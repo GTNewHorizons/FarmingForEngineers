@@ -25,8 +25,8 @@ public class ContainerMarket extends Container {
     private final int posY;
     private final int posZ;
 
-    private final InventoryBasic marketInputBuffer = new InventoryBasic("container.farmingforblockheads:market", false, 1);
-	private final InventoryBasic marketOutputBuffer = new InventoryBasic("container.farmingforblockheads:market", false, 1);
+    private final InventoryBasic marketInputBuffer = new InventoryBasic("container.farmingforengineers:market", false, 1);
+	private final InventoryBasic marketOutputBuffer = new InventoryBasic("container.farmingforengineers:market", false, 1);
 	protected final List<FakeSlotMarket> marketSlots = Lists.newArrayList();
 
 	private boolean sentItemList;

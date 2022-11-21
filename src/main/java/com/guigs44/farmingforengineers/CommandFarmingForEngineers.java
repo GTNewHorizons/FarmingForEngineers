@@ -19,12 +19,12 @@ public class CommandFarmingForEngineers extends CommandBase {
 
 	@Override
 	public String getCommandName() {
-		return "farmingforblockheads";
+		return "farmingforengineers";
 	}
 
 	@Override
 	public String getCommandUsage(ICommandSender sender) {
-		return "/farmingforblockheads reload";
+		return "/farmingforengineers reload";
 	}
 
 	@Override
@@ -35,7 +35,7 @@ public class CommandFarmingForEngineers extends CommandBase {
 		if(args[0].equals("reload")) {
 			AbstractRegistry.registryErrors.clear();
 			MarketRegistry.INSTANCE.load(FarmingForEngineers.configDir);
-			sender.addChatMessage(new TextComponentTranslation("commands.farmingforblockheads:reload.success"));
+			sender.addChatMessage(new TextComponentTranslation("commands.farmingforengineers:reload.success"));
 			if(AbstractRegistry.registryErrors.size() > 0) {
 				sender.addChatMessage(new TextComponentString(TextFormatting.RED + "There were errors loading the Farming for Blockheads registries:"));
 				TextFormatting lastFormatting = TextFormatting.WHITE;

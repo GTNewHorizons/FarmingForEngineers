@@ -35,7 +35,7 @@ public class MarketRecipe extends BlankRecipeWrapper {
 		if(entry.getCostItem().getItem() == Items.DIAMOND) {
 			color = TextFormatting.AQUA.toString();
 		}
-		return color + I18n.format("gui.farmingforblockheads:market.cost", entry.getCostItem().stackSize, entry.getCostItem().getDisplayName());
+		return color + I18n.format("gui.farmingforengineers:market.cost", entry.getCostItem().stackSize, entry.getCostItem().getDisplayName());
 	}
 
 }

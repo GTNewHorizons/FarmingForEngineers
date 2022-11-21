@@ -13,7 +13,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class MarketCategory extends BlankRecipeCategory<MarketRecipe> {
 
-	public static final String UID = "farmingforblockheads:market";
+	public static final String UID = "farmingforengineers:market";
 
 	private static final ResourceLocation TEXTURE = new ResourceLocation(FarmingForEngineers.MOD_ID, "textures/gui/jei_market.png");
 

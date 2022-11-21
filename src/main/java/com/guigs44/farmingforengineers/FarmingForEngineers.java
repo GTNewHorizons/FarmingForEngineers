@@ -41,12 +41,12 @@ import java.util.Optional;
 @Mod.EventBusSubscriber
 public class FarmingForEngineers {
 
-	public static final String MOD_ID = "farmingforblockheads";
+	public static final String MOD_ID = "farmingforengineers";
 
 	@Mod.Instance(MOD_ID)
 	public static FarmingForEngineers instance;
 
-	@SidedProxy(clientSide = "com.guigs44.farmingforblockheads.client.ClientProxy", serverSide = "com.guigs44.farmingforblockheads.CommonProxy")
+	@SidedProxy(clientSide = "com.guigs44.farmingforengineers.client.ClientProxy", serverSide = "com.guigs44.farmingforengineers.CommonProxy")
 	public static CommonProxy proxy;
 
 	public static final Logger logger = LogManager.getLogger();
@@ -64,11 +64,11 @@ public class FarmingForEngineers {
 
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		configDir = new File(event.getModConfigurationDirectory(), "FarmingForBlockheads");
+		configDir = new File(event.getModConfigurationDirectory(), "farmingforengineers");
 		if (!configDir.exists() && !configDir.mkdirs()) {
 			throw new RuntimeException("Couldn't create Farming for Blockheads configuration directory");
 		}
-		config = new Configuration(new File(configDir, "FarmingForBlockheads.cfg"));
+		config = new Configuration(new File(configDir, "farmingforengineers.cfg"));
 		config.load();
 		ModConfig.preInit(config);
 
@@ -87,11 +87,11 @@ public class FarmingForEngineers {
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 
 		new VanillaAddon();
-		buildSoftDependProxy(Compat.HARVESTCRAFT, "com.guigs44.farmingforblockheads.compat.HarvestcraftAddon");
-		buildSoftDependProxy(Compat.FORESTRY, "com.guigs44.farmingforblockheads.compat.ForestryAddon");
-		buildSoftDependProxy(Compat.AGRICRAFT, "com.guigs44.farmingforblockheads.compat.AgriCraftAddon");
-		buildSoftDependProxy(Compat.BIOMESOPLENTY, "com.guigs44.farmingforblockheads.compat.BiomesOPlentyAddon");
-		buildSoftDependProxy(Compat.NATURA, "com.guigs44.farmingforblockheads.compat.NaturaAddon");
+		buildSoftDependProxy(Compat.HARVESTCRAFT, "com.guigs44.farmingforengineers.compat.HarvestcraftAddon");
+		buildSoftDependProxy(Compat.FORESTRY, "com.guigs44.farmingforengineers.compat.ForestryAddon");
+		buildSoftDependProxy(Compat.AGRICRAFT, "com.guigs44.farmingforengineers.compat.AgriCraftAddon");
+		buildSoftDependProxy(Compat.BIOMESOPLENTY, "com.guigs44.farmingforengineers.compat.BiomesOPlentyAddon");
+		buildSoftDependProxy(Compat.NATURA, "com.guigs44.farmingforengineers.compat.NaturaAddon");
 
 		ModRecipes.init();
 		MarketRegistry.INSTANCE.load(configDir);
