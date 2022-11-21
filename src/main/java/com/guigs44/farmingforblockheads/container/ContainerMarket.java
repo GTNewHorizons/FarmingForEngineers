@@ -15,7 +15,6 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -23,17 +22,22 @@ import java.util.List;
 public class ContainerMarket extends Container {
 
 	private final EntityPlayer player;
-	private final BlockPos pos;
-	private final InventoryBasic marketInputBuffer = new InventoryBasic("container.farmingforblockheads:market", false, 1);
+    private final int posX; //TODO: Deduplicate/Turn it into an object as it gets used all throughout the code
+    private final int posY;
+    private final int posZ;
+
+    private final InventoryBasic marketInputBuffer = new InventoryBasic("container.farmingforblockheads:market", false, 1);
 	private final InventoryBasic marketOutputBuffer = new InventoryBasic("container.farmingforblockheads:market", false, 1);
 	protected final List<FakeSlotMarket> marketSlots = Lists.newArrayList();
 
 	private boolean sentItemList;
 	protected MarketEntry selectedEntry;
 
-	public ContainerMarket(EntityPlayer player, BlockPos pos) {
+	public ContainerMarket(EntityPlayer player, int posX, int posY, int posZ) {
 		this.player = player;
-		this.pos = pos;
+        this.posX = posX;
+        this.posY = posY;
+        this.posZ = posZ;
 
 		addSlotToContainer(new Slot(marketInputBuffer, 0, 23, 39));
 		addSlotToContainer(new SlotMarketBuy(this, marketOutputBuffer, 0, 61, 39));
@@ -126,7 +130,8 @@ public class ContainerMarket extends Container {
 
 	@Override
 	public boolean canInteractWith(EntityPlayer player) {
-		return player.worldObj.getBlockState(pos).getBlock() == ModBlocks.market && player.getDistanceSq( pos.getX() + 0.5,  pos.getY() + 0.5,  pos.getZ() + 0.5) <= 64;
+		return player.worldObj.getBlockState(pos).getBlock() == ModBlocks.market && player.getDistanceSq(
+            posX + 0.5,  posY + 0.5,  posZ + 0.5) <= 64;
 	}
 
 	@Override

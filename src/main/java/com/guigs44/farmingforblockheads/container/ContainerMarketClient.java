@@ -27,14 +27,14 @@ public class ContainerMarketClient extends ContainerMarket {
 	private boolean isDirty;
 	private int scrollOffset;
 
-	public ContainerMarketClient(EntityPlayer player, BlockPos pos) {
-		super(player, pos);
+	public ContainerMarketClient(EntityPlayer player, int x, int y, int z) {
+		super(player, x, y, z);
 	}
 
 	@Override
 	public ItemStack slotClick(int slotNumber, int dragType, ClickType clickType, EntityPlayer player) {
 		if (slotNumber >= 0 && slotNumber < inventorySlots.size()) {
-			Slot slot = inventorySlots.get(slotNumber);
+			Slot slot = (Slot) inventorySlots.get(slotNumber); //may break
 			if (player.worldObj.isRemote) {
 				if (slot instanceof FakeSlotMarket) {
 					FakeSlotMarket slotMarket = (FakeSlotMarket) slot;
