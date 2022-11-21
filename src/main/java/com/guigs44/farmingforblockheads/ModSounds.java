@@ -1,7 +1,7 @@
 package com.guigs44.farmingforblockheads;
 
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
+import net.minecraftforge.client.event.sound.SoundEvent;
 
 public class ModSounds {
 

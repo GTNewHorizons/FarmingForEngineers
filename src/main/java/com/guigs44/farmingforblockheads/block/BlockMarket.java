@@ -32,7 +32,7 @@ public class BlockMarket extends BlockContainer {
 	public static final PropertyDirection FACING = BlockHorizontal.FACING;
 
 	public BlockMarket() {
-		super(Material.WOOD);
+		super(Material.wood);
 		setRegistryName(FarmingForBlockheads.MOD_ID, "market");
 		setSoundType(SoundType.WOOD);
 		setHardness(2f);

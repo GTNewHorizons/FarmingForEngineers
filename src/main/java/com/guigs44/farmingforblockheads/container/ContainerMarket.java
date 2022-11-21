@@ -60,7 +60,7 @@ public class ContainerMarket extends Container {
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int slotIndex) {
 		ItemStack itemStack = null;
-		Slot slot = inventorySlots.get(slotIndex);
+		Slot slot = (Slot) inventorySlots.get(slotIndex); //IDK if it will break
 		if (slot != null && slot.getHasStack()) {
 			ItemStack slotStack = slot.getStack();
 			//noinspection ConstantConditions
@@ -74,7 +74,7 @@ public class ContainerMarket extends Container {
 				if (!mergeItemStack(slotStack, 14, 50, true)) {
 					return null;
 				}
-			} else if ((selectedEntry == null && slotStack.getItem() == Items.EMERALD) || (selectedEntry != null && selectedEntry.getCostItem().isItemEqual(slotStack))) {
+			} else if ((selectedEntry == null && slotStack.getItem() == Items.emerald) || (selectedEntry != null && selectedEntry.getCostItem().isItemEqual(slotStack))) {
 				if (!this.mergeItemStack(slotStack, 0, 1, true)) {
 					return null;
 				}

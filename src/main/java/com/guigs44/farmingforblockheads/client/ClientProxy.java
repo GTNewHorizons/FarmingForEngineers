@@ -4,6 +4,7 @@ import com.guigs44.farmingforblockheads.CommonProxy;
 import com.guigs44.farmingforblockheads.block.ModBlocks;
 import com.guigs44.farmingforblockheads.client.render.RenderMerchant;
 import com.guigs44.farmingforblockheads.entity.EntityMerchant;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
