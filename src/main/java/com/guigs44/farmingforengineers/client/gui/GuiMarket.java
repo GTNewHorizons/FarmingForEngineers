@@ -1,7 +1,7 @@
 package com.guigs44.farmingforengineers.client.gui;
 
 import com.google.common.collect.Lists;
-import com.guigs44.farmingforengineers.FarmingForEngineers;
+import com.guigs44.farmingforengineers.FarmingForBlockheads;
 import com.guigs44.farmingforengineers.container.ContainerMarketClient;
 import com.guigs44.farmingforengineers.container.FakeSlotMarket;
 import com.guigs44.farmingforengineers.container.SlotMarketBuy;
@@ -34,7 +34,7 @@ public class GuiMarket extends GuiContainer {
 	private static final int SCROLLBAR_HEIGHT = 77;
 	private static final int VISIBLE_ROWS = 4;
 
-	private static final ResourceLocation TEXTURE = new ResourceLocation(FarmingForEngineers.MOD_ID, "textures/gui/market.png");
+	private static final ResourceLocation TEXTURE = new ResourceLocation(FarmingForBlockheads.MOD_ID, "textures/gui/market.png");
 
 	private final ContainerMarketClient container;
 	private final List<GuiButtonMarketFilter> filterButtons = Lists.newArrayList();
@@ -178,10 +178,10 @@ public class GuiMarket extends GuiContainer {
 			}
 		}
 
-		fontRendererObj.drawString(I18n.format("container.farmingforengineers:market"), guiLeft + 10, guiTop + 10, 0xFFFFFF, true);
+		fontRendererObj.drawString(I18n.format("container.farmingforblockheads:market"), guiLeft + 10, guiTop + 10, 0xFFFFFF, true);
 
 		if(container.getSelectedEntry() == null) {
-			drawCenteredString(fontRendererObj, I18n.format("gui.farmingforengineers:market.no_selection"), guiLeft + 49, guiTop + 65, 0xFFFFFF);
+			drawCenteredString(fontRendererObj, I18n.format("gui.farmingforblockheads:market.no_selection"), guiLeft + 49, guiTop + 65, 0xFFFFFF);
 		} else {
 			drawCenteredString(fontRendererObj, getFormattedCostStringShort(container.getSelectedEntry()), guiLeft + 49, guiTop + 65, 0xFFFFFF);
 		}
@@ -245,7 +245,7 @@ public class GuiMarket extends GuiContainer {
 		if(entry.getCostItem().getItem() == Items.DIAMOND) {
 			color = TextFormatting.AQUA.toString();
 		}
-		return color + I18n.format("gui.farmingforengineers:market.tooltip_cost", I18n.format("gui.farmingforengineers:market.cost", entry.getCostItem().stackSize, entry.getCostItem().getDisplayName()));
+		return color + I18n.format("gui.farmingforblockheads:market.tooltip_cost", I18n.format("gui.farmingforblockheads:market.cost", entry.getCostItem().stackSize, entry.getCostItem().getDisplayName()));
 	}
 
 	private String getFormattedCostStringShort(MarketEntry entry) {
@@ -253,7 +253,7 @@ public class GuiMarket extends GuiContainer {
 		if(entry.getCostItem().getItem() == Items.DIAMOND) {
 			color = TextFormatting.AQUA.toString();
 		}
-		return color + I18n.format("gui.farmingforengineers:market.cost", entry.getCostItem().stackSize, entry.getCostItem().getDisplayName());
+		return color + I18n.format("gui.farmingforblockheads:market.cost", entry.getCostItem().stackSize, entry.getCostItem().getDisplayName());
 	}
 
 }

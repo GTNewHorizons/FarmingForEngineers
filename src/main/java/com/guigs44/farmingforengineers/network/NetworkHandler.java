@@ -1,6 +1,6 @@
 package com.guigs44.farmingforengineers.network;
 
-import com.guigs44.farmingforengineers.FarmingForEngineers;
+import com.guigs44.farmingforengineers.FarmingForBlockheads;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.IThreadListener;
 import net.minecraft.world.WorldServer;
@@ -11,7 +11,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class NetworkHandler {
-	public static final SimpleNetworkWrapper instance = NetworkRegistry.INSTANCE.newSimpleChannel(FarmingForEngineers.MOD_ID);
+	public static final SimpleNetworkWrapper instance = NetworkRegistry.INSTANCE.newSimpleChannel(FarmingForBlockheads.MOD_ID);
 
 	public static void init() {
 		instance.registerMessage(HandlerMarketList.class, MessageMarketList.class, 0, Side.CLIENT);

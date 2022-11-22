@@ -6,16 +6,16 @@ import mezz.jei.api.gui.IDrawableStatic;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.BlankRecipeCategory;
-import com.guigs44.farmingforengineers.FarmingForEngineers;
+import com.guigs44.farmingforengineers.FarmingForBlockheads;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 public class MarketCategory extends BlankRecipeCategory<MarketRecipe> {
 
-	public static final String UID = "farmingforengineers:market";
+	public static final String UID = "farmingforblockheads:market";
 
-	private static final ResourceLocation TEXTURE = new ResourceLocation(FarmingForEngineers.MOD_ID, "textures/gui/jei_market.png");
+	private static final ResourceLocation TEXTURE = new ResourceLocation(FarmingForBlockheads.MOD_ID, "textures/gui/jei_market.png");
 
 	private final IDrawableStatic background;
 

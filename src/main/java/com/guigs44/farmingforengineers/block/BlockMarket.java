@@ -1,6 +1,6 @@
 package com.guigs44.farmingforengineers.block;
 
-import com.guigs44.farmingforengineers.FarmingForEngineers;
+import com.guigs44.farmingforengineers.FarmingForBlockheads;
 import com.guigs44.farmingforengineers.ModSounds;
 import com.guigs44.farmingforengineers.entity.EntityMerchant;
 import com.guigs44.farmingforengineers.network.GuiHandler;
@@ -33,11 +33,11 @@ public class BlockMarket extends BlockContainer {
 
 	public BlockMarket() {
 		super(Material.wood);
-		setRegistryName(FarmingForEngineers.MOD_ID, "market");
-		setSoundType(SoundType.WOOD);
+		setRegistryName(FarmingForBlockheads.MOD_ID, "market");
+		setSoundType(SoundType.wood);
 		setHardness(2f);
 		setUnlocalizedName(getRegistryName().toString());
-		setCreativeTab(FarmingForEngineers.creativeTab);
+		setCreativeTab(FarmingForBlockheads.creativeTab);
 	}
 
 	@Override
@@ -127,7 +127,7 @@ public class BlockMarket extends BlockContainer {
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, @Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
 		if(!world.isRemote) {
-			player.openGui(FarmingForEngineers.instance, GuiHandler.MARKET, world, pos.getX(), pos.getY(), pos.getZ());
+			player.openGui(FarmingForBlockheads.instance, GuiHandler.MARKET, world, pos.getX(), pos.getY(), pos.getZ());
 		}
 		return true;
 	}

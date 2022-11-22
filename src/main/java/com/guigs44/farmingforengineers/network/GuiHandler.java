@@ -19,9 +19,9 @@ public class GuiHandler implements IGuiHandler {
 	@Nullable
 	public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
 		if(id == MARKET) {
-			TileEntity tileEntity = world.getTileEntity(x, y, z);
+			TileEntity tileEntity = world.getTileEntity(x,y,z);
 			if(tileEntity instanceof TileMarket) {
-				return new ContainerMarket(player, x, y, z);
+				return new ContainerMarket(player, x,y,z);
 			}
 		}
 		return null;
@@ -31,9 +31,9 @@ public class GuiHandler implements IGuiHandler {
 	@Nullable
 	public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
 		if(id == MARKET) {
-			TileEntity tileEntity = world.getTileEntity(x, y, z);
+			TileEntity tileEntity = world.getTileEntity(x,y,z);
 			if(tileEntity instanceof TileMarket) {
-				return new GuiMarket(new ContainerMarketClient(player, x, y, z));
+				return new GuiMarket(new ContainerMarketClient(player, x,y,z));
 			}
 		}
 		return null;

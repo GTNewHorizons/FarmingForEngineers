@@ -8,12 +8,14 @@ import com.guigs44.farmingforengineers.registry.MarketEntry;
 import com.guigs44.farmingforengineers.registry.MarketRegistry;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.BlockPos;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -21,12 +23,11 @@ import java.util.List;
 public class ContainerMarket extends Container {
 
 	private final EntityPlayer player;
-    private final int posX; //TODO: Deduplicate/Turn it into an object as it gets used all throughout the code
+    private final int posX;
     private final int posY;
     private final int posZ;
-
-    private final InventoryBasic marketInputBuffer = new InventoryBasic("container.farmingforengineers:market", false, 1);
-	private final InventoryBasic marketOutputBuffer = new InventoryBasic("container.farmingforengineers:market", false, 1);
+	private final InventoryBasic marketInputBuffer = new InventoryBasic("container.farmingforblockheads:market", false, 1);
+	private final InventoryBasic marketOutputBuffer = new InventoryBasic("container.farmingforblockheads:market", false, 1);
 	protected final List<FakeSlotMarket> marketSlots = Lists.newArrayList();
 
 	private boolean sentItemList;
@@ -37,7 +38,6 @@ public class ContainerMarket extends Container {
         this.posX = posX;
         this.posY = posY;
         this.posZ = posZ;
-
 		addSlotToContainer(new Slot(marketInputBuffer, 0, 23, 39));
 		addSlotToContainer(new SlotMarketBuy(this, marketOutputBuffer, 0, 61, 39));
 
@@ -63,7 +63,7 @@ public class ContainerMarket extends Container {
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int slotIndex) {
 		ItemStack itemStack = null;
-		Slot slot = (Slot) inventorySlots.get(slotIndex); //IDK if it will break
+		Slot slot = inventorySlots.get(slotIndex);
 		if (slot != null && slot.getHasStack()) {
 			ItemStack slotStack = slot.getStack();
 			//noinspection ConstantConditions
@@ -129,8 +129,7 @@ public class ContainerMarket extends Container {
 
 	@Override
 	public boolean canInteractWith(EntityPlayer player) {
-		return player.worldObj.getBlockState(pos).getBlock() == ModBlocks.market && player.getDistanceSq(
-            posX + 0.5,  posY + 0.5,  posZ + 0.5) <= 64;
+		return player.worldObj.getBlockState(pos).getBlock() == ModBlocks.market && player.getDistanceSq( posX + 0.5,  posY + 0.5,  posZ + 0.5) <= 64;
 	}
 
 	@Override

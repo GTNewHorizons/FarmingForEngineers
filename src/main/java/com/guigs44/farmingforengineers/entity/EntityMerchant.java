@@ -1,6 +1,6 @@
 package com.guigs44.farmingforengineers.entity;
 
-import com.guigs44.farmingforengineers.FarmingForEngineers;
+import com.guigs44.farmingforengineers.FarmingForBlockheads;
 import com.guigs44.farmingforengineers.block.ModBlocks;
 import com.guigs44.farmingforengineers.network.GuiHandler;
 import net.minecraft.block.Block;
@@ -77,7 +77,7 @@ public class EntityMerchant extends EntityCreature implements INpc {
 	@Override
 	public boolean processInteract(EntityPlayer player, EnumHand hand, @Nullable ItemStack itemStack) {
 		if (isMarketValid()) {
-			player.openGui(FarmingForEngineers.MOD_ID, GuiHandler.MARKET, worldObj, marketPos.getX(), marketPos.getY(), marketPos.getZ());
+			player.openGui(FarmingForBlockheads.MOD_ID, GuiHandler.MARKET, worldObj, marketPos.getX(), marketPos.getY(), marketPos.getZ());
 			return true;
 		}
 		return super.processInteract(player, hand, itemStack);

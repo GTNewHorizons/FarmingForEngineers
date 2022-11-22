@@ -6,7 +6,7 @@ import com.guigs44.farmingforengineers.container.ContainerMarketClient;
 import com.guigs44.farmingforengineers.registry.MarketEntry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.renderer.GlStateManager;
+//import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 
 import com.google.common.collect.Lists;
@@ -16,8 +16,9 @@ public class GuiButtonMarketFilter extends GuiButton {
 	private final ContainerMarketClient container;
 	private final MarketEntry.EntryType filterType;
 	private final List<String> tooltipLines = Lists.newArrayList();
+    private boolean hovered;
 
-	public GuiButtonMarketFilter(int buttonId, int x, int y, ContainerMarketClient container, MarketEntry.EntryType filterType) {
+    public GuiButtonMarketFilter(int buttonId, int x, int y, ContainerMarketClient container, MarketEntry.EntryType filterType) {
 		super(buttonId, x, y, 20, 20, "");
 		this.container = container;
 		this.filterType = filterType;
@@ -34,7 +35,7 @@ public class GuiButtonMarketFilter extends GuiButton {
 		} else if(hovered) {
 			texY += 20;
 		}
-		GlStateManager.color(1f, 1f, 1f, 1f);
+		//GlStateManager.color(1f, 1f, 1f, 1f);
 		mc.getTextureManager().bindTexture(filterType.getIconTexture());
 		drawTexturedModalRect(xPosition, yPosition, filterType.getIconTextureX(), texY, width, height);
 	}

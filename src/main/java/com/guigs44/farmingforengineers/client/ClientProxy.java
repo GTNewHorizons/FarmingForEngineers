@@ -4,7 +4,6 @@ import com.guigs44.farmingforengineers.CommonProxy;
 import com.guigs44.farmingforengineers.block.ModBlocks;
 import com.guigs44.farmingforengineers.client.render.RenderMerchant;
 import com.guigs44.farmingforengineers.entity.EntityMerchant;
-import cpw.mods.fml.client.registry.RenderingRegistry;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;

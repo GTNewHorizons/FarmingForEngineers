@@ -8,16 +8,18 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.guigs44.farmingforengineers.FarmingForEngineers;
+import com.guigs44.farmingforengineers.FarmingForBlockheads;
 import com.guigs44.farmingforengineers.ModConfig;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 
+import javax.annotation.Nullable;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 public abstract class AbstractRegistry {
 
@@ -40,7 +42,7 @@ public abstract class AbstractRegistry {
 				jsonWriter.setIndent("  ");
 				gson.toJson(create(), jsonWriter);
 			} catch (IOException e) {
-				FarmingForEngineers.logger.error("Failed to create default {} registry: {}", registryName, e);
+				FarmingForBlockheads.logger.error("Failed to create default {} registry: {}", registryName, e);
 			}
 		}
 
@@ -77,7 +79,7 @@ public abstract class AbstractRegistry {
 				jsonWriter.setIndent("  ");
 				gson.toJson(root, jsonWriter);
 			} catch (IOException e) {
-				FarmingForEngineers.logger.error("Failed to save updated {} registry: {}", registryName, e);
+				FarmingForBlockheads.logger.error("Failed to save updated {} registry: {}", registryName, e);
 			}
 		}
 		MinecraftForge.EVENT_BUS.post(new ReloadRegistryEvent(this));
@@ -191,13 +193,13 @@ public abstract class AbstractRegistry {
 
 	protected final void logError(String format, Object... args) {
 		String s = String.format(format, args);
-		FarmingForEngineers.logger.error(s);
+		FarmingForBlockheads.logger.error(s);
 		registryErrors.add(s);
 	}
 
 	protected final void logWarning(String format, Object... args) {
 		String s = String.format(format, args);
-		FarmingForEngineers.logger.error(s);
+		FarmingForBlockheads.logger.error(s);
 		if(ModConfig.showRegistryWarnings) {
 			registryErrors.add(s);
 		}
@@ -205,18 +207,18 @@ public abstract class AbstractRegistry {
 
 	protected final void logUnknownItem(ResourceLocation location) {
 		String s = String.format("Unknown item '%s' in %s", location, registryName);
-		FarmingForEngineers.logger.error(s);
+		FarmingForBlockheads.logger.error(s);
 		registryErrors.add(s);
 	}
 
 	protected final void logUnknownFluid(String fluidName, ResourceLocation location) {
 		String s = String.format("Unknown fluid '%s' when registering %s in %s", fluidName, location, registryName);
-		FarmingForEngineers.logger.error(s);
+		FarmingForBlockheads.logger.error(s);
 		registryErrors.add(s);
 	}
 
 	protected final void logUnknownOre(ResourceLocation location) {
-		FarmingForEngineers.logger.warn("No ore dictionary entries found for {} in {}", location.getResourcePath(), registryName);
+		FarmingForBlockheads.logger.warn("No ore dictionary entries found for {} in {}", location.getResourcePath(), registryName);
 	}
 
 }

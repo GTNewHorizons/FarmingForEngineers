@@ -12,6 +12,13 @@ import com.guigs44.farmingforengineers.registry.MarketRegistry;
 import com.guigs44.farmingforengineers.tile.TileMarket;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.network.IGuiHandler;
+import net.minecraft.block.Block;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
+import net.minecraftforge.common.config.Configuration;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -21,30 +28,20 @@ import cpw.mods.fml.common.gameevent.PlayerEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.block.Block;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.Mod;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.util.Optional;
 
-@Mod(modid = FarmingForEngineers.MOD_ID, name = "Farming for Blockheads", dependencies = "after:mousetweaks[2.8,);after:forestry;after:agricraft")
-@Mod.EventBusSubscriber
-public class FarmingForEngineers {
+@Mod(modid = FarmingForBlockheads.MOD_ID, name = "Farming for Blockheads", dependencies = "after:mousetweaks[2.8,);after:forestry;after:agricraft")
+//@Mod.EventBusSubscriber
+public class FarmingForBlockheads {
 
-	public static final String MOD_ID = "farmingforengineers";
+	public static final String MOD_ID = "farmingforblockheads";
 
 	@Mod.Instance(MOD_ID)
-	public static FarmingForEngineers instance;
+	public static FarmingForBlockheads instance;
 
 	@SidedProxy(clientSide = "com.guigs44.farmingforengineers.client.ClientProxy", serverSide = "com.guigs44.farmingforengineers.CommonProxy")
 	public static CommonProxy proxy;
@@ -64,11 +61,11 @@ public class FarmingForEngineers {
 
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		configDir = new File(event.getModConfigurationDirectory(), "farmingforengineers");
+		configDir = new File(event.getModConfigurationDirectory(), "FarmingForBlockheads");
 		if (!configDir.exists() && !configDir.mkdirs()) {
 			throw new RuntimeException("Couldn't create Farming for Blockheads configuration directory");
 		}
-		config = new Configuration(new File(configDir, "farmingforengineers.cfg"));
+		config = new Configuration(new File(configDir, "FarmingForBlockheads.cfg"));
 		config.load();
 		ModConfig.preInit(config);
 
