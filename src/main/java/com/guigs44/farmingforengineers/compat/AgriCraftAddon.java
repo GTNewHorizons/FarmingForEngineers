@@ -1,7 +1,7 @@
 package com.guigs44.farmingforengineers.compat;
 
 import com.google.common.collect.Lists;
-import com.guigs44.farmingforengineers.FarmingForBlockheads;
+import com.guigs44.farmingforengineers.FarmingForEngineers;
 import com.guigs44.farmingforengineers.registry.MarketEntry;
 import com.guigs44.farmingforengineers.registry.MarketRegistry;
 import com.guigs44.farmingforengineers.registry.MarketRegistryDefaultHandler;
@@ -32,10 +32,10 @@ public class AgriCraftAddon {
 							registry.registerEntry(itemStack, defaultPayment, MarketEntry.EntryType.SEEDS);
 						}
 					} else {
-						FarmingForBlockheads.logger.warn("Could not find AgriCraft Seeds creative tab. AgriCraft seeds will not be available in the market.");
+						FarmingForEngineers.logger.warn("Could not find AgriCraft Seeds creative tab. AgriCraft seeds will not be available in the market.");
 					}
 				} else {
-					FarmingForBlockheads.logger.warn("Could not find AgriCraft seed item. AgriCraft seeds will not be available in the market.");
+					FarmingForEngineers.logger.warn("Could not find AgriCraft seed item. AgriCraft seeds will not be available in the market.");
 				}
 			}
 

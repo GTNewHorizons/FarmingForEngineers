@@ -27,7 +27,7 @@ public class CommandFarmingForEngineers extends CommandBase {
         }
         if(args[0].equals("reload")) {
             AbstractRegistry.registryErrors.clear();
-            MarketRegistry.INSTANCE.load(FarmingForBlockheads.configDir);
+            MarketRegistry.INSTANCE.load(FarmingForEngineers.configDir);
             sender.addChatMessage(ChatComponentBuilder.of("commands.farmingforblockheads:reload.success").build());
             if(AbstractRegistry.registryErrors.size() > 0) {
                 sender.addChatMessage(ChatComponentBuilder.of("There were errors loading the Farming for Blockheads registries:").setColor(EnumChatFormatting.RED).build());

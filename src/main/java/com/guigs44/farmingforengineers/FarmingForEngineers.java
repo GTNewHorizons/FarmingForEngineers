@@ -12,7 +12,6 @@ import com.guigs44.farmingforengineers.registry.MarketRegistry;
 import com.guigs44.farmingforengineers.tile.TileMarket;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -34,14 +33,14 @@ import org.apache.logging.log4j.Logger;
 import java.io.File;
 import java.util.Optional;
 
-@Mod(modid = FarmingForBlockheads.MOD_ID, name = "Farming for Blockheads", dependencies = "after:mousetweaks[2.8,);after:forestry;after:agricraft")
+@Mod(modid = FarmingForEngineers.MOD_ID, name = "Farming for Blockheads", dependencies = "after:mousetweaks[2.8,);after:forestry;after:agricraft")
 //@Mod.EventBusSubscriber
-public class FarmingForBlockheads {
+public class FarmingForEngineers {
 
 	public static final String MOD_ID = "farmingforblockheads";
 
 	@Mod.Instance(MOD_ID)
-	public static FarmingForBlockheads instance;
+	public static FarmingForEngineers instance;
 
 	@SidedProxy(clientSide = "com.guigs44.farmingforengineers.client.ClientProxy", serverSide = "com.guigs44.farmingforengineers.CommonProxy")
 	public static CommonProxy proxy;

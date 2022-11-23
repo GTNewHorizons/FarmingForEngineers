@@ -1,6 +1,6 @@
 package com.guigs44.farmingforengineers.registry;
 
-import com.guigs44.farmingforengineers.FarmingForBlockheads;
+import com.guigs44.farmingforengineers.FarmingForEngineers;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
@@ -11,7 +11,7 @@ public class MarketEntry {
 		SAPLINGS("gui.farmingforblockheads:market.tooltip_saplings"),
 		OTHER("gui.farmingforblockheads:market.tooltip_other");
 
-		private static final ResourceLocation TEXTURE = new ResourceLocation(FarmingForBlockheads.MOD_ID, "textures/gui/market.png");
+		private static final ResourceLocation TEXTURE = new ResourceLocation(FarmingForEngineers.MOD_ID, "textures/gui/market.png");
 		private static final EntryType[] values = values();
 		private String tooltip;
 

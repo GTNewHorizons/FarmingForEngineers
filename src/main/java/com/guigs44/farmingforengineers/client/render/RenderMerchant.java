@@ -1,6 +1,6 @@
 package com.guigs44.farmingforengineers.client.render;
 
-import com.guigs44.farmingforengineers.FarmingForBlockheads;
+import com.guigs44.farmingforengineers.FarmingForEngineers;
 import com.guigs44.farmingforengineers.entity.EntityMerchant;
 import net.minecraft.client.model.ModelVillager;
 import net.minecraft.client.renderer.GlStateManager;
@@ -11,7 +11,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderMerchant extends RenderLiving<EntityMerchant> {
 
-	private static final ResourceLocation MERCHANT_TEXTURE = new ResourceLocation(FarmingForBlockheads.MOD_ID, "textures/entity/merchant.png");
+	private static final ResourceLocation MERCHANT_TEXTURE = new ResourceLocation(FarmingForEngineers.MOD_ID, "textures/entity/merchant.png");
 
 	public RenderMerchant(RenderManager renderManager) {
 		super(renderManager, new ModelVillager(0f), 0.5f);

@@ -5,6 +5,6 @@ import net.minecraft.util.SoundEvent;
 
 public class ModSounds {
 
-	public static final SoundEvent falling = new SoundEvent(new ResourceLocation(FarmingForBlockheads.MOD_ID, "falling"));
+	public static final SoundEvent falling = new SoundEvent(new ResourceLocation(FarmingForEngineers.MOD_ID, "falling"));
 
 }

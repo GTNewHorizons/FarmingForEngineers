@@ -10,6 +10,7 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.resources.I18n;
 
 import com.google.common.collect.Lists;
+import org.lwjgl.opengl.GL11;
 
 public class GuiButtonMarketFilter extends GuiButton {
 
@@ -35,6 +36,7 @@ public class GuiButtonMarketFilter extends GuiButton {
 		} else if(hovered) {
 			texY += 20;
 		}
+        GL11.glColor4f(1f, 1f, 1f, 1f); //maybe?
 		//GlStateManager.color(1f, 1f, 1f, 1f);
 		mc.getTextureManager().bindTexture(filterType.getIconTexture());
 		drawTexturedModalRect(xPosition, yPosition, filterType.getIconTextureX(), texY, width, height);
