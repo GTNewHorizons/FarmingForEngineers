@@ -1,31 +1,28 @@
 package com.guigs44.farmingforengineers.client.gui;
 
 import com.google.common.collect.Lists;
-import com.guigs44.farmingforengineers.FarmingForBlockheads;
+import com.guigs44.farmingforengineers.FarmingForEngineers;
 import com.guigs44.farmingforengineers.container.ContainerMarketClient;
 import com.guigs44.farmingforengineers.container.FakeSlotMarket;
 import com.guigs44.farmingforengineers.container.SlotMarketBuy;
 import com.guigs44.farmingforengineers.registry.MarketEntry;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.Slot;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import org.lwjgl.input.Mouse;
-import yalter.mousetweaks.api.MouseTweaksIgnore;
-
-import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
+import org.lwjgl.opengl.GL11;
 
-@MouseTweaksIgnore
+//@MouseTweaksIgnore
 public class GuiMarket extends GuiContainer {
 
 	private static final int SCROLLBAR_COLOR = 0xFFAAAAAA;
@@ -34,7 +31,7 @@ public class GuiMarket extends GuiContainer {
 	private static final int SCROLLBAR_HEIGHT = 77;
 	private static final int VISIBLE_ROWS = 4;
 
-	private static final ResourceLocation TEXTURE = new ResourceLocation(FarmingForBlockheads.MOD_ID, "textures/gui/market.png");
+	private static final ResourceLocation TEXTURE = new ResourceLocation(FarmingForEngineers.MOD_ID, "textures/gui/market.png");
 
 	private final ContainerMarketClient container;
 	private final List<GuiButtonMarketFilter> filterButtons = Lists.newArrayList();
@@ -48,6 +45,7 @@ public class GuiMarket extends GuiContainer {
 	private int mouseClickY = -1;
 	private int indexWhenClicked;
 	private int lastNumberOfMoves;
+    private Slot hoverSlot;
 
 	private GuiTextField searchBar;
 
@@ -61,7 +59,7 @@ public class GuiMarket extends GuiContainer {
 		ySize = 174;
 		super.initGui();
 
-		searchBar = new GuiTextField(0, fontRendererObj, guiLeft + xSize - 78, guiTop - 5, 70, 10);
+		searchBar = new GuiTextField(fontRendererObj, guiLeft + xSize - 78, guiTop - 5, 70, 10);
 
 		int id = 1;
 		int curY = -80;
@@ -82,7 +80,7 @@ public class GuiMarket extends GuiContainer {
 	}
 
 	@Override
-	protected void actionPerformed(GuiButton button) throws IOException {
+	protected void actionPerformed(GuiButton button) { //TODO: handle exceptions
 		if(button instanceof GuiButtonMarketFilter) {
 			if(container.getCurrentFilter() == ((GuiButtonMarketFilter) button).getFilterType()) {
 				container.setFilterType(null);
@@ -95,7 +93,7 @@ public class GuiMarket extends GuiContainer {
 	}
 
 	@Override
-	public void handleMouseInput() throws IOException {
+	public void handleMouseInput() {
 		super.handleMouseInput();
 		int delta = Mouse.getEventDWheel();
 		if (delta == 0) {
@@ -105,8 +103,8 @@ public class GuiMarket extends GuiContainer {
 	}
 
 	@Override
-	protected void mouseReleased(int mouseX, int mouseY, int state) {
-		super.mouseReleased(mouseX, mouseY, state);
+	protected void mouseMovedOrUp(int mouseX, int mouseY, int state) {
+		super.mouseMovedOrUp(mouseX, mouseY, state);
 		if (state != -1 && mouseClickY != -1) {
 			mouseClickY = -1;
 			indexWhenClicked = 0;
@@ -115,7 +113,7 @@ public class GuiMarket extends GuiContainer {
 	}
 
 	@Override
-	protected void mouseClicked(int mouseX, int mouseY, int button) throws IOException {
+	protected void mouseClicked(int mouseX, int mouseY, int button){ //TODO: handle exceptions
 		super.mouseClicked(mouseX, mouseY, button);
 		if (button == 1 && mouseX >= searchBar.xPosition && mouseX < searchBar.xPosition + searchBar.width && mouseY >= searchBar.yPosition && mouseY < searchBar.yPosition + searchBar.height) {
 			searchBar.setText("");
@@ -132,7 +130,7 @@ public class GuiMarket extends GuiContainer {
 	}
 
 	@Override
-	protected void keyTyped(char c, int keyCode) throws IOException {
+	protected void keyTyped(char c, int keyCode){
 		if (searchBar.textboxKeyTyped(c, keyCode)) {
 			container.search(searchBar.getText());
 			container.populateMarketSlots();
@@ -147,8 +145,8 @@ public class GuiMarket extends GuiContainer {
 		super.drawScreen(mouseX, mouseY, partialTicks);
 
 		for (GuiButton sortButton : filterButtons) {
-			if (sortButton.isMouseOver() && sortButton.enabled) {
-				drawHoveringText(((GuiButtonMarketFilter) sortButton).getTooltipLines(), mouseX, mouseY);
+			if (sortButton.func_146115_a() && sortButton.enabled) { //func_146115_a == isMouseOverSlot
+				drawHoveringText(((GuiButtonMarketFilter) sortButton).getTooltipLines(), mouseX, mouseY, Minecraft.getMinecraft().fontRenderer);
 			}
 		}
 	}
@@ -159,8 +157,7 @@ public class GuiMarket extends GuiContainer {
 			recalculateScrollBar();
 			container.setDirty(false);
 		}
-
-		GlStateManager.color(1f, 1f, 1f, 1f);
+        GL11.glColor4f(1f, 1f, 1f, 1f);
 		mc.getTextureManager().bindTexture(TEXTURE);
 		drawTexturedModalRect(guiLeft, guiTop - 10, 0, 0, xSize, ySize + 10);
 		if(container.getSelectedEntry() != null && !container.isReadyToBuy()) {
@@ -187,10 +184,11 @@ public class GuiMarket extends GuiContainer {
 		}
 
 		GuiContainer.drawRect(scrollBarXPos, scrollBarYPos, scrollBarXPos + SCROLLBAR_WIDTH, scrollBarYPos + scrollBarScaledHeight, SCROLLBAR_COLOR);
-
-		GlStateManager.color(1f, 1f, 1f, 1f);
+        GL11.glColor4f(1f, 1f, 1f, 1f);
 
 		searchBar.drawTextBox();
+
+        hoverSlot = getSlotAtPosition(mouseX, mouseY);
 	}
 
 	public Collection<GuiButtonMarketFilter> getFilterButtons() {
@@ -223,9 +221,8 @@ public class GuiMarket extends GuiContainer {
 
 	@SubscribeEvent
 	public void onItemTooltip(ItemTooltipEvent event) {
-		Slot hoverSlot = getSlotUnderMouse();
 		//noinspection ConstantConditions
-		if (hoverSlot != null && event.getItemStack() == hoverSlot.getStack()) {
+		if (hoverSlot != null && event.itemStack == hoverSlot.getStack()) {
 			MarketEntry hoverEntry = null;
 
 			if (hoverSlot instanceof FakeSlotMarket) {
@@ -235,23 +232,38 @@ public class GuiMarket extends GuiContainer {
 			}
 
 			if (hoverEntry != null) {
-				event.getToolTip().add(getFormattedCostString(hoverEntry));
+				event.toolTip.add(getFormattedCostString(hoverEntry));
 			}
 		}
 	}
 
+    private Slot getSlotAtPosition(int x, int y) {
+        for (int k = 0; k < inventorySlots.inventorySlots.size(); ++k) {
+            Slot slot = (Slot) inventorySlots.inventorySlots.get(k);
+
+            if (isMouseOverSlot(slot, x, y)) {
+                return slot;
+            }
+        }
+        return null;
+    }
+
+    private boolean isMouseOverSlot(Slot slotIn, int mouseX, int mouseY) {
+        return func_146978_c(slotIn.xDisplayPosition, slotIn.yDisplayPosition, 16, 16, mouseX, mouseY);
+    }
+
 	private String getFormattedCostString(MarketEntry entry) {
-		String color = TextFormatting.GREEN.toString();
-		if(entry.getCostItem().getItem() == Items.DIAMOND) {
-			color = TextFormatting.AQUA.toString();
+		String color = "\u00a7a"; //green
+		if(entry.getCostItem().getItem() == Items.diamond) {
+			color = "\u00a7b"; //aqua
 		}
 		return color + I18n.format("gui.farmingforblockheads:market.tooltip_cost", I18n.format("gui.farmingforblockheads:market.cost", entry.getCostItem().stackSize, entry.getCostItem().getDisplayName()));
 	}
 
 	private String getFormattedCostStringShort(MarketEntry entry) {
-		String color = TextFormatting.GREEN.toString();
-		if(entry.getCostItem().getItem() == Items.DIAMOND) {
-			color = TextFormatting.AQUA.toString();
+		String color = "\u00a7a"; //green
+		if(entry.getCostItem().getItem() == Items.diamond) {
+			color = "\u00a7b";//aqua
 		}
 		return color + I18n.format("gui.farmingforblockheads:market.cost", entry.getCostItem().stackSize, entry.getCostItem().getDisplayName());
 	}
