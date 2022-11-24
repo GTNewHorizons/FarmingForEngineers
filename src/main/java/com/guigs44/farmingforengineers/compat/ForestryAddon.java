@@ -18,7 +18,7 @@ public class ForestryAddon {
 			@Override
 			public void apply(MarketRegistry registry, ItemStack defaultPayment) {
 				for(ITree tree : TreeManager.treeRoot.getIndividualTemplates()) {
-					ItemStack saplingStack = TreeManager.treeRoot.getMemberStack(tree, EnumGermlingType.SAPLING);
+					ItemStack saplingStack = TreeManager.treeRoot.getMemberStack(tree, 1); // hoping 1 == sapling
 					registry.registerEntry(saplingStack, defaultPayment, MarketEntry.EntryType.SAPLINGS);
 				}
 			}
@@ -30,7 +30,7 @@ public class ForestryAddon {
 
 			@Override
 			public ItemStack getDefaultPayment() {
-				return new ItemStack(Items.EMERALD, 2);
+				return new ItemStack(Items.emerald, 2);
 			}
 		});
 	}

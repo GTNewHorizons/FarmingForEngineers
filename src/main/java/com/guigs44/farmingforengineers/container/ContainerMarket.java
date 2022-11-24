@@ -8,15 +8,12 @@ import com.guigs44.farmingforengineers.registry.MarketEntry;
 import com.guigs44.farmingforengineers.registry.MarketRegistry;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
-
 import javax.annotation.Nullable;
 import java.util.List;
 
@@ -63,7 +60,7 @@ public class ContainerMarket extends Container {
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int slotIndex) {
 		ItemStack itemStack = null;
-		Slot slot = inventorySlots.get(slotIndex);
+		Slot slot = (Slot) inventorySlots.get(slotIndex);
 		if (slot != null && slot.getHasStack()) {
 			ItemStack slotStack = slot.getStack();
 			//noinspection ConstantConditions
@@ -119,17 +116,17 @@ public class ContainerMarket extends Container {
 	@Override
 	public void onContainerClosed(EntityPlayer player) {
 		super.onContainerClosed(player);
-		if (!player.worldObj.isRemote) {
-			ItemStack itemStack = this.marketInputBuffer.removeStackFromSlot(0);
-			if (itemStack != null) {
-				player.dropItem(itemStack, false);
-			}
-		}
+//		if (!player.worldObj.isRemote) {
+//			ItemStack itemStack = this.marketInputBuffer.removeStackFromSlot(0);
+//			if (itemStack != null) {
+//				player.dropItem(itemStack, false);
+//			}
+//		}
 	}
 
 	@Override
 	public boolean canInteractWith(EntityPlayer player) {
-		return player.worldObj.getBlockState(pos).getBlock() == ModBlocks.market && player.getDistanceSq( posX + 0.5,  posY + 0.5,  posZ + 0.5) <= 64;
+		return player.worldObj.getBlock(posX,posY,posZ) == ModBlocks.market && player.getDistanceSq( posX + 0.5,  posY + 0.5,  posZ + 0.5) <= 64;
 	}
 
 	@Override
@@ -152,8 +149,9 @@ public class ContainerMarket extends Container {
 	}
 
 	@Override
-	public boolean canMergeSlot(ItemStack itemStack, Slot slot) {
-		return slot.inventory != this.marketOutputBuffer && super.canMergeSlot(itemStack, slot);
+	public boolean func_94530_a(ItemStack itemStack, Slot slot) {
+		return slot.inventory != this.marketOutputBuffer && super.func_94530_a(itemStack, slot);
+        //func_94530_a == canMergeSlot most likely
 	}
 
 	public boolean isReadyToBuy() {

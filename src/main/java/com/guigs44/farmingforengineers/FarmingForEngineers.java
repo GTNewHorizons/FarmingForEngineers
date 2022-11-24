@@ -4,7 +4,7 @@ import com.guigs44.farmingforengineers.block.BlockMarket;
 import com.guigs44.farmingforengineers.block.ModBlocks;
 import com.guigs44.farmingforengineers.compat.Compat;
 import com.guigs44.farmingforengineers.compat.VanillaAddon;
-import com.guigs44.farmingforengineers.entity.EntityMerchant;
+//import com.guigs44.farmingforengineers.entity.EntityMerchant;
 import com.guigs44.farmingforengineers.network.GuiHandler;
 import com.guigs44.farmingforengineers.network.NetworkHandler;
 import com.guigs44.farmingforengineers.registry.AbstractRegistry;
@@ -33,11 +33,13 @@ import org.apache.logging.log4j.Logger;
 import java.io.File;
 import java.util.Optional;
 
-@Mod(modid = FarmingForEngineers.MOD_ID, name = "Farming for Blockheads", dependencies = "after:mousetweaks[2.8,);after:forestry;after:agricraft")
+@Mod(modid = FarmingForEngineers.MOD_ID, name = "Farming for Engineers", dependencies = "after:mousetweaks[2.8,);after:forestry;after:agricraft")
 //@Mod.EventBusSubscriber
 public class FarmingForEngineers {
 
-	public static final String MOD_ID = "farmingforblockheads";
+	public static final String MOD_ID = "farmingforengineers";
+
+    public static Block blockMarket = new BlockMarket();
 
 	@Mod.Instance(MOD_ID)
 	public static FarmingForEngineers instance;
@@ -70,7 +72,7 @@ public class FarmingForEngineers {
 
 		GameRegistry.registerTileEntity(TileMarket.class, MOD_ID + ":market");
 
-		proxy.preInit();
+		proxy.preInit(event);
 
 		if(config.hasChanged()) {
 			config.save();
@@ -92,9 +94,9 @@ public class FarmingForEngineers {
 		ModRecipes.init();
 		MarketRegistry.INSTANCE.load(configDir);
 
-		EntityRegistry.registerModEntity(EntityMerchant.class, "merchant", 0, this, 64, 3, true);
+		//EntityRegistry.registerModEntity(EntityMerchant.class, "merchant", 0, this, 64, 3, true);
 
-		proxy.init();
+		proxy.init(event);
 	}
 
 	@Mod.EventHandler
@@ -106,26 +108,26 @@ public class FarmingForEngineers {
 		event.registerServerCommand(new CommandFarmingForEngineers());
 	}
 
-	@SubscribeEvent
-	public static void registerBlocks(RegistryEvent.Register<Block> event) {
-		event.getRegistry().registerAll((ModBlocks.market = new BlockMarket()));
-	}
+//	@SubscribeEvent
+//	public static void registerBlocks(RegistryEvent.Register<Block> event) {
+//		event.getRegistry().registerAll((ModBlocks.market = new BlockMarket()));
+//	}
 
-	@SubscribeEvent
-	public static void registerItems(RegistryEvent.Register<Item> event) {
-		event.getRegistry().registerAll(new ItemBlock(ModBlocks.market).setRegistryName(ModBlocks.market.getRegistryName()));
-	}
+//	@SubscribeEvent
+//	public static void registerItems(RegistryEvent.Register<Item> event) {
+//		event.getRegistry().registerAll(new ItemBlock(ModBlocks.market).setRegistryName(ModBlocks.market.getRegistryName()));
+//	}
 
 	@SubscribeEvent
 	public void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
-		if (AbstractRegistry.registryErrors.size() > 0) {
-			event.player.addChatComponentMessage(new TextComponentString(TextFormatting.RED + "There were errors loading the Farming for Blockheads registries:"));
-			TextFormatting lastFormatting = TextFormatting.WHITE;
-			for (String error : AbstractRegistry.registryErrors) {
-				event.player.addChatMessage(new TextComponentString(lastFormatting + "* " + error));
-				lastFormatting = lastFormatting == TextFormatting.GRAY ? TextFormatting.WHITE : TextFormatting.GRAY;
-			}
-		}
+//		if (AbstractRegistry.registryErrors.size() > 0) {
+//			event.player.addChatComponentMessage(new TextComponentString(TextFormatting.RED + "There were errors loading the Farming for Blockheads registries:"));
+//			TextFormatting lastFormatting = TextFormatting.WHITE;
+//			for (String error : AbstractRegistry.registryErrors) {
+//				event.player.addChatMessage(new TextComponentString(lastFormatting + "* " + error));
+//				lastFormatting = lastFormatting == TextFormatting.GRAY ? TextFormatting.WHITE : TextFormatting.GRAY;
+//			}
+//		}
 	}
 
 	private Optional<?> buildSoftDependProxy(String modId, String className) {

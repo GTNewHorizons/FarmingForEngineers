@@ -23,8 +23,8 @@ public class BiomesOPlentyAddon {
 				for(int i = 0; i <= 2; i++) {
 
 					ResourceLocation location = new ResourceLocation(Compat.BIOMESOPLENTY, "sapling_" + i);
-					if(Block.REGISTRY.containsKey(location)) {
-						Block blockSapling = Block.REGISTRY.getObject(location);
+					if(Block.blockRegistry.containsKey(location)) {
+						Block blockSapling = (Block) Block.blockRegistry.getObject(location);
 						for (int j = 0; j < 8; j++) {
 							if(i == SACRED_OAK_PAGE && j == SACRED_OAK_META) {
 								// Sacred Oak Sapling. Done below.
@@ -44,7 +44,7 @@ public class BiomesOPlentyAddon {
 
 			@Override
 			public ItemStack getDefaultPayment() {
-				return new ItemStack(Items.EMERALD);
+				return new ItemStack(Items.emerald);
 			}
 		});
 
@@ -52,8 +52,8 @@ public class BiomesOPlentyAddon {
 			@Override
 			public void apply(MarketRegistry registry, ItemStack defaultPayment) {
 					ResourceLocation location = new ResourceLocation(Compat.BIOMESOPLENTY, "sapling_" + SACRED_OAK_PAGE);
-					if(Block.REGISTRY.containsKey(location)) {
-						Block blockSapling = Block.REGISTRY.getObject(location);
+					if(Block.blockRegistry.containsKey(location)) {
+						Block blockSapling = (Block) Block.blockRegistry.getObject(location);
 						ItemStack saplingStack = new ItemStack(blockSapling, 1, SACRED_OAK_META);
 						registry.registerEntry(saplingStack, defaultPayment, MarketEntry.EntryType.SAPLINGS);
 					}
@@ -66,7 +66,7 @@ public class BiomesOPlentyAddon {
 
 			@Override
 			public ItemStack getDefaultPayment() {
-				return new ItemStack(Items.EMERALD, 1, 8);
+				return new ItemStack(Items.emerald, 1, 8);
 			}
 		});
 	}

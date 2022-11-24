@@ -20,8 +20,8 @@ public class NaturaAddon {
 
 				for(int i = 0; i < SAPLINGS.length; i++) {
 					ResourceLocation location = new ResourceLocation(Compat.NATURA, SAPLINGS[i]);
-					if(Block.REGISTRY.containsKey(location)) {
-						Block blockSapling = Block.REGISTRY.getObject(location);
+					if(Block.blockRegistry.containsKey(location)) {
+						Block blockSapling = (Block) Block.blockRegistry.getObject(location);
 						for (int j = 0; j < (i == 2 ? 1 : 4); j++) {
 							ItemStack saplingStack = new ItemStack(blockSapling, 1, j);
 							registry.registerEntry(saplingStack, defaultPayment, MarketEntry.EntryType.SAPLINGS);
@@ -37,7 +37,7 @@ public class NaturaAddon {
 
 			@Override
 			public ItemStack getDefaultPayment() {
-				return new ItemStack(Items.EMERALD);
+				return new ItemStack(Items.emerald);
 			}
 		});
 	}
