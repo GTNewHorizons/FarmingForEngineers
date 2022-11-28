@@ -1,7 +1,4 @@
-@MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 package com.guigs44.farmingforengineers.registry;
-
-import mcp.MethodsReturnNonnullByDefault;
 
 import javax.annotation.ParametersAreNonnullByDefault;
