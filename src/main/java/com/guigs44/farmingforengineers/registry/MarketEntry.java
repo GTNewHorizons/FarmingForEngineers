@@ -6,64 +6,64 @@ import net.minecraft.util.ResourceLocation;
 
 public class MarketEntry {
 
-	public enum EntryType {
-		SEEDS("gui.farmingforblockheads:market.tooltip_seeds"),
-		SAPLINGS("gui.farmingforblockheads:market.tooltip_saplings"),
-		OTHER("gui.farmingforblockheads:market.tooltip_other");
+    public enum EntryType {
+        SEEDS("gui.farmingforblockheads:market.tooltip_seeds"),
+        SAPLINGS("gui.farmingforblockheads:market.tooltip_saplings"),
+        OTHER("gui.farmingforblockheads:market.tooltip_other");
 
-		private static final ResourceLocation TEXTURE = new ResourceLocation(FarmingForEngineers.MOD_ID, "textures/gui/market.png");
-		private static final EntryType[] values = values();
-		private String tooltip;
+        private static final ResourceLocation TEXTURE =
+                new ResourceLocation(FarmingForEngineers.MOD_ID, "textures/gui/market.png");
+        private static final EntryType[] values = values();
+        private String tooltip;
 
-		EntryType(String tooltip) {
-			this.tooltip = tooltip;
-		}
+        EntryType(String tooltip) {
+            this.tooltip = tooltip;
+        }
 
-		public String getTooltip() {
-			return tooltip;
-		}
+        public String getTooltip() {
+            return tooltip;
+        }
 
-		public ResourceLocation getIconTexture() {
-			return TEXTURE;
-		}
+        public ResourceLocation getIconTexture() {
+            return TEXTURE;
+        }
 
-		public int getIconTextureX() {
-			return 196 + ordinal() * 20;
-		}
+        public int getIconTextureX() {
+            return 196 + ordinal() * 20;
+        }
 
-		public int getIconTextureY() {
-			return 14;
-		}
+        public int getIconTextureY() {
+            return 14;
+        }
 
-		public boolean passes(MarketEntry entry) {
-			return entry.getType() == this;
-		}
+        public boolean passes(MarketEntry entry) {
+            return entry.getType() == this;
+        }
 
-		public static EntryType fromId(int id) {
-			return values[id];
-		}
-	}
+        public static EntryType fromId(int id) {
+            return values[id];
+        }
+    }
 
-	private final ItemStack outputItem;
-	private final ItemStack costItem;
-	private final EntryType type;
+    private final ItemStack outputItem;
+    private final ItemStack costItem;
+    private final EntryType type;
 
-	public MarketEntry(ItemStack outputItem, ItemStack costItem, EntryType type) {
-		this.outputItem = outputItem;
-		this.costItem = costItem;
-		this.type = type;
-	}
+    public MarketEntry(ItemStack outputItem, ItemStack costItem, EntryType type) {
+        this.outputItem = outputItem;
+        this.costItem = costItem;
+        this.type = type;
+    }
 
-	public ItemStack getCostItem() {
-		return costItem;
-	}
+    public ItemStack getCostItem() {
+        return costItem;
+    }
 
-	public ItemStack getOutputItem() {
-		return outputItem;
-	}
+    public ItemStack getOutputItem() {
+        return outputItem;
+    }
 
-	public EntryType getType() {
-		return type;
-	}
-
+    public EntryType getType() {
+        return type;
+    }
 }

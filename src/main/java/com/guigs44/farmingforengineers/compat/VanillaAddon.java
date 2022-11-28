@@ -1,110 +1,107 @@
 package com.guigs44.farmingforengineers.compat;
 
+import buildcraft.api.core.EnumColor;
 import com.guigs44.farmingforengineers.registry.MarketEntry;
 import com.guigs44.farmingforengineers.registry.MarketRegistry;
 import com.guigs44.farmingforengineers.registry.MarketRegistryDefaultHandler;
-import net.minecraft.block.BlockPlanks;
-import net.minecraft.block.BlockSapling;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.EnumDyeColor;
-import net.minecraft.item.ItemMonsterPlacer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 public class VanillaAddon {
 
-	private static final String[] ANIMALS = new String[] {
-			"Pig", "Sheep", "Cow", "Chicken", "EntityHorse", "Ozelot", "Rabbit", "PolarBear", "Wolf"
-	};
+    private static final String[] ANIMALS =
+            new String[] {"Pig", "Sheep", "Cow", "Chicken", "EntityHorse", "Ocelot", "Rabbit", "PolarBear", "Wolf"};
 
-	public VanillaAddon() {
-		MarketRegistry.registerDefaultHandler("Vanilla Seeds", new MarketRegistryDefaultHandler() {
-			@Override
-			public void apply(MarketRegistry registry, ItemStack defaultPayment) {
-				registry.registerEntry(new ItemStack(Items.WHEAT_SEEDS), defaultPayment, MarketEntry.EntryType.SEEDS);
-				registry.registerEntry(new ItemStack(Items.MELON_SEEDS), defaultPayment, MarketEntry.EntryType.SEEDS);
-				registry.registerEntry(new ItemStack(Items.PUMPKIN_SEEDS), defaultPayment, MarketEntry.EntryType.SEEDS);
-				registry.registerEntry(new ItemStack(Items.BEETROOT_SEEDS), defaultPayment, MarketEntry.EntryType.SEEDS);
-			}
+    public VanillaAddon() {
+        MarketRegistry.registerDefaultHandler("Vanilla Seeds", new MarketRegistryDefaultHandler() {
+            @Override
+            public void apply(MarketRegistry registry, ItemStack defaultPayment) {
+                registry.registerEntry(new ItemStack(Items.wheat_seeds), defaultPayment, MarketEntry.EntryType.SEEDS);
+                registry.registerEntry(new ItemStack(Items.melon_seeds), defaultPayment, MarketEntry.EntryType.SEEDS);
+                registry.registerEntry(new ItemStack(Items.pumpkin_seeds), defaultPayment, MarketEntry.EntryType.SEEDS);
+            }
 
-			@Override
-			public boolean isEnabledByDefault() {
-				return true;
-			}
+            @Override
+            public boolean isEnabledByDefault() {
+                return true;
+            }
 
-			@Override
-			public ItemStack getDefaultPayment() {
-				return new ItemStack(Items.EMERALD);
-			}
-		});
+            @Override
+            public ItemStack getDefaultPayment() {
+                return new ItemStack(Items.emerald);
+            }
+        });
 
-		MarketRegistry.registerDefaultHandler("Vanilla Saplings", new MarketRegistryDefaultHandler() {
-			@Override
-			public void apply(MarketRegistry registry, ItemStack defaultPayment) {
-				for (BlockPlanks.EnumType type : BlockSapling.TYPE.getAllowedValues()) {
-					registry.registerEntry(new ItemStack(Blocks.SAPLING, 1, type.getMetadata()), defaultPayment, MarketEntry.EntryType.SAPLINGS);
-				}
-			}
+        MarketRegistry.registerDefaultHandler("Vanilla Saplings", new MarketRegistryDefaultHandler() {
+            @Override
+            public void apply(MarketRegistry registry, ItemStack defaultPayment) {
+                //				for (EnumWoodType type : ) {
+                //					registry.registerEntry(new ItemStack(Blocks.sapling, 1, type.ordinal()), defaultPayment,
+                // MarketEntry.EntryType.SAPLINGS);
+                //				}
+            }
 
-			@Override
-			public boolean isEnabledByDefault() {
-				return true;
-			}
+            @Override
+            public boolean isEnabledByDefault() {
+                return true;
+            }
 
-			@Override
-			public ItemStack getDefaultPayment() {
-				return new ItemStack(Items.EMERALD);
-			}
-		});
+            @Override
+            public ItemStack getDefaultPayment() {
+                return new ItemStack(Items.emerald);
+            }
+        });
 
-		MarketRegistry.registerDefaultHandler("Bonemeal", new MarketRegistryDefaultHandler() {
-			@Override
-			public void apply(MarketRegistry registry, ItemStack defaultPayment) {
-				registry.registerEntry(new ItemStack(Items.DYE, 1, EnumDyeColor.WHITE.getDyeDamage()), defaultPayment, MarketEntry.EntryType.OTHER);
-			}
+        MarketRegistry.registerDefaultHandler("Bonemeal", new MarketRegistryDefaultHandler() {
+            @Override
+            public void apply(MarketRegistry registry, ItemStack defaultPayment) {
+                registry.registerEntry(
+                        new ItemStack(Items.dye, 1, EnumColor.WHITE.ordinal()),
+                        defaultPayment,
+                        MarketEntry.EntryType.OTHER);
+            }
 
-			@Override
-			public boolean isEnabledByDefault() {
-				return true;
-			}
+            @Override
+            public boolean isEnabledByDefault() {
+                return true;
+            }
 
-			@Override
-			public ItemStack getDefaultPayment() {
-				return new ItemStack(Items.EMERALD);
-			}
-		});
+            @Override
+            public ItemStack getDefaultPayment() {
+                return new ItemStack(Items.emerald);
+            }
+        });
 
-		MarketRegistry.registerDefaultHandler("Animal Eggs", new MarketRegistryDefaultHandler() {
-			@Override
-			public void apply(MarketRegistry registry, ItemStack defaultPayment) {
-				for (String animalName : ANIMALS) {
-					ItemStack eggStack = new ItemStack(Items.SPAWN_EGG);
+        MarketRegistry.registerDefaultHandler("Animal Eggs", new MarketRegistryDefaultHandler() {
+            @Override
+            public void apply(MarketRegistry registry, ItemStack defaultPayment) {
+                for (String animalName : ANIMALS) {
+                    ItemStack eggStack = new ItemStack(Items.spawn_egg);
 
-					// \o/ Praise SideOnly \o/
-					NBTTagCompound tagCompound = eggStack.getTagCompound();
-					if(tagCompound == null) {
-						tagCompound = new NBTTagCompound();
-					}
-					NBTTagCompound entityTag = new NBTTagCompound();
-					entityTag.setString("id", animalName);
-					tagCompound.setTag("EntityTag", entityTag);
-					eggStack.setTagCompound(tagCompound);
+                    // \o/ Praise SideOnly \o/
+                    NBTTagCompound tagCompound = eggStack.getTagCompound();
+                    if (tagCompound == null) {
+                        tagCompound = new NBTTagCompound();
+                    }
+                    NBTTagCompound entityTag = new NBTTagCompound();
+                    entityTag.setString("id", animalName);
+                    tagCompound.setTag("EntityTag", entityTag);
+                    eggStack.setTagCompound(tagCompound);
 
-					registry.registerEntry(eggStack, defaultPayment, MarketEntry.EntryType.OTHER);
-				}
-			}
+                    registry.registerEntry(eggStack, defaultPayment, MarketEntry.EntryType.OTHER);
+                }
+            }
 
-			@Override
-			public boolean isEnabledByDefault() {
-				return false;
-			}
+            @Override
+            public boolean isEnabledByDefault() {
+                return false;
+            }
 
-			@Override
-			public ItemStack getDefaultPayment() {
-				return new ItemStack(Items.EMERALD);
-			}
-		});
-	}
-
+            @Override
+            public ItemStack getDefaultPayment() {
+                return new ItemStack(Items.emerald);
+            }
+        });
+    }
 }

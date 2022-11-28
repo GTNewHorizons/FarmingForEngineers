@@ -39,9 +39,15 @@ public class ChatComponentBuilder {
                 this.style = new ChatStyle();
                 break;
             case NONE:
-                this.style = new ChatStyle().setColor(null).setBold(false).setItalic(false)
-                    .setStrikethrough(false).setUnderlined(false).setObfuscated(false)
-                    .setChatClickEvent(null).setChatHoverEvent(null);
+                this.style = new ChatStyle()
+                        .setColor(null)
+                        .setBold(false)
+                        .setItalic(false)
+                        .setStrikethrough(false)
+                        .setUnderlined(false)
+                        .setObfuscated(false)
+                        .setChatClickEvent(null)
+                        .setChatHoverEvent(null);
                 break;
         }
     }
@@ -98,7 +104,6 @@ public class ChatComponentBuilder {
         return this;
     }
 
-
     public ChatComponentBuilder append(String text) {
         return this.append(text, Inheritance.SHALLOW);
     }
@@ -113,7 +118,8 @@ public class ChatComponentBuilder {
     }
 
     public enum Inheritance {
-        DEEP, SHALLOW, NONE
+        DEEP,
+        SHALLOW,
+        NONE
     }
-
 }

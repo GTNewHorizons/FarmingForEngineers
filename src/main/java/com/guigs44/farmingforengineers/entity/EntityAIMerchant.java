@@ -1,8 +1,8 @@
-//package com.guigs44.farmingforengineers.entity;
+// package com.guigs44.farmingforengineers.entity;
 //
-//import net.minecraft.entity.ai.EntityAIBase;
+// import net.minecraft.entity.ai.EntityAIBase;
 //
-//public class EntityAIMerchant extends EntityAIBase {
+// public class EntityAIMerchant extends EntityAIBase {
 //
 //	private final EntityMerchant entity;
 //	private double movePosX;
@@ -41,4 +41,4 @@
 //		entity.getNavigator().tryMoveToXYZ(movePosX, movePosY, movePosZ, movementSpeed);
 //	}
 //
-//}
+// }

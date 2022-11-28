@@ -1,28 +1,28 @@
-//package com.guigs44.farmingforengineers.entity;
+// package com.guigs44.farmingforengineers.entity;
 //
-//import com.guigs44.farmingforengineers.FarmingForEngineers;
-//import com.guigs44.farmingforengineers.block.ModBlocks;
-//import com.guigs44.farmingforengineers.network.GuiHandler;
-//import net.minecraft.block.Block;
-//import net.minecraft.entity.EntityCreature;
-//import net.minecraft.entity.IEntityLivingData;
-//import net.minecraft.entity.INpc;
-//import net.minecraft.entity.SharedMonsterAttributes;
-//import net.minecraft.entity.ai.EntityAIAvoidEntity;
-//import net.minecraft.entity.ai.EntityAISwimming;
-//import net.minecraft.entity.monster.EntityZombie;
-//import net.minecraft.entity.player.EntityPlayer;
-//import net.minecraft.init.Blocks;
-//import net.minecraft.item.ItemStack;
-//import net.minecraft.nbt.NBTTagCompound;
-//import net.minecraft.util.DamageSource;
-//import net.minecraft.util.EnumFacing;
-//import net.minecraft.world.World;
+// import com.guigs44.farmingforengineers.FarmingForEngineers;
+// import com.guigs44.farmingforengineers.block.ModBlocks;
+// import com.guigs44.farmingforengineers.network.GuiHandler;
+// import net.minecraft.block.Block;
+// import net.minecraft.entity.EntityCreature;
+// import net.minecraft.entity.IEntityLivingData;
+// import net.minecraft.entity.INpc;
+// import net.minecraft.entity.SharedMonsterAttributes;
+// import net.minecraft.entity.ai.EntityAIAvoidEntity;
+// import net.minecraft.entity.ai.EntityAISwimming;
+// import net.minecraft.entity.monster.EntityZombie;
+// import net.minecraft.entity.player.EntityPlayer;
+// import net.minecraft.init.Blocks;
+// import net.minecraft.item.ItemStack;
+// import net.minecraft.nbt.NBTTagCompound;
+// import net.minecraft.util.DamageSource;
+// import net.minecraft.util.EnumFacing;
+// import net.minecraft.world.World;
 //
-//import javax.annotation.Nullable;
-//import java.util.Random;
+// import javax.annotation.Nullable;
+// import java.util.Random;
 //
-//public class EntityMerchant extends EntityCreature implements INpc {
+// public class EntityMerchant extends EntityCreature implements INpc {
 //
 //	public enum SpawnAnimationType {
 //		MAGIC,
@@ -72,7 +72,8 @@
 //	@Override
 //	public boolean processInteract(EntityPlayer player, EnumHand hand, @Nullable ItemStack itemStack) {
 //		if (isMarketValid()) {
-//			player.openGui(FarmingForEngineers.MOD_ID, GuiHandler.MARKET, worldObj, marketPos.getX(), marketPos.getY(), marketPos.getZ());
+//			player.openGui(FarmingForEngineers.MOD_ID, GuiHandler.MARKET, worldObj, marketPos.getX(), marketPos.getY(),
+// marketPos.getZ());
 //			return true;
 //		}
 //		return super.processInteract(player, hand, itemStack);
@@ -144,11 +145,14 @@
 //			diggingAnimation--;
 //			for(int i = 0; i < 4; i++) {
 //				int stateId = Block.getStateId(diggingBlockState != null ? diggingBlockState : Blocks.DIRT.getDefaultState());
-//				worldObj.spawnParticle(EnumParticleTypes.BLOCK_CRACK, posX, posY, posZ, Math.random() * 2 - 1, Math.random() * 4, Math.random() * 2 - 1, stateId);
-//				worldObj.spawnParticle(EnumParticleTypes.BLOCK_DUST, posX, posY, posZ, (Math.random() - 0.5) * 0.5, Math.random() * 0.5f, (Math.random() - 0.5) * 0.5, stateId);
+//				worldObj.spawnParticle(EnumParticleTypes.BLOCK_CRACK, posX, posY, posZ, Math.random() * 2 - 1, Math.random() * 4,
+// Math.random() * 2 - 1, stateId);
+//				worldObj.spawnParticle(EnumParticleTypes.BLOCK_DUST, posX, posY, posZ, (Math.random() - 0.5) * 0.5, Math.random()
+// * 0.5f, (Math.random() - 0.5) * 0.5, stateId);
 //			}
 //			if(diggingAnimation % 2 == 0) {
-//				worldObj.playSound(posX, posY, posZ, Blocks.DIRT.getSoundType().getHitSound(), SoundCategory.BLOCKS, 1f, (float) (Math.random() + 0.5), false);
+//				worldObj.playSound(posX, posY, posZ, Blocks.DIRT.getSoundType().getHitSound(), SoundCategory.BLOCKS, 1f, (float)
+// (Math.random() + 0.5), false);
 //			}
 //		}
 //	}
@@ -230,7 +234,8 @@
 //	public void disappear() {
 //		worldObj.playSound(posX, posY, posZ, SoundEvents.ITEM_FIRECHARGE_USE, SoundCategory.NEUTRAL, 1f, 1f, false);
 //		for (int i = 0; i < 50; i++) {
-//			worldObj.spawnParticle(EnumParticleTypes.FIREWORKS_SPARK, posX, posY + 1, posZ, (Math.random() - 0.5) * 0.5f, (Math.random() - 0.5) * 0.5f, (Math.random() - 0.5) * 0.5f);
+//			worldObj.spawnParticle(EnumParticleTypes.FIREWORKS_SPARK, posX, posY + 1, posZ, (Math.random() - 0.5) * 0.5f,
+// (Math.random() - 0.5) * 0.5f, (Math.random() - 0.5) * 0.5f);
 //		}
 //		worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, posX, posY + 1, posZ, 0, 0, 0);
 //		setDead();
@@ -243,4 +248,4 @@
 //	public int getDiggingAnimation() {
 //		return diggingAnimation;
 //	}
-//}
+// }
