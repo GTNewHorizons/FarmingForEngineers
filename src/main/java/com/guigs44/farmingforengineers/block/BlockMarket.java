@@ -30,28 +30,10 @@ public class BlockMarket extends BlockContainer {
         setBlockName(FarmingForEngineers.MOD_ID + ":market"); //TODO: Fix the name
         setStepSound(soundTypeWood);
         setHardness(2f);
+        setResistance(10f);
         setCreativeTab(FarmingForEngineers.creativeTab);
     }
 
-    //	@Override
-    //	protected BlockStateContainer createBlockState() {
-    //		return new BlockStateContainer(this, FACING);
-    //	}
-
-    //	@Override
-    //	@SuppressWarnings("deprecation")
-    //	public IBlockState getStateFromMeta(int meta) {
-    //		EnumFacing facing = EnumFacing.getFront(meta);
-    //		if (facing.getAxis() == EnumFacing.Axis.Y) {
-    //			facing = EnumFacing.NORTH;
-    //		}
-    //		return getDefaultState().withProperty(FACING, facing);
-    //	}
-
-    //	@Override
-    //	public int getMetaFromState(IBlockState state) {
-    //		return state.getValue(FACING).getIndex();
-    //	}
 
     @Override
     public TileEntity createNewTileEntity(World world, int meta) {
@@ -59,7 +41,6 @@ public class BlockMarket extends BlockContainer {
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public boolean isOpaqueCube() {
         return false;
     }
@@ -71,17 +52,15 @@ public class BlockMarket extends BlockContainer {
     //	}
 
     @Override
+    public boolean renderAsNormalBlock() {
+        return false;
+    }
+
+    @Override
     public void onBlockAdded(World worldIn, int x, int y, int z) {
         super.onBlockAdded(worldIn, x, y, z);
         findOrientation(worldIn, x, y, z);
     }
-
-    //	@Override
-    //	@SuppressWarnings("deprecation")
-    //	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float
-    // hitZ, int meta, EntityLivingBase placer) {
-    //		return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
-    //	}
 
     @Override
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase placer, ItemStack itemStack) {

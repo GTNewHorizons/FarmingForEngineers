@@ -52,13 +52,11 @@ public class FarmingForEngineers {
     public static final CreativeTabs creativeTab = new CreativeTabs(MOD_ID) {
         @Override
         public Item getTabIconItem() {
-            //noinspection ConstantConditions
             return Item.getItemFromBlock(ModBlocks.market);
         }
     };
 
     public static File configDir;
-    private Configuration config;
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
@@ -66,7 +64,7 @@ public class FarmingForEngineers {
         if (!configDir.exists() && !configDir.mkdirs()) {
             throw new RuntimeException("Couldn't create Farming for Blockheads configuration directory");
         }
-        config = new Configuration(new File(configDir, "FarmingForBlockheads.cfg"));
+        Configuration config = new Configuration(new File(configDir, "FarmingForBlockheads.cfg"));
         config.load();
         ModConfig.preInit(config);
 
