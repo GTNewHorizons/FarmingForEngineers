@@ -24,9 +24,9 @@ public class ContainerMarket extends Container {
     private final int posY;
     private final int posZ;
     private final InventoryBasic marketInputBuffer =
-            new InventoryBasic("container.farmingforblockheads:market", false, 1);
+            new InventoryBasic("container.farmingforengineers:market", false, 1);
     private final InventoryBasic marketOutputBuffer =
-            new InventoryBasic("container.farmingforblockheads:market", false, 1);
+            new InventoryBasic("container.farmingforengineers:market", false, 1);
     protected final List<FakeSlotMarket> marketSlots = Lists.newArrayList();
 
     private boolean sentItemList;
@@ -62,7 +62,7 @@ public class ContainerMarket extends Container {
     @Override
     public ItemStack transferStackInSlot(EntityPlayer player, int slotIndex) {
         ItemStack itemStack = null;
-        Slot slot = (Slot) inventorySlots.get(slotIndex);
+        Slot slot = (Slot) this.inventorySlots.get(slotIndex);
         if (slot != null && slot.getHasStack()) {
             ItemStack slotStack = slot.getStack();
             //noinspection ConstantConditions
@@ -129,8 +129,7 @@ public class ContainerMarket extends Container {
 
     @Override
     public boolean canInteractWith(EntityPlayer player) {
-        return player.worldObj.getBlock(posX, posY, posZ) == ModBlocks.market
-                && player.getDistanceSq(posX + 0.5, posY + 0.5, posZ + 0.5) <= 64;
+        return true;
     }
 
     @Override

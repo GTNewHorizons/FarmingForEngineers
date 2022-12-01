@@ -36,7 +36,7 @@ public class GuiMarket extends GuiContainer {
     private static final int VISIBLE_ROWS = 4;
 
     private static final ResourceLocation TEXTURE =
-            new ResourceLocation(FarmingForEngineers.MOD_ID, "textures/gui/market.png");
+            new ResourceLocation("farmingforengineers:textures/gui/market.png");
 
     private final ContainerMarketClient container;
     private final List<GuiButtonMarketFilter> filterButtons = Lists.newArrayList();
@@ -196,12 +196,12 @@ public class GuiMarket extends GuiContainer {
         }
 
         fontRendererObj.drawString(
-                I18n.format("container.farmingforblockheads:market"), guiLeft + 10, guiTop + 10, 0xFFFFFF, true);
+                I18n.format("container.farmingforengineers:market"), guiLeft + 10, guiTop + 10, 0xFFFFFF, true);
 
         if (container.getSelectedEntry() == null) {
             drawCenteredString(
                     fontRendererObj,
-                    I18n.format("gui.farmingforblockheads:market.no_selection"),
+                    I18n.format("gui.farmingforengineers:market.no_selection"),
                     guiLeft + 49,
                     guiTop + 65,
                     0xFFFFFF);
@@ -301,9 +301,9 @@ public class GuiMarket extends GuiContainer {
         }
         return color
                 + I18n.format(
-                        "gui.farmingforblockheads:market.tooltip_cost",
+                        "gui.farmingforengineers:market.tooltip_cost",
                         I18n.format(
-                                "gui.farmingforblockheads:market.cost",
+                                "gui.farmingforengineers:market.cost",
                                 entry.getCostItem().stackSize,
                                 entry.getCostItem().getDisplayName()));
     }
@@ -315,7 +315,7 @@ public class GuiMarket extends GuiContainer {
         }
         return color
                 + I18n.format(
-                        "gui.farmingforblockheads:market.cost",
+                        "gui.farmingforengineers:market.cost",
                         entry.getCostItem().stackSize,
                         entry.getCostItem().getDisplayName());
     }
