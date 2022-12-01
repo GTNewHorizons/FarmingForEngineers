@@ -107,7 +107,7 @@ public class BlockMarket extends BlockContainer {
 
     @Override
     public boolean onBlockActivated(
-            World world, int x, int y, int z, EntityPlayer player, int side, float subX, float subY, float subZ) {
+        World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
         if (!world.isRemote) {
             player.openGui(FarmingForEngineers.instance, GuiHandler.MARKET, world, x, y, z);
         }
@@ -119,9 +119,14 @@ public class BlockMarket extends BlockContainer {
     //		return false;
     //	}
 
+
+//    @Override
+//    public int getRenderType() {
+//        return RenderingRegistry.getNextAvailableRenderId();
+//    }
     @Override
     public int getRenderType() {
-        return RenderingRegistry.getNextAvailableRenderId();
+        return 0;
     }
 
     // Helper Methods

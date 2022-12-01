@@ -1,7 +1,9 @@
 package com.guigs44.farmingforengineers;
 
+import com.guigs44.farmingforengineers.network.GuiHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class CommonProxy {
@@ -9,5 +11,6 @@ public class CommonProxy {
 
     public void init(FMLInitializationEvent event) {
         GameRegistry.registerBlock(FarmingForEngineers.blockMarket, "market");
+        NetworkRegistry.INSTANCE.registerGuiHandler(FarmingForEngineers.instance, new GuiHandler());
     }
 }
