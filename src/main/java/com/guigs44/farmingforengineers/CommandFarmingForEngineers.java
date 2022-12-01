@@ -28,11 +28,11 @@ public class CommandFarmingForEngineers extends CommandBase {
         if (args[0].equals("reload")) {
             AbstractRegistry.registryErrors.clear();
             MarketRegistry.INSTANCE.load(FarmingForEngineers.configDir);
-            sender.addChatMessage(ChatComponentBuilder.of("commands.farmingforblockheads:reload.success")
+            sender.addChatMessage(ChatComponentBuilder.of("commands.farmingforengineers:reload.success")
                     .build());
             if (AbstractRegistry.registryErrors.size() > 0) {
                 sender.addChatMessage(
-                        ChatComponentBuilder.of("There were errors loading the Farming for Blockheads registries:")
+                        ChatComponentBuilder.of("There were errors loading the Farming for Engineers registries:")
                                 .setColor(EnumChatFormatting.RED)
                                 .build());
                 for (String error : AbstractRegistry.registryErrors) {
@@ -55,11 +55,11 @@ public class CommandFarmingForEngineers extends CommandBase {
     //		}
     //		if(args[0].equals("reload")) {
     //			AbstractRegistry.registryErrors.clear();
-    //			MarketRegistry.INSTANCE.load(FarmingForBlockheads.configDir);
-    //			sender.addChatMessage(new TextComponentTranslation("commands.farmingforblockheads:reload.success"));
+    //			MarketRegistry.INSTANCE.load(FarmingForEngineers.configDir);
+    //			sender.addChatMessage(new TextComponentTranslation("commands.farmingforengineers:reload.success"));
     //			if(AbstractRegistry.registryErrors.size() > 0) {
     //				sender.addChatMessage(new TextComponentString(TextFormatting.RED + "There were errors loading the Farming for
-    // Blockheads registries:"));
+    // Engineers registries:"));
     //				TextFormatting lastFormatting = TextFormatting.WHITE;
     //				for(String error : AbstractRegistry.registryErrors) {
     //					sender.addChatMessage(new TextComponentString(lastFormatting + "* " + error));

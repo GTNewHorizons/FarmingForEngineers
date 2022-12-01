@@ -1,7 +1,7 @@
 [
 {
-  "modid": "farmingforblockheads",
-  "name": "Farming for Blockheads",
+  "modid": "farmingforengineers",
+  "name": "Farming for Engineers",
   "description": "Adds a seed market with a search bar and a scrolling grid.",
   "version": "${modVersion}",
   "mcversion": "${minecraftVersion}",

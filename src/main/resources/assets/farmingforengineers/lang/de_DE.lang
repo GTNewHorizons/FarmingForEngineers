@@ -1,0 +1,14 @@
+tile.farmingforengineers:market.name=Markt
+
+itemGroup.farmingforengineers=Farming for Engineers
+
+container.farmingforengineers:market=Markt
+
+gui.farmingforengineers:market.no_selection=Keine Auswahl
+gui.farmingforengineers:market.tooltip_cost=Kosten: %s
+gui.farmingforengineers:market.tooltip_seeds=Samen
+gui.farmingforengineers:market.tooltip_saplings=Setzlinge
+gui.farmingforengineers:market.tooltip_other=Sonstiges
+gui.farmingforengineers:market.cost=%dx %s
+
+jei.farmingforengineers:market=Markt

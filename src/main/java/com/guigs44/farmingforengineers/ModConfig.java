@@ -11,6 +11,6 @@ public class ModConfig {
                 "Show Registry Warnings",
                 "client",
                 false,
-                "Set this to true if you're a modpack dev to see Farming for Blockheads registry warnings in chat. Errors will always display.");
+                "Set this to true if you're a modpack dev to see Farming for Engineers registry warnings in chat. Errors will always display.");
     }
 }

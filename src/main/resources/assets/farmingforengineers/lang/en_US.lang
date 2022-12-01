@@ -1,0 +1,16 @@
+tile.farmingforengineers:market.name=Market
+
+itemGroup.farmingforengineers=Farming for Engineers
+
+container.farmingforengineers:market=Market
+
+commands.farmingforengineers:reload.success=Farming for Engineers registries reloaded.
+
+gui.farmingforengineers:market.no_selection=No Selection
+gui.farmingforengineers:market.tooltip_cost=Cost: %s
+gui.farmingforengineers:market.tooltip_seeds=Seeds
+gui.farmingforengineers:market.tooltip_saplings=Saplings
+gui.farmingforengineers:market.tooltip_other=Other
+gui.farmingforengineers:market.cost=%dx %s
+
+jei.farmingforengineers:market=Market

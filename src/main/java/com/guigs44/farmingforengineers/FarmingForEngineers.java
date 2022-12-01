@@ -60,11 +60,11 @@ public class FarmingForEngineers {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        configDir = new File(event.getModConfigurationDirectory(), "FarmingForBlockheads");
+        configDir = new File(event.getModConfigurationDirectory(), "FarmingForEngineers");
         if (!configDir.exists() && !configDir.mkdirs()) {
-            throw new RuntimeException("Couldn't create Farming for Blockheads configuration directory");
+            throw new RuntimeException("Couldn't create Farming for Engineers configuration directory");
         }
-        Configuration config = new Configuration(new File(configDir, "FarmingForBlockheads.cfg"));
+        Configuration config = new Configuration(new File(configDir, "FarmingForEngineers.cfg"));
         config.load();
         ModConfig.preInit(config);
 
@@ -120,7 +120,7 @@ public class FarmingForEngineers {
     public void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
         //		if (AbstractRegistry.registryErrors.size() > 0) {
         //			event.player.addChatComponentMessage(new TextComponentString(TextFormatting.RED + "There were errors
-        // loading the Farming for Blockheads registries:"));
+        // loading the Farming for Engineers registries:"));
         //			TextFormatting lastFormatting = TextFormatting.WHITE;
         //			for (String error : AbstractRegistry.registryErrors) {
         //				event.player.addChatMessage(new TextComponentString(lastFormatting + "* " + error));
