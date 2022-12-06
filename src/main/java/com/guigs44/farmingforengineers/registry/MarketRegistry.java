@@ -218,7 +218,6 @@ public class MarketRegistry extends AbstractRegistry {
         NBTTagCompound tagCompound = null;
         if (nbt != null) {
             tagCompound = (NBTTagCompound) codechicken.nei.util.NBTJson.toNbt(JsonParser.parseString(nbt));
-            // tagCompound = JsonToNBT.getTagFromJson(nbt);
         }
         ItemStack itemStack = new ItemStack(item, count, meta);
         if (tagCompound != null) {
