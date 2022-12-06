@@ -4,6 +4,8 @@ import buildcraft.api.core.EnumColor;
 import com.guigs44.farmingforengineers.registry.MarketEntry;
 import com.guigs44.farmingforengineers.registry.MarketRegistry;
 import com.guigs44.farmingforengineers.registry.MarketRegistryDefaultHandler;
+import net.minecraft.block.BlockSapling;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -36,10 +38,10 @@ public class VanillaAddon {
         MarketRegistry.registerDefaultHandler("Vanilla Saplings", new MarketRegistryDefaultHandler() {
             @Override
             public void apply(MarketRegistry registry, ItemStack defaultPayment) {
-                //				for (EnumWoodType type : ) {
-                //					registry.registerEntry(new ItemStack(Blocks.sapling, 1, type.ordinal()), defaultPayment,
-                // MarketEntry.EntryType.SAPLINGS);
-                //				}
+
+                for (int typeID = 0; typeID < BlockSapling.field_149882_a.length; typeID++) {
+                    registry.registerEntry(new ItemStack(Blocks.sapling, 1, typeID), defaultPayment, MarketEntry.EntryType.SAPLINGS);
+                }
             }
 
             @Override

@@ -131,9 +131,9 @@ public class MarketRegistry extends AbstractRegistry {
         MarketEntry.EntryType type = MarketEntry.EntryType.OTHER;
 
         // outputStack.getItem().getRegistryName().getResourcePath().contains("sapling") maybe
-        if (Item.itemRegistry.getNameForObject(outputStack.getItem()).contains("sapling")) {
+        if (outputStack.getItem().getUnlocalizedName().contains("sapling")) {
             type = MarketEntry.EntryType.SAPLINGS;
-        } else if (Item.itemRegistry.getNameForObject(outputStack.getItem()).contains("seed")) {
+        } else if (outputStack.getItem().getUnlocalizedName().contains("seed")) {
             type = MarketEntry.EntryType.SEEDS;
         }
 

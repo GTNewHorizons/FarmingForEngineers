@@ -6,8 +6,10 @@ import com.guigs44.farmingforengineers.compat.Compat;
 import com.guigs44.farmingforengineers.compat.VanillaAddon;
 import com.guigs44.farmingforengineers.network.GuiHandler;
 import com.guigs44.farmingforengineers.network.NetworkHandler;
+import com.guigs44.farmingforengineers.registry.AbstractRegistry;
 import com.guigs44.farmingforengineers.registry.MarketRegistry;
 import com.guigs44.farmingforengineers.tile.TileMarket;
+import com.guigs44.farmingforengineers.utilities.ChatComponentBuilder;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -118,15 +120,12 @@ public class FarmingForEngineers {
 
     @SubscribeEvent
     public void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
-        //		if (AbstractRegistry.registryErrors.size() > 0) {
-        //			event.player.addChatComponentMessage(new TextComponentString(TextFormatting.RED + "There were errors
-        // loading the Farming for Engineers registries:"));
-        //			TextFormatting lastFormatting = TextFormatting.WHITE;
-        //			for (String error : AbstractRegistry.registryErrors) {
-        //				event.player.addChatMessage(new TextComponentString(lastFormatting + "* " + error));
-        //				lastFormatting = lastFormatting == TextFormatting.GRAY ? TextFormatting.WHITE : TextFormatting.GRAY;
-        //			}
-        //		}
+        		if (AbstractRegistry.registryErrors.size() > 0) {
+        			event.player.addChatMessage(ChatComponentBuilder.of("There were errors loading the Farming for Engineers registries:").build());
+        			for (String error : AbstractRegistry.registryErrors) {
+        				event.player.addChatMessage(ChatComponentBuilder.of("* " + error).build());
+        			}
+        		}
     }
 
     private Optional<?> buildSoftDependProxy(String modId, String className) {
