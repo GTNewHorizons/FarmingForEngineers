@@ -207,7 +207,7 @@ public class MarketRegistry extends AbstractRegistry {
         }
 
         ResourceLocation resourceLocation = new ResourceLocation(matcher.group(2), matcher.group(3));
-        Item item = (Item) Item.itemRegistry.getObject(resourceLocation);
+        Item item = (Item) Item.itemRegistry.getObject(resourceLocation.toString());
         if (item == null) {
             logUnknownItem(resourceLocation);
             return null;
