@@ -17,7 +17,7 @@ public class ClientProxy extends CommonProxy {
         //			}
         //		});
 
-        //ClientRegistry.bindTileEntitySpecialRenderer(TileMarket.class,new TileEntityMarketBlockRenderer());
+        // ClientRegistry.bindTileEntitySpecialRenderer(TileMarket.class,new TileEntityMarketBlockRenderer());
         RenderingRegistry.registerBlockHandler(MarketBlockRenderer.RENDER_ID, new MarketBlockRenderer());
         //noinspection ConstantConditions
         // ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ModBlocks.market), 0, new

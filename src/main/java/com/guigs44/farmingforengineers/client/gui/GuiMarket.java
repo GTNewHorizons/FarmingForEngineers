@@ -1,13 +1,10 @@
 package com.guigs44.farmingforengineers.client.gui;
 
 import com.google.common.collect.Lists;
-import com.guigs44.farmingforengineers.FarmingForEngineers;
-import com.guigs44.farmingforengineers.container.ContainerMarket;
 import com.guigs44.farmingforengineers.container.ContainerMarketClient;
 import com.guigs44.farmingforengineers.container.FakeSlotMarket;
 import com.guigs44.farmingforengineers.container.SlotMarketBuy;
 import com.guigs44.farmingforengineers.registry.MarketEntry;
-import com.guigs44.farmingforengineers.tile.TileMarket;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import java.util.Collection;
 import java.util.List;
@@ -16,8 +13,6 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.Slot;
 import net.minecraft.util.ResourceLocation;
@@ -35,8 +30,7 @@ public class GuiMarket extends GuiContainer {
     private static final int SCROLLBAR_HEIGHT = 77;
     private static final int VISIBLE_ROWS = 4;
 
-    private static final ResourceLocation TEXTURE =
-            new ResourceLocation("farmingforengineers:textures/gui/market.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation("farmingforengineers:textures/gui/market.png");
 
     private final ContainerMarketClient container;
     private final List<GuiButtonMarketFilter> filterButtons = Lists.newArrayList();
@@ -58,8 +52,6 @@ public class GuiMarket extends GuiContainer {
         super(container);
         this.container = container;
     }
-
-
 
     @Override
     public void initGui() {

@@ -120,12 +120,15 @@ public class FarmingForEngineers {
 
     @SubscribeEvent
     public void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
-        		if (AbstractRegistry.registryErrors.size() > 0) {
-        			event.player.addChatMessage(ChatComponentBuilder.of("There were errors loading the Farming for Engineers registries:").build());
-        			for (String error : AbstractRegistry.registryErrors) {
-        				event.player.addChatMessage(ChatComponentBuilder.of("* " + error).build());
-        			}
-        		}
+        if (AbstractRegistry.registryErrors.size() > 0) {
+            event.player.addChatMessage(
+                    ChatComponentBuilder.of("There were errors loading the Farming for Engineers registries:")
+                            .build());
+            for (String error : AbstractRegistry.registryErrors) {
+                event.player.addChatMessage(
+                        ChatComponentBuilder.of("* " + error).build());
+            }
+        }
     }
 
     private Optional<?> buildSoftDependProxy(String modId, String className) {

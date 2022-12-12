@@ -40,7 +40,8 @@ public class VanillaAddon {
             public void apply(MarketRegistry registry, ItemStack defaultPayment) {
 
                 for (int typeID = 0; typeID < BlockSapling.field_149882_a.length; typeID++) {
-                    registry.registerEntry(new ItemStack(Blocks.sapling, 1, typeID), defaultPayment, MarketEntry.EntryType.SAPLINGS);
+                    registry.registerEntry(
+                            new ItemStack(Blocks.sapling, 1, typeID), defaultPayment, MarketEntry.EntryType.SAPLINGS);
                 }
             }
 

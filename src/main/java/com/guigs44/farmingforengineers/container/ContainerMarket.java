@@ -1,7 +1,6 @@
 package com.guigs44.farmingforengineers.container;
 
 import com.google.common.collect.Lists;
-import com.guigs44.farmingforengineers.block.ModBlocks;
 import com.guigs44.farmingforengineers.network.MessageMarketList;
 import com.guigs44.farmingforengineers.network.NetworkHandler;
 import com.guigs44.farmingforengineers.registry.MarketEntry;

@@ -3,7 +3,6 @@ package com.guigs44.farmingforengineers.block;
 import com.guigs44.farmingforengineers.FarmingForEngineers;
 import com.guigs44.farmingforengineers.network.GuiHandler;
 import com.guigs44.farmingforengineers.tile.TileMarket;
-import cpw.mods.fml.client.registry.RenderingRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -27,13 +26,12 @@ public class BlockMarket extends BlockContainer {
 
     public BlockMarket() {
         super(Material.wood);
-        setBlockName(FarmingForEngineers.MOD_ID + ":market"); //TODO: Fix the name
+        setBlockName(FarmingForEngineers.MOD_ID + ":market"); // TODO: Fix the name
         setStepSound(soundTypeWood);
         setHardness(2f);
         setResistance(10f);
         setCreativeTab(FarmingForEngineers.creativeTab);
     }
-
 
     @Override
     public TileEntity createNewTileEntity(World world, int meta) {
@@ -107,7 +105,7 @@ public class BlockMarket extends BlockContainer {
 
     @Override
     public boolean onBlockActivated(
-        World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
+            World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
         if (!world.isRemote) {
             player.openGui(FarmingForEngineers.instance, GuiHandler.MARKET, world, x, y, z);
         }
@@ -119,11 +117,10 @@ public class BlockMarket extends BlockContainer {
     //		return false;
     //	}
 
-
-//    @Override
-//    public int getRenderType() {
-//        return RenderingRegistry.getNextAvailableRenderId();
-//    }
+    //    @Override
+    //    public int getRenderType() {
+    //        return RenderingRegistry.getNextAvailableRenderId();
+    //    }
     @Override
     public int getRenderType() {
         return 0;
