@@ -17,14 +17,14 @@ public class ForestryAddon {
             @Override
             public void apply(MarketRegistry registry, ItemStack defaultPayment) {
                 for (ITree tree : TreeManager.treeRoot.getIndividualTemplates()) {
-                    ItemStack saplingStack = TreeManager.treeRoot.getMemberStack(tree, 1); // hoping 1 == sapling
+                    ItemStack saplingStack = TreeManager.treeRoot.getMemberStack(tree, 0); // 0 == sapling I guess
                     registry.registerEntry(saplingStack, defaultPayment, MarketEntry.EntryType.SAPLINGS);
                 }
             }
 
             @Override
             public boolean isEnabledByDefault() {
-                return false;
+                return true;
             }
 
             @Override
