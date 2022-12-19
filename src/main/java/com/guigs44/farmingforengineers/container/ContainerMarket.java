@@ -118,12 +118,12 @@ public class ContainerMarket extends Container {
     @Override
     public void onContainerClosed(EntityPlayer player) {
         super.onContainerClosed(player);
-        //		if (!player.worldObj.isRemote) {
-        //			ItemStack itemStack = this.marketInputBuffer.removeStackFromSlot(0);
-        //			if (itemStack != null) {
-        //				player.dropItem(itemStack, false);
-        //			}
-        //		}
+        if (!player.worldObj.isRemote) {
+            ItemStack itemStack = this.marketInputBuffer.getStackInSlot(0);
+            if (itemStack != null) {
+                player.entityDropItem(itemStack, 1f);
+            }
+        }
     }
 
     @Override
