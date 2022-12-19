@@ -1,7 +1,6 @@
 package com.guigs44.farmingforengineers;
 
 import com.guigs44.farmingforengineers.block.BlockMarket;
-import com.guigs44.farmingforengineers.block.ModBlocks;
 import com.guigs44.farmingforengineers.compat.Compat;
 import com.guigs44.farmingforengineers.compat.VanillaAddon;
 import com.guigs44.farmingforengineers.network.GuiHandler;
@@ -25,6 +24,7 @@ import java.io.File;
 import java.util.Optional;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.config.Configuration;
 import org.apache.logging.log4j.LogManager;
@@ -54,7 +54,7 @@ public class FarmingForEngineers {
     public static final CreativeTabs creativeTab = new CreativeTabs(MOD_ID) {
         @Override
         public Item getTabIconItem() {
-            return Item.getItemFromBlock(ModBlocks.market);
+            return Item.getItemFromBlock(Blocks.log); // ModBlocks.market
         }
     };
 

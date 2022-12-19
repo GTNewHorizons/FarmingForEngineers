@@ -121,9 +121,10 @@ public class BlockMarket extends BlockContainer {
     //    public int getRenderType() {
     //        return RenderingRegistry.getNextAvailableRenderId();
     //    }
+
     @Override
     public int getRenderType() {
-        return 0;
+        return -1;
     }
 
     // Helper Methods
