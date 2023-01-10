@@ -3,6 +3,7 @@ package com.guigs44.farmingforengineers;
 import com.guigs44.farmingforengineers.block.BlockMarket;
 import com.guigs44.farmingforengineers.compat.Compat;
 import com.guigs44.farmingforengineers.compat.VanillaAddon;
+import com.guigs44.farmingforengineers.entity.EntityMerchant;
 import com.guigs44.farmingforengineers.network.GuiHandler;
 import com.guigs44.farmingforengineers.network.NetworkHandler;
 import com.guigs44.farmingforengineers.registry.AbstractRegistry;
@@ -19,6 +20,7 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import java.io.File;
 import java.util.Optional;
@@ -94,7 +96,7 @@ public class FarmingForEngineers {
         ModRecipes.init();
         MarketRegistry.INSTANCE.load(configDir);
 
-        // EntityRegistry.registerModEntity(EntityMerchant.class, "merchant", 0, this, 64, 3, true);
+        EntityRegistry.registerModEntity(EntityMerchant.class, "merchant", 0, this, 64, 3, true);
 
         proxy.init(event);
     }
