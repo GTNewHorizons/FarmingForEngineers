@@ -59,9 +59,9 @@
 	@Override
 	protected void entityInit() {
 		super.entityInit();
-		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(1, new EntityAIAvoidEntity(this, EntityZombie.class, 8f, 0.6, 0.6));
-		tasks.addTask(5, new EntityAIMerchant(this, 0.6));
+		//tasks.addTask(0, new EntityAISwimming(this));
+		//tasks.addTask(1, new EntityAIAvoidEntity(this, EntityZombie.class, 8f, 0.6, 0.6));
+		//tasks.addTask(5, new EntityAIMerchant(this, 0.6));
 	}
 
 	@Override
