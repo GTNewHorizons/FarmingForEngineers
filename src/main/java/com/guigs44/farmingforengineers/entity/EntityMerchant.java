@@ -54,14 +54,14 @@
 	public EntityMerchant(World world) {
 		super(world);
 		setSize(0.6f, 1.95f);
+        this.tasks.addTask(0, new EntityAISwimming(this));
+        this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntityZombie.class, 8f, 0.6, 0.6));
+        this.tasks.addTask(5, new EntityAIMerchant(this, 0.6));
 	}
 
 	@Override
 	protected void entityInit() {
 		super.entityInit();
-		//tasks.addTask(0, new EntityAISwimming(this));
-		//tasks.addTask(1, new EntityAIAvoidEntity(this, EntityZombie.class, 8f, 0.6, 0.6));
-		//tasks.addTask(5, new EntityAIMerchant(this, 0.6));
 	}
 
 	@Override
