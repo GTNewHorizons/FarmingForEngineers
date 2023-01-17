@@ -184,15 +184,16 @@
 		return 1.62f;
 	}
 
-//	@Nullable
-//	public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingData) {
-//		if(Math.random() < 0.001) {
-//			setCustomNameTag(Math.random() <= 0.5 ? "Pam" : "Blay");
-//		} else {
-//			setCustomNameTag(NAMES[rand.nextInt(NAMES.length)]);
-//		}
-//		return super.onInitialSpawn(difficulty, livingData);
-//	}
+    @Nullable
+    public IEntityLivingData onInitialSpawn(@Nullable IEntityLivingData livingData) {
+        if(Math.random() < 0.001) {
+            setCustomNameTag(Math.random() <= 0.5 ? "Pam" : "Blay");
+        } else {
+            setCustomNameTag(NAMES[rand.nextInt(NAMES.length)]);
+        }
+        setAlwaysRenderNameTag(true);
+        return livingData;
+    }
 
 
 

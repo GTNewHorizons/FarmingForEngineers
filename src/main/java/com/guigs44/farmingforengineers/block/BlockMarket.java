@@ -87,7 +87,7 @@ public class BlockMarket extends BlockContainer {
         			}
 
         			world.spawnEntityInWorld(merchant);
-        			//merchant.onInitialSpawn(world.getDifficultyForLocation(pos), null);
+        			merchant.onInitialSpawn(null);
         		}
         		if(spawnAnimationType == EntityMerchant.SpawnAnimationType.FALLING) {
         			world.playSound(x + 0.5, y + 1, z + 0.5, "sounds.falling", 1f, 1f, false);
