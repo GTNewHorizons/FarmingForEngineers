@@ -114,18 +114,18 @@
 
 	@Override
 	protected String getLivingSound() {
-		return "entity.villager.ambient";
-	}
+		return "mob.villager.ambient";
+	} //TODO: Figure out what is the correct string
 
 	@Override
 	protected String getHurtSound() {
-		return "entity.villager.hurt";
-	}
+		return "mob.villager.hit";
+	} //Works
 
 	@Override
 	protected String getDeathSound() {
-		return "entity.villager.death";
-	}
+		return "mob.villager.death";
+	}// works
 
 	@Override
 	public void onEntityUpdate() {
