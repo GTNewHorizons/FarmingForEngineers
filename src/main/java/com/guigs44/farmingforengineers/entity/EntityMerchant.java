@@ -73,7 +73,7 @@
 	@Override
 	public boolean interact(EntityPlayer player) {
 		if (isMarketValid()) {
-			player.openGui(FarmingForEngineers.MOD_ID, GuiHandler.MARKET, worldObj, marketX, marketY, marketZ);
+			player.openGui(FarmingForEngineers.MOD_ID, GuiHandler.MARKET, worldObj, (int) marketX, (int) marketY, (int) marketZ);
 			return true;
 		}
 		return super.interact(player);
@@ -146,7 +146,9 @@
 		if(diggingAnimation > 0) {
 			diggingAnimation--;
 			for(int i = 0; i < 4; i++) {
-				int stateId = 0;//Block.getStateId(diggingBlockState != null ? diggingBlockState : Blocks.dirt.get());
+				int stateId = 0;
+
+                //Block.getStateId(diggingBlockState != null ? diggingBlockState : Blocks.dirt.get());
 				//worldObj.spawnParticle(EnumParticleTypes.BLOCK_CRACK, posX, posY, posZ, Math.random() * 2 - 1, Math.random() * 4, Math.random() * 2 - 1, stateId);
 				//worldObj.spawnParticle(EnumParticleTypes.BLOCK_DUST, posX, posY, posZ, (Math.random() - 0.5) * 0.5, Math.random() * 0.5f, (Math.random() - 0.5) * 0.5, stateId);
 			}
@@ -222,7 +224,6 @@
 	}
 
 	private boolean isMarketValid() {
-
 		//return marketPos != null && worldObj.getBlockState(marketPos).getBlock() == ModBlocks.market;
         return true;
 	}

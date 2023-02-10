@@ -23,7 +23,7 @@ import net.minecraft.world.World;
  * Licensed under LGPL-3.0
  */
 public class BlockMarket extends BlockContainer {
-
+    public EntityMerchant merchant;
     // public static final PropertyDirection FACING = BlockHorizontal.FACING;
 
     public BlockMarket() {
@@ -73,7 +73,7 @@ public class BlockMarket extends BlockContainer {
         			spawnAnimationType = EntityMerchant.SpawnAnimationType.DIGGING;
         		}
         		if(!world.isRemote) {
-        			EntityMerchant merchant = new EntityMerchant(world);
+                    merchant = new EntityMerchant(world);
         			merchant.setMarket(x,y,z, facing);
         			merchant.setToFacingAngle();
         			merchant.setSpawnAnimation(spawnAnimationType);
@@ -150,5 +150,10 @@ public class BlockMarket extends BlockContainer {
             }
             world.setBlockMetadataWithNotify(x, y, z, side, 2);
         }
+    }
+
+    @Override
+    public void onBlockDestroyedByPlayer(World p_149664_1_, int p_149664_2_, int p_149664_3_, int p_149664_4_, int p_149664_5_){
+        merchant.disappear();
     }
 }
