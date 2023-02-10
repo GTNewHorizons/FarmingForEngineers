@@ -19,6 +19,5 @@ public class ModRecipes {
                 Blocks.planks,
                 'W',
                 Blocks.log);
-        GameRegistry.addRecipe(new ItemStack(ModBlocks.market), "XXX", "XXX", "XXX", 'X', Blocks.log);
     }
 }
