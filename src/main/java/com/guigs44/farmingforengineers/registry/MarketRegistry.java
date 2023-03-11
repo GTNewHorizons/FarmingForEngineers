@@ -1,25 +1,28 @@
 package com.guigs44.farmingforengineers.registry;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.gson.*;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import javax.annotation.Nullable;
+
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.gson.*;
+
 public class MarketRegistry extends AbstractRegistry {
 
     public static final MarketRegistry INSTANCE = new MarketRegistry();
 
-    private static final Pattern ITEMSTACK_PATTERN =
-            Pattern.compile("(?:([0-9]+)\\*)?(?:([\\w]+):)([\\w]+)(?::([0-9]+))?(?:@(.+))?");
+    private static final Pattern ITEMSTACK_PATTERN = Pattern
+            .compile("(?:([0-9]+)\\*)?(?:([\\w]+):)([\\w]+)(?::([0-9]+))?(?:@(.+))?");
 
     private final List<MarketEntry> entries = Lists.newArrayList();
 

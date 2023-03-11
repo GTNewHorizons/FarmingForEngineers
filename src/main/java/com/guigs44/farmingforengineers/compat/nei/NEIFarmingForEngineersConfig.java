@@ -3,6 +3,7 @@ package com.guigs44.farmingforengineers.compat.nei;
 import codechicken.nei.api.IConfigureNEI;
 
 public class NEIFarmingForEngineersConfig implements IConfigureNEI {
+
     @Override
     public void loadConfig() {}
 

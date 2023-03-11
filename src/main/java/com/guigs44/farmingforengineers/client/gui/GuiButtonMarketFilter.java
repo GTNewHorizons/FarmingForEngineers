@@ -1,13 +1,16 @@
 package com.guigs44.farmingforengineers.client.gui;
 
-import com.google.common.collect.Lists;
-import com.guigs44.farmingforengineers.container.ContainerMarketClient;
-import com.guigs44.farmingforengineers.registry.MarketEntry;
 import java.util.List;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.resources.I18n;
+
 import org.lwjgl.opengl.GL11;
+
+import com.google.common.collect.Lists;
+import com.guigs44.farmingforengineers.container.ContainerMarketClient;
+import com.guigs44.farmingforengineers.registry.MarketEntry;
 
 public class GuiButtonMarketFilter extends GuiButton {
 
@@ -16,8 +19,8 @@ public class GuiButtonMarketFilter extends GuiButton {
     private final List<String> tooltipLines = Lists.newArrayList();
     private boolean hovered;
 
-    public GuiButtonMarketFilter(
-            int buttonId, int x, int y, ContainerMarketClient container, MarketEntry.EntryType filterType) {
+    public GuiButtonMarketFilter(int buttonId, int x, int y, ContainerMarketClient container,
+            MarketEntry.EntryType filterType) {
         super(buttonId, x, y, 20, 20, "");
         this.container = container;
         this.filterType = filterType;
@@ -26,8 +29,7 @@ public class GuiButtonMarketFilter extends GuiButton {
 
     @Override
     public void drawButton(Minecraft mc, int mouseX, int mouseY) {
-        this.hovered = mouseX >= this.xPosition
-                && mouseY >= this.yPosition
+        this.hovered = mouseX >= this.xPosition && mouseY >= this.yPosition
                 && mouseX < this.xPosition + this.width
                 && mouseY < this.yPosition + this.height;
 

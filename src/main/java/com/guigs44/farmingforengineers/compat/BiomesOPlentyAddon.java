@@ -1,12 +1,13 @@
 package com.guigs44.farmingforengineers.compat;
 
-import com.guigs44.farmingforengineers.registry.MarketEntry;
-import com.guigs44.farmingforengineers.registry.MarketRegistry;
-import com.guigs44.farmingforengineers.registry.MarketRegistryDefaultHandler;
 import net.minecraft.block.Block;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+
+import com.guigs44.farmingforengineers.registry.MarketEntry;
+import com.guigs44.farmingforengineers.registry.MarketRegistry;
+import com.guigs44.farmingforengineers.registry.MarketRegistryDefaultHandler;
 
 public class BiomesOPlentyAddon {
 
@@ -18,6 +19,7 @@ public class BiomesOPlentyAddon {
 
     public BiomesOPlentyAddon() {
         MarketRegistry.registerDefaultHandler(KEY_SAPLINGS, new MarketRegistryDefaultHandler() {
+
             @Override
             public void apply(MarketRegistry registry, ItemStack defaultPayment) {
                 for (int i = 0; i <= 2; i++) {
@@ -49,6 +51,7 @@ public class BiomesOPlentyAddon {
         });
 
         MarketRegistry.registerDefaultHandler(KEY_SACRED_OAK, new MarketRegistryDefaultHandler() {
+
             @Override
             public void apply(MarketRegistry registry, ItemStack defaultPayment) {
                 ResourceLocation location = new ResourceLocation(Compat.BIOMESOPLENTY, "sapling_" + SACRED_OAK_PAGE);

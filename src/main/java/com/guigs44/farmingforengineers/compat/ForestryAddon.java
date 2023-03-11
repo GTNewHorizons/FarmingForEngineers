@@ -1,12 +1,14 @@
 package com.guigs44.farmingforengineers.compat;
 
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+
 import com.guigs44.farmingforengineers.registry.MarketEntry;
 import com.guigs44.farmingforengineers.registry.MarketRegistry;
 import com.guigs44.farmingforengineers.registry.MarketRegistryDefaultHandler;
+
 import forestry.api.arboriculture.ITree;
 import forestry.api.arboriculture.TreeManager;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 
 public class ForestryAddon {
 
@@ -14,6 +16,7 @@ public class ForestryAddon {
 
     public ForestryAddon() {
         MarketRegistry.registerDefaultHandler(KEY_SAPLINGS, new MarketRegistryDefaultHandler() {
+
             @Override
             public void apply(MarketRegistry registry, ItemStack defaultPayment) {
                 for (ITree tree : TreeManager.treeRoot.getIndividualTemplates()) {

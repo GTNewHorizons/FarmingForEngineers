@@ -1,8 +1,10 @@
 package com.guigs44.farmingforengineers.container;
 
-import com.guigs44.farmingforengineers.registry.MarketEntry;
 import javax.annotation.Nullable;
+
 import net.minecraft.item.ItemStack;
+
+import com.guigs44.farmingforengineers.registry.MarketEntry;
 
 public class FakeSlotMarket extends FakeSlot {
 

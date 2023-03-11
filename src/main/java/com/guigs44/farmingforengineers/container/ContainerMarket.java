@@ -1,12 +1,9 @@
 package com.guigs44.farmingforengineers.container;
 
-import com.google.common.collect.Lists;
-import com.guigs44.farmingforengineers.network.MessageMarketList;
-import com.guigs44.farmingforengineers.network.NetworkHandler;
-import com.guigs44.farmingforengineers.registry.MarketEntry;
-import com.guigs44.farmingforengineers.registry.MarketRegistry;
 import java.util.List;
+
 import javax.annotation.Nullable;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
@@ -16,16 +13,26 @@ import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
+import com.google.common.collect.Lists;
+import com.guigs44.farmingforengineers.network.MessageMarketList;
+import com.guigs44.farmingforengineers.network.NetworkHandler;
+import com.guigs44.farmingforengineers.registry.MarketEntry;
+import com.guigs44.farmingforengineers.registry.MarketRegistry;
+
 public class ContainerMarket extends Container {
 
     private final EntityPlayer player;
     private final int posX;
     private final int posY;
     private final int posZ;
-    private final InventoryBasic marketInputBuffer =
-            new InventoryBasic("container.farmingforengineers:market", false, 1);
-    private final InventoryBasic marketOutputBuffer =
-            new InventoryBasic("container.farmingforengineers:market", false, 1);
+    private final InventoryBasic marketInputBuffer = new InventoryBasic(
+            "container.farmingforengineers:market",
+            false,
+            1);
+    private final InventoryBasic marketOutputBuffer = new InventoryBasic(
+            "container.farmingforengineers:market",
+            false,
+            1);
     protected final List<FakeSlotMarket> marketSlots = Lists.newArrayList();
 
     private boolean sentItemList;
@@ -64,7 +71,7 @@ public class ContainerMarket extends Container {
         Slot slot = (Slot) this.inventorySlots.get(slotIndex);
         if (slot != null && slot.getHasStack()) {
             ItemStack slotStack = slot.getStack();
-            //noinspection ConstantConditions
+            // noinspection ConstantConditions
             itemStack = slotStack.copy();
             if (slotIndex == 1) {
                 if (!this.mergeItemStack(slotStack, 14, 50, true)) {
@@ -77,18 +84,19 @@ public class ContainerMarket extends Container {
                 }
             } else if ((selectedEntry == null && slotStack.getItem() == Items.emerald)
                     || (selectedEntry != null && selectedEntry.getCostItem().isItemEqual(slotStack))) {
-                if (!this.mergeItemStack(slotStack, 0, 1, true)) {
-                    return null;
+                        if (!this.mergeItemStack(slotStack, 0, 1, true)) {
+                            return null;
+                        }
+                    } else
+                if (slotIndex >= 41 && slotIndex < 50) {
+                    if (!mergeItemStack(slotStack, 14, 41, true)) {
+                        return null;
+                    }
+                } else if (slotIndex >= 14 && slotIndex < 41) {
+                    if (!mergeItemStack(slotStack, 41, 50, false)) {
+                        return null;
+                    }
                 }
-            } else if (slotIndex >= 41 && slotIndex < 50) {
-                if (!mergeItemStack(slotStack, 14, 41, true)) {
-                    return null;
-                }
-            } else if (slotIndex >= 14 && slotIndex < 41) {
-                if (!mergeItemStack(slotStack, 41, 50, false)) {
-                    return null;
-                }
-            }
 
             if (slotStack.stackSize == 0) {
                 slot.putStack(null);
@@ -134,8 +142,7 @@ public class ContainerMarket extends Container {
     @Override
     public void onCraftMatrixChanged(IInventory inventory) {
         if (selectedEntry != null) {
-            marketOutputBuffer.setInventorySlotContents(
-                    0, selectedEntry.getOutputItem().copy());
+            marketOutputBuffer.setInventorySlotContents(0, selectedEntry.getOutputItem().copy());
         } else {
             marketOutputBuffer.setInventorySlotContents(0, null);
         }
@@ -159,10 +166,8 @@ public class ContainerMarket extends Container {
 
     public boolean isReadyToBuy() {
         ItemStack payment = marketInputBuffer.getStackInSlot(0);
-        return payment != null
-                && !(selectedEntry == null
-                        || !payment.isItemEqual(selectedEntry.getCostItem())
-                        || payment.stackSize < selectedEntry.getCostItem().stackSize);
+        return payment != null && !(selectedEntry == null || !payment.isItemEqual(selectedEntry.getCostItem())
+                || payment.stackSize < selectedEntry.getCostItem().stackSize);
     }
 
     public void onItemBought() {

@@ -11,37 +11,37 @@
 //
 // public class RenderMerchant extends RenderLiving<EntityMerchant> {
 //
-//	private static final ResourceLocation MERCHANT_TEXTURE = new ResourceLocation(FarmingForEngineers.MOD_ID,
+// private static final ResourceLocation MERCHANT_TEXTURE = new ResourceLocation(FarmingForEngineers.MOD_ID,
 // "textures/entity/merchant.png");
 //
-//	public RenderMerchant(RenderManager renderManager) {
-//		super(renderManager, new ModelVillager(0f), 0.5f);
-//		addLayer(new LayerCustomHead(this.getMainModel().villagerHead));
-//		shadowSize = 0.5f;
-//	}
+// public RenderMerchant(RenderManager renderManager) {
+// super(renderManager, new ModelVillager(0f), 0.5f);
+// addLayer(new LayerCustomHead(this.getMainModel().villagerHead));
+// shadowSize = 0.5f;
+// }
 //
-//	@Override
-//	public ModelVillager getMainModel() {
-//		return (ModelVillager) super.getMainModel();
-//	}
+// @Override
+// public ModelVillager getMainModel() {
+// return (ModelVillager) super.getMainModel();
+// }
 //
-//	@Override
-//	protected ResourceLocation getEntityTexture(EntityMerchant entity) {
-//		return MERCHANT_TEXTURE;
-//	}
+// @Override
+// protected ResourceLocation getEntityTexture(EntityMerchant entity) {
+// return MERCHANT_TEXTURE;
+// }
 //
-//	@Override
-//	protected void preRenderCallback(EntityMerchant merchant, float partialTickTime) {
-//		float scale = 0.9375f;
-//		GlStateManager.scale(scale, scale, scale);
-//		int diggingAnimation = merchant.getDiggingAnimation();
-//		if(diggingAnimation > 0) {
-//			GlStateManager.translate(0,diggingAnimation * 0.05, 0);
-//		}
-//	}
+// @Override
+// protected void preRenderCallback(EntityMerchant merchant, float partialTickTime) {
+// float scale = 0.9375f;
+// GlStateManager.scale(scale, scale, scale);
+// int diggingAnimation = merchant.getDiggingAnimation();
+// if(diggingAnimation > 0) {
+// GlStateManager.translate(0,diggingAnimation * 0.05, 0);
+// }
+// }
 //
-//	@Override
-//	protected boolean canRenderName(EntityMerchant entity) {
-//		return entity.getDiggingAnimation() <= 0 && super.canRenderName(entity);
-//	}
+// @Override
+// protected boolean canRenderName(EntityMerchant entity) {
+// return entity.getDiggingAnimation() <= 0 && super.canRenderName(entity);
+// }
 // }

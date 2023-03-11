@@ -5,13 +5,17 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
+
 import org.lwjgl.opengl.GL11;
 
 public class TileEntityMarketRenderer extends TileEntitySpecialRenderer {
-    private static final ResourceLocation texture =
-            new ResourceLocation("farmingforengineers", "textures/blocks/texture.png");
-    private static final ResourceLocation marketModel =
-            new ResourceLocation("farmingforengineers", "models/block/market.obj");
+
+    private static final ResourceLocation texture = new ResourceLocation(
+            "farmingforengineers",
+            "textures/blocks/texture.png");
+    private static final ResourceLocation marketModel = new ResourceLocation(
+            "farmingforengineers",
+            "models/block/market.obj");
     private static final IModelCustom model = AdvancedModelLoader.loadModel(marketModel);
 
     @Override

@@ -1,24 +1,26 @@
 package com.guigs44.farmingforengineers.container;
 
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.List;
+
+import javax.annotation.Nullable;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
+
 import com.google.common.collect.Lists;
 import com.guigs44.farmingforengineers.network.MessageMarketSelect;
 import com.guigs44.farmingforengineers.network.NetworkHandler;
 import com.guigs44.farmingforengineers.registry.MarketEntry;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.List;
-import javax.annotation.Nullable;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Slot;
-import net.minecraft.item.ItemStack;
 
 public class ContainerMarketClient extends ContainerMarket {
 
     private final List<MarketEntry> itemList = Lists.newArrayList();
     private final List<MarketEntry> filteredItems = Lists.newArrayList();
 
-    private final Comparator<MarketEntry> comparator =
-            Comparator.comparingInt(o -> o.getType().ordinal());
+    private final Comparator<MarketEntry> comparator = Comparator.comparingInt(o -> o.getType().ordinal());
 
     private String currentSearch;
     private MarketEntry.EntryType currentFilter;
@@ -65,11 +67,8 @@ public class ContainerMarketClient extends ContainerMarket {
             filteredItems.addAll(itemList);
         } else {
             for (MarketEntry entry : itemList) {
-                if (hasSearchFilter
-                        && !entry.getOutputItem()
-                                .getDisplayName()
-                                .toLowerCase()
-                                .contains(currentSearch.toLowerCase())) {
+                if (hasSearchFilter && !entry.getOutputItem().getDisplayName().toLowerCase()
+                        .contains(currentSearch.toLowerCase())) {
                     continue;
                 }
                 if (currentFilter != null && !currentFilter.passes(entry)) {

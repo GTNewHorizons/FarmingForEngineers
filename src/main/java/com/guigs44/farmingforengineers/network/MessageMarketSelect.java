@@ -1,9 +1,10 @@
 package com.guigs44.farmingforengineers.network;
 
+import net.minecraft.item.ItemStack;
+
 import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.item.ItemStack;
 
 public class MessageMarketSelect implements IMessage {
 

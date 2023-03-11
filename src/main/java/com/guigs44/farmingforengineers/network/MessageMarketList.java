@@ -1,12 +1,15 @@
 package com.guigs44.farmingforengineers.network;
 
+import java.util.Collection;
+
+import net.minecraft.item.ItemStack;
+
 import com.google.common.collect.Lists;
 import com.guigs44.farmingforengineers.registry.MarketEntry;
+
 import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import io.netty.buffer.ByteBuf;
-import java.util.Collection;
-import net.minecraft.item.ItemStack;
 
 public class MessageMarketList implements IMessage {
 

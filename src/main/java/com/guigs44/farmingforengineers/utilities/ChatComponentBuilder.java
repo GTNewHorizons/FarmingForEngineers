@@ -11,8 +11,7 @@ import net.minecraft.util.IChatComponent;
 /**
  * Utility class to easily build IChatComponents (Text).
  *
- * @author Semx11
- * https://hypixel.net/threads/ichatcomponent-utility.1025107/
+ * @author Semx11 https://hypixel.net/threads/ichatcomponent-utility.1025107/
  *
  */
 public class ChatComponentBuilder {
@@ -39,15 +38,8 @@ public class ChatComponentBuilder {
                 this.style = new ChatStyle();
                 break;
             case NONE:
-                this.style = new ChatStyle()
-                        .setColor(null)
-                        .setBold(false)
-                        .setItalic(false)
-                        .setStrikethrough(false)
-                        .setUnderlined(false)
-                        .setObfuscated(false)
-                        .setChatClickEvent(null)
-                        .setChatHoverEvent(null);
+                this.style = new ChatStyle().setColor(null).setBold(false).setItalic(false).setStrikethrough(false)
+                        .setUnderlined(false).setObfuscated(false).setChatClickEvent(null).setChatHoverEvent(null);
                 break;
         }
     }

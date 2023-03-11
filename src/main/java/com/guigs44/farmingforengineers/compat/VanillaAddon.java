@@ -1,22 +1,25 @@
 package com.guigs44.farmingforengineers.compat;
 
-import buildcraft.api.core.EnumColor;
-import com.guigs44.farmingforengineers.registry.MarketEntry;
-import com.guigs44.farmingforengineers.registry.MarketRegistry;
-import com.guigs44.farmingforengineers.registry.MarketRegistryDefaultHandler;
 import net.minecraft.block.BlockSapling;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
+import buildcraft.api.core.EnumColor;
+
+import com.guigs44.farmingforengineers.registry.MarketEntry;
+import com.guigs44.farmingforengineers.registry.MarketRegistry;
+import com.guigs44.farmingforengineers.registry.MarketRegistryDefaultHandler;
+
 public class VanillaAddon {
 
-    private static final String[] ANIMALS =
-            new String[] {"Pig", "Sheep", "Cow", "Chicken", "EntityHorse", "Ocelot", "Rabbit", "PolarBear", "Wolf"};
+    private static final String[] ANIMALS = new String[] { "Pig", "Sheep", "Cow", "Chicken", "EntityHorse", "Ocelot",
+            "Rabbit", "PolarBear", "Wolf" };
 
     public VanillaAddon() {
         MarketRegistry.registerDefaultHandler("Vanilla Seeds", new MarketRegistryDefaultHandler() {
+
             @Override
             public void apply(MarketRegistry registry, ItemStack defaultPayment) {
                 registry.registerEntry(new ItemStack(Items.wheat_seeds), defaultPayment, MarketEntry.EntryType.SEEDS);
@@ -36,12 +39,15 @@ public class VanillaAddon {
         });
 
         MarketRegistry.registerDefaultHandler("Vanilla Saplings", new MarketRegistryDefaultHandler() {
+
             @Override
             public void apply(MarketRegistry registry, ItemStack defaultPayment) {
 
                 for (int typeID = 0; typeID < BlockSapling.field_149882_a.length; typeID++) {
                     registry.registerEntry(
-                            new ItemStack(Blocks.sapling, 1, typeID), defaultPayment, MarketEntry.EntryType.SAPLINGS);
+                            new ItemStack(Blocks.sapling, 1, typeID),
+                            defaultPayment,
+                            MarketEntry.EntryType.SAPLINGS);
                 }
             }
 
@@ -57,6 +63,7 @@ public class VanillaAddon {
         });
 
         MarketRegistry.registerDefaultHandler("Bonemeal", new MarketRegistryDefaultHandler() {
+
             @Override
             public void apply(MarketRegistry registry, ItemStack defaultPayment) {
                 registry.registerEntry(
@@ -77,6 +84,7 @@ public class VanillaAddon {
         });
 
         MarketRegistry.registerDefaultHandler("Animal Eggs", new MarketRegistryDefaultHandler() {
+
             @Override
             public void apply(MarketRegistry registry, ItemStack defaultPayment) {
                 for (String animalName : ANIMALS) {
