@@ -1,9 +1,5 @@
 package com.guigs44.farmingforengineers.block;
 
-import com.guigs44.farmingforengineers.FarmingForEngineers;
-import com.guigs44.farmingforengineers.entity.EntityMerchant;
-import com.guigs44.farmingforengineers.network.GuiHandler;
-import com.guigs44.farmingforengineers.tile.TileMarket;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -14,15 +10,20 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
+import com.guigs44.farmingforengineers.FarmingForEngineers;
+import com.guigs44.farmingforengineers.entity.EntityMerchant;
+import com.guigs44.farmingforengineers.network.GuiHandler;
+import com.guigs44.farmingforengineers.tile.TileMarket;
+
 /**
- * A good chunk of the code in this file has been based on Jason Mitchell's (@mitchej123) work.
- * Specifically:
+ * A good chunk of the code in this file has been based on Jason Mitchell's (@mitchej123) work. Specifically:
  * https://github.com/GTNewHorizons/CookingForBlockheads/blob/master/src/main/java/net/blay09/mods/cookingforblockheads/block/BlockBaseKitchen.java
  * https://github.com/GTNewHorizons/CookingForBlockheads/blob/master/src/main/java/net/blay09/mods/cookingforblockheads/block/BlockOven.java
  *
  * Licensed under LGPL-3.0
  */
 public class BlockMarket extends BlockContainer {
+
     public EntityMerchant merchant;
     // public static final PropertyDirection FACING = BlockHorizontal.FACING;
 
@@ -45,11 +46,11 @@ public class BlockMarket extends BlockContainer {
         return false;
     }
 
-    //	@Override
-    //	@SuppressWarnings("deprecation")
-    //	public boolean isFullCube(IBlockState state) {
-    //		return false;
-    //	}
+    // @Override
+    // @SuppressWarnings("deprecation")
+    // public boolean isFullCube(IBlockState state) {
+    // return false;
+    // }
 
     @Override
     public boolean renderAsNormalBlock() {
@@ -64,64 +65,69 @@ public class BlockMarket extends BlockContainer {
 
     @Override
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase placer, ItemStack itemStack) {
-        		EnumFacing facing = EnumFacing.NORTH;
-        		//BlockPos entityPos = pos.offset(facing.getOpposite());
-        		EntityMerchant.SpawnAnimationType spawnAnimationType = EntityMerchant.SpawnAnimationType.MAGIC;
-        		if(world.canBlockSeeTheSky(x,y,z)) {
-        			spawnAnimationType = EntityMerchant.SpawnAnimationType.FALLING;
-        		} else if(!world.isAirBlock(x,y-1,z)) {
-        			spawnAnimationType = EntityMerchant.SpawnAnimationType.DIGGING;
-        		}
-        		if(!world.isRemote) {
-                    merchant = new EntityMerchant(world);
-        			merchant.setMarket(x,y,z, facing);
-        			merchant.setToFacingAngle();
-        			merchant.setSpawnAnimation(spawnAnimationType);
+        EnumFacing facing = EnumFacing.NORTH;
+        // BlockPos entityPos = pos.offset(facing.getOpposite());
+        EntityMerchant.SpawnAnimationType spawnAnimationType = EntityMerchant.SpawnAnimationType.MAGIC;
+        if (world.canBlockSeeTheSky(x, y, z)) {
+            spawnAnimationType = EntityMerchant.SpawnAnimationType.FALLING;
+        } else if (!world.isAirBlock(x, y - 1, z)) {
+            spawnAnimationType = EntityMerchant.SpawnAnimationType.DIGGING;
+        }
+        if (!world.isRemote) {
+            merchant = new EntityMerchant(world);
+            merchant.setMarket(x, y, z, facing);
+            merchant.setToFacingAngle();
+            merchant.setSpawnAnimation(spawnAnimationType);
 
-        			if(world.canBlockSeeTheSky(x,y,z)) {
-        				merchant.setPosition(x + 0.5, y + 172, z + 0.5);
-        			} else if(!world.isAirBlock(x, y, z - 1)) {
-        				merchant.setPosition(x + 0.5, y + 0.5, z + 0.5);
-        			} else {
-        				merchant.setPosition(x + 0.5, y, z + 0.5);
-        			}
+            if (world.canBlockSeeTheSky(x, y, z)) {
+                merchant.setPosition(x + 0.5, y + 172, z + 0.5);
+            } else if (!world.isAirBlock(x, y, z - 1)) {
+                merchant.setPosition(x + 0.5, y + 0.5, z + 0.5);
+            } else {
+                merchant.setPosition(x + 0.5, y, z + 0.5);
+            }
 
-        			world.spawnEntityInWorld(merchant);
-        			merchant.onInitialSpawn(null);
-        		}
-        		if(spawnAnimationType == EntityMerchant.SpawnAnimationType.FALLING) {
-        			world.playSound(x + 0.5, y + 1, z + 0.5, "sounds.falling", 1f, 1f, false);
-        		} else if(spawnAnimationType == EntityMerchant.SpawnAnimationType.DIGGING) {
-        			world.playSound(x + 0.5, y + 1, z, "sounds.falling", 1f, 1f, false);
-        		} else {
-        			world.playSound(x + 0.5, y + 1, z + 0.5, "item.firecharge.use", 1f, 1f, false);
-        			for (int i = 0; i < 50; i++) {
-        				world.spawnParticle("firework", x + 0.5, y + 1, z + 0.5,
-         (Math.random() - 0.5) * 0.5f, (Math.random() - 0.5) * 0.5f, (Math.random() - 0.5) * 0.5f);
-        			}
-        			world.spawnParticle("explosion", x + 0.5, y + 1, z + 0.5,
-         0, 0, 0);
-        		}
+            world.spawnEntityInWorld(merchant);
+            merchant.onInitialSpawn(null);
+        }
+        if (spawnAnimationType == EntityMerchant.SpawnAnimationType.FALLING) {
+            world.playSound(x + 0.5, y + 1, z + 0.5, "sounds.falling", 1f, 1f, false);
+        } else if (spawnAnimationType == EntityMerchant.SpawnAnimationType.DIGGING) {
+            world.playSound(x + 0.5, y + 1, z, "sounds.falling", 1f, 1f, false);
+        } else {
+            world.playSound(x + 0.5, y + 1, z + 0.5, "item.firecharge.use", 1f, 1f, false);
+            for (int i = 0; i < 50; i++) {
+                world.spawnParticle(
+                        "firework",
+                        x + 0.5,
+                        y + 1,
+                        z + 0.5,
+                        (Math.random() - 0.5) * 0.5f,
+                        (Math.random() - 0.5) * 0.5f,
+                        (Math.random() - 0.5) * 0.5f);
+            }
+            world.spawnParticle("explosion", x + 0.5, y + 1, z + 0.5, 0, 0, 0);
+        }
     }
 
     @Override
-    public boolean onBlockActivated(
-            World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX,
+            float hitY, float hitZ) {
         if (!world.isRemote) {
             player.openGui(FarmingForEngineers.instance, GuiHandler.MARKET, world, x, y, z);
         }
         return true;
     }
 
-    //	@Override
-    //	public boolean rotateBlock(World world, BlockPos pos, EnumFacing axis) {
-    //		return false;
-    //	}
+    // @Override
+    // public boolean rotateBlock(World world, BlockPos pos, EnumFacing axis) {
+    // return false;
+    // }
 
-    //    @Override
-    //    public int getRenderType() {
-    //        return RenderingRegistry.getNextAvailableRenderId();
-    //    }
+    // @Override
+    // public int getRenderType() {
+    // return RenderingRegistry.getNextAvailableRenderId();
+    // }
 
     @Override
     public int getRenderType() {
@@ -153,7 +159,8 @@ public class BlockMarket extends BlockContainer {
     }
 
     @Override
-    public void onBlockDestroyedByPlayer(World p_149664_1_, int p_149664_2_, int p_149664_3_, int p_149664_4_, int p_149664_5_){
+    public void onBlockDestroyedByPlayer(World p_149664_1_, int p_149664_2_, int p_149664_3_, int p_149664_4_,
+            int p_149664_5_) {
         merchant.disappear();
     }
 }

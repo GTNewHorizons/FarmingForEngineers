@@ -1,18 +1,21 @@
 package com.guigs44.farmingforengineers.registry;
 
-import com.guigs44.farmingforengineers.FarmingForEngineers;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+
+import com.guigs44.farmingforengineers.FarmingForEngineers;
 
 public class MarketEntry {
 
     public enum EntryType {
+
         SEEDS("gui.farmingforengineers:market.tooltip_seeds"),
         SAPLINGS("gui.farmingforengineers:market.tooltip_saplings"),
         OTHER("gui.farmingforengineers:market.tooltip_other");
 
-        private static final ResourceLocation TEXTURE =
-                new ResourceLocation(FarmingForEngineers.MOD_ID, "textures/gui/market.png");
+        private static final ResourceLocation TEXTURE = new ResourceLocation(
+                FarmingForEngineers.MOD_ID,
+                "textures/gui/market.png");
         private static final EntryType[] values = values();
         private String tooltip;
 

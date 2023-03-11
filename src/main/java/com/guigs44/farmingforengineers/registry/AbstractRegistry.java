@@ -1,5 +1,13 @@
 package com.guigs44.farmingforengineers.registry;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.List;
+
+import net.minecraft.util.ResourceLocation;
+
 import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -10,12 +18,6 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.guigs44.farmingforengineers.FarmingForEngineers;
 import com.guigs44.farmingforengineers.ModConfig;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.List;
-import net.minecraft.util.ResourceLocation;
 
 public abstract class AbstractRegistry {
 
@@ -157,7 +159,9 @@ public abstract class AbstractRegistry {
             } else {
                 logError(
                         "Invalid configuration format: expected %s to be a json object in %s, but got %s",
-                        key, registryName, element.getClass().toString());
+                        key,
+                        registryName,
+                        element.getClass().toString());
                 refuseSave = true;
                 return new JsonObject();
             }
@@ -176,7 +180,9 @@ public abstract class AbstractRegistry {
             } else {
                 logError(
                         "Invalid configuration format: expected %s to be a json array in %s, but got %s",
-                        key, registryName, element.getClass().toString());
+                        key,
+                        registryName,
+                        element.getClass().toString());
                 refuseSave = true;
                 return new JsonArray();
             }
@@ -224,7 +230,7 @@ public abstract class AbstractRegistry {
     }
 
     protected final void logUnknownOre(ResourceLocation location) {
-        FarmingForEngineers.logger.warn(
-                "No ore dictionary entries found for {} in {}", location.getResourcePath(), registryName);
+        FarmingForEngineers.logger
+                .warn("No ore dictionary entries found for {} in {}", location.getResourcePath(), registryName);
     }
 }

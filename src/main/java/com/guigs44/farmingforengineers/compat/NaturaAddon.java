@@ -1,12 +1,13 @@
 package com.guigs44.farmingforengineers.compat;
 
-import com.guigs44.farmingforengineers.registry.MarketEntry;
-import com.guigs44.farmingforengineers.registry.MarketRegistry;
-import com.guigs44.farmingforengineers.registry.MarketRegistryDefaultHandler;
 import net.minecraft.block.Block;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+
+import com.guigs44.farmingforengineers.registry.MarketEntry;
+import com.guigs44.farmingforengineers.registry.MarketRegistry;
+import com.guigs44.farmingforengineers.registry.MarketRegistryDefaultHandler;
 
 public class NaturaAddon {
 
@@ -14,9 +15,10 @@ public class NaturaAddon {
 
     public NaturaAddon() {
         MarketRegistry.registerDefaultHandler(KEY_SAPLINGS, new MarketRegistryDefaultHandler() {
+
             @Override
             public void apply(MarketRegistry registry, ItemStack defaultPayment) {
-                final String[] SAPLINGS = new String[] {"overworld_sapling", "overworld_sapling2", "redwood_sapling"};
+                final String[] SAPLINGS = new String[] { "overworld_sapling", "overworld_sapling2", "redwood_sapling" };
 
                 for (int i = 0; i < SAPLINGS.length; i++) {
                     ResourceLocation location = new ResourceLocation(Compat.NATURA, SAPLINGS[i]);

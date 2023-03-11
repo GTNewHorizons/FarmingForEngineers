@@ -1,13 +1,8 @@
 package com.guigs44.farmingforengineers.client.gui;
 
-import com.google.common.collect.Lists;
-import com.guigs44.farmingforengineers.container.ContainerMarketClient;
-import com.guigs44.farmingforengineers.container.FakeSlotMarket;
-import com.guigs44.farmingforengineers.container.SlotMarketBuy;
-import com.guigs44.farmingforengineers.registry.MarketEntry;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import java.util.Collection;
 import java.util.List;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
@@ -18,8 +13,16 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
+
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
+
+import com.google.common.collect.Lists;
+import com.guigs44.farmingforengineers.container.ContainerMarketClient;
+import com.guigs44.farmingforengineers.container.FakeSlotMarket;
+import com.guigs44.farmingforengineers.container.SlotMarketBuy;
+import com.guigs44.farmingforengineers.registry.MarketEntry;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 // @MouseTweaksIgnore
 public class GuiMarket extends GuiContainer {
@@ -63,8 +66,12 @@ public class GuiMarket extends GuiContainer {
         int id = 1;
         int curY = -80;
         for (MarketEntry.EntryType type : MarketEntry.EntryType.values()) {
-            GuiButtonMarketFilter filterButton =
-                    new GuiButtonMarketFilter(id++, width / 2 + 87, height / 2 + curY, container, type);
+            GuiButtonMarketFilter filterButton = new GuiButtonMarketFilter(
+                    id++,
+                    width / 2 + 87,
+                    height / 2 + curY,
+                    container,
+                    type);
             buttonList.add(filterButton);
             filterButtons.add(filterButton);
 
@@ -115,8 +122,7 @@ public class GuiMarket extends GuiContainer {
     @Override
     protected void mouseClicked(int mouseX, int mouseY, int button) { // TODO: handle exceptions
         super.mouseClicked(mouseX, mouseY, button);
-        if (button == 1
-                && mouseX >= searchBar.xPosition
+        if (button == 1 && mouseX >= searchBar.xPosition
                 && mouseX < searchBar.xPosition + searchBar.width
                 && mouseY >= searchBar.yPosition
                 && mouseY < searchBar.yPosition + searchBar.height) {
@@ -127,8 +133,7 @@ public class GuiMarket extends GuiContainer {
         } else {
             searchBar.mouseClicked(mouseX, mouseY, button);
         }
-        if (mouseX >= scrollBarXPos
-                && mouseX <= scrollBarXPos + SCROLLBAR_WIDTH
+        if (mouseX >= scrollBarXPos && mouseX <= scrollBarXPos + SCROLLBAR_WIDTH
                 && mouseY >= scrollBarYPos
                 && mouseY <= scrollBarYPos + scrollBarScaledHeight) {
             mouseClickY = mouseY;
@@ -188,7 +193,11 @@ public class GuiMarket extends GuiContainer {
         }
 
         fontRendererObj.drawString(
-                I18n.format("container.farmingforengineers:market"), guiLeft + 10, guiTop + 10, 0xFFFFFF, true);
+                I18n.format("container.farmingforengineers:market"),
+                guiLeft + 10,
+                guiTop + 10,
+                0xFFFFFF,
+                true);
 
         if (container.getSelectedEntry() == null) {
             drawCenteredString(
@@ -237,16 +246,14 @@ public class GuiMarket extends GuiContainer {
         this.scrollBarScaledHeight = (int) (scrollBarTotalHeight
                 * Math.min(1f, ((float) VISIBLE_ROWS / (Math.ceil(container.getFilteredListCount() / 3f)))));
         this.scrollBarXPos = guiLeft + xSize - SCROLLBAR_WIDTH - 9;
-        this.scrollBarYPos = guiTop
-                + SCROLLBAR_Y
-                + ((scrollBarTotalHeight - scrollBarScaledHeight)
-                        * currentOffset
+        this.scrollBarYPos = guiTop + SCROLLBAR_Y
+                + ((scrollBarTotalHeight - scrollBarScaledHeight) * currentOffset
                         / Math.max(1, (int) Math.ceil((container.getFilteredListCount() / 3f)) - VISIBLE_ROWS));
     }
 
     public void setCurrentOffset(int currentOffset) {
-        this.currentOffset = Math.max(
-                0, Math.min(currentOffset, (int) Math.ceil(container.getFilteredListCount() / 3f) - VISIBLE_ROWS));
+        this.currentOffset = Math
+                .max(0, Math.min(currentOffset, (int) Math.ceil(container.getFilteredListCount() / 3f) - VISIBLE_ROWS));
 
         container.setScrollOffset(this.currentOffset);
 
@@ -255,7 +262,7 @@ public class GuiMarket extends GuiContainer {
 
     @SubscribeEvent
     public void onItemTooltip(ItemTooltipEvent event) {
-        //noinspection ConstantConditions
+        // noinspection ConstantConditions
         if (hoverSlot != null && event.itemStack == hoverSlot.getStack()) {
             MarketEntry hoverEntry = null;
 
@@ -291,13 +298,12 @@ public class GuiMarket extends GuiContainer {
         if (entry.getCostItem().getItem() == Items.diamond) {
             color = "\u00a7b"; // aqua
         }
-        return color
-                + I18n.format(
-                        "gui.farmingforengineers:market.tooltip_cost",
-                        I18n.format(
-                                "gui.farmingforengineers:market.cost",
-                                entry.getCostItem().stackSize,
-                                entry.getCostItem().getDisplayName()));
+        return color + I18n.format(
+                "gui.farmingforengineers:market.tooltip_cost",
+                I18n.format(
+                        "gui.farmingforengineers:market.cost",
+                        entry.getCostItem().stackSize,
+                        entry.getCostItem().getDisplayName()));
     }
 
     private String getFormattedCostStringShort(MarketEntry entry) {
@@ -305,10 +311,9 @@ public class GuiMarket extends GuiContainer {
         if (entry.getCostItem().getItem() == Items.diamond) {
             color = "\u00a7b"; // aqua
         }
-        return color
-                + I18n.format(
-                        "gui.farmingforengineers:market.cost",
-                        entry.getCostItem().stackSize,
-                        entry.getCostItem().getDisplayName());
+        return color + I18n.format(
+                "gui.farmingforengineers:market.cost",
+                entry.getCostItem().stackSize,
+                entry.getCostItem().getDisplayName());
     }
 }

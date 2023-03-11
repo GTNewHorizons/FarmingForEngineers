@@ -1,11 +1,13 @@
 package com.guigs44.farmingforengineers.container;
 
-import com.guigs44.farmingforengineers.registry.MarketEntry;
 import javax.annotation.Nullable;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+
+import com.guigs44.farmingforengineers.registry.MarketEntry;
 
 public class SlotMarketBuy extends Slot {
 

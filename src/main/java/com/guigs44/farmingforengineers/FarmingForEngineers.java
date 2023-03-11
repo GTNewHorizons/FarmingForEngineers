@@ -1,5 +1,17 @@
 package com.guigs44.farmingforengineers;
 
+import java.io.File;
+import java.util.Optional;
+
+import net.minecraft.block.Block;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
+import net.minecraftforge.common.config.Configuration;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.guigs44.farmingforengineers.block.BlockMarket;
 import com.guigs44.farmingforengineers.compat.Compat;
 import com.guigs44.farmingforengineers.compat.VanillaAddon;
@@ -10,6 +22,7 @@ import com.guigs44.farmingforengineers.registry.AbstractRegistry;
 import com.guigs44.farmingforengineers.registry.MarketRegistry;
 import com.guigs44.farmingforengineers.tile.TileMarket;
 import com.guigs44.farmingforengineers.utilities.ChatComponentBuilder;
+
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -22,15 +35,6 @@ import cpw.mods.fml.common.gameevent.PlayerEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import java.io.File;
-import java.util.Optional;
-import net.minecraft.block.Block;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
-import net.minecraftforge.common.config.Configuration;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 @Mod(
         modid = FarmingForEngineers.MOD_ID,
@@ -54,6 +58,7 @@ public class FarmingForEngineers {
     public static final Logger logger = LogManager.getLogger();
 
     public static final CreativeTabs creativeTab = new CreativeTabs(MOD_ID) {
+
         @Override
         public Item getTabIconItem() {
             return Item.getItemFromBlock(Blocks.log); // ModBlocks.market
@@ -109,26 +114,24 @@ public class FarmingForEngineers {
         event.registerServerCommand(new CommandFarmingForEngineers());
     }
 
-    //	@SubscribeEvent
-    //	public static void registerBlocks(RegistryEvent.Register<Block> event) {
-    //		event.getRegistry().registerAll((ModBlocks.market = new BlockMarket()));
-    //	}
+    // @SubscribeEvent
+    // public static void registerBlocks(RegistryEvent.Register<Block> event) {
+    // event.getRegistry().registerAll((ModBlocks.market = new BlockMarket()));
+    // }
 
-    //	@SubscribeEvent
-    //	public static void registerItems(RegistryEvent.Register<Item> event) {
-    //		event.getRegistry().registerAll(new
+    // @SubscribeEvent
+    // public static void registerItems(RegistryEvent.Register<Item> event) {
+    // event.getRegistry().registerAll(new
     // ItemBlock(ModBlocks.market).setRegistryName(ModBlocks.market.getRegistryName()));
-    //	}
+    // }
 
     @SubscribeEvent
     public void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
         if (AbstractRegistry.registryErrors.size() > 0) {
             event.player.addChatMessage(
-                    ChatComponentBuilder.of("There were errors loading the Farming for Engineers registries:")
-                            .build());
+                    ChatComponentBuilder.of("There were errors loading the Farming for Engineers registries:").build());
             for (String error : AbstractRegistry.registryErrors) {
-                event.player.addChatMessage(
-                        ChatComponentBuilder.of("* " + error).build());
+                event.player.addChatMessage(ChatComponentBuilder.of("* " + error).build());
             }
         }
     }
