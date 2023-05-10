@@ -15,8 +15,11 @@ Aims to backport [FarmingForBlockheads](https://www.curseforge.com/minecraft/mc-
 ## What doesn't work:
 - NPC doesn't have a proper model/texture.
 - AI is broken.
-- No sound effects.
+- ~~No sound effects.~~
+  - Fixed by @Dioxop (Mostly, villager ambient sounds aren't working).
 - No particle effects.
-- Block doesn't rotate to face the player when placed.
-- No block item.
-  - Seems to be the cause of the game crashes that happen when trying to craft the block or when opening the creative tab.
+- ~~Block doesn't rotate to face the player when placed.~~
+  - Fixed by @Dioxop.
+- ~~No block item.~~
+  - ~~Seems to be the cause of the game crashes that happen when trying to craft the block or when opening the creative tab.~~
+  - Fixed by @Dioxop.
