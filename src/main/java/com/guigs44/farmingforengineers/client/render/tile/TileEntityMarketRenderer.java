@@ -8,6 +8,8 @@ import net.minecraftforge.client.model.IModelCustom;
 
 import org.lwjgl.opengl.GL11;
 
+import com.guigs44.farmingforengineers.utilities.RenderUtils;
+
 public class TileEntityMarketRenderer extends TileEntitySpecialRenderer {
 
     private static final ResourceLocation texture = new ResourceLocation(
@@ -19,11 +21,17 @@ public class TileEntityMarketRenderer extends TileEntitySpecialRenderer {
     private static final IModelCustom model = AdvancedModelLoader.loadModel(marketModel);
 
     @Override
-    public void renderTileEntityAt(TileEntity te, double posX, double posY, double posZ, float partialTick) {
-        bindTexture(texture);
+    public void renderTileEntityAt(TileEntity tileEntity, double posX, double posY, double posZ, float partialTick) {
+        int metadata = 0;
+        if (tileEntity.hasWorldObj()) {
+            metadata = tileEntity.getBlockMetadata();
+        }
 
+        float angle = RenderUtils.getAngle(metadata);
+        bindTexture(texture);
         GL11.glPushMatrix();
         GL11.glTranslated(posX + 0.5, posY + 0.5, posZ + 0.5);
+        GL11.glRotatef(angle, 0f, 1f, 0f);
         model.renderAll();
         GL11.glPopMatrix();
     }

@@ -5,14 +5,12 @@ import java.util.Optional;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.config.Configuration;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.guigs44.farmingforengineers.block.BlockMarket;
 import com.guigs44.farmingforengineers.compat.Compat;
 import com.guigs44.farmingforengineers.compat.VanillaAddon;
 import com.guigs44.farmingforengineers.entity.EntityMerchant;
@@ -20,7 +18,6 @@ import com.guigs44.farmingforengineers.network.GuiHandler;
 import com.guigs44.farmingforengineers.network.NetworkHandler;
 import com.guigs44.farmingforengineers.registry.AbstractRegistry;
 import com.guigs44.farmingforengineers.registry.MarketRegistry;
-import com.guigs44.farmingforengineers.tile.TileMarket;
 import com.guigs44.farmingforengineers.utilities.ChatComponentBuilder;
 
 import cpw.mods.fml.common.Loader;
@@ -34,7 +31,6 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
 
 @Mod(
         modid = FarmingForEngineers.MOD_ID,
@@ -44,8 +40,6 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class FarmingForEngineers {
 
     public static final String MOD_ID = "farmingforengineers";
-
-    public static Block blockMarket = new BlockMarket();
 
     @Mod.Instance(MOD_ID)
     public static FarmingForEngineers instance;
@@ -61,11 +55,13 @@ public class FarmingForEngineers {
 
         @Override
         public Item getTabIconItem() {
-            return Item.getItemFromBlock(Blocks.log); // ModBlocks.market
+            return Item.getItemFromBlock(FarmingForEngineers.blockMarket);
         }
     };
 
     public static File configDir;
+
+    public static Block blockMarket;
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
@@ -73,11 +69,10 @@ public class FarmingForEngineers {
         if (!configDir.exists() && !configDir.mkdirs()) {
             throw new RuntimeException("Couldn't create Farming for Engineers configuration directory");
         }
+
         Configuration config = new Configuration(new File(configDir, "FarmingForEngineers.cfg"));
         config.load();
         ModConfig.preInit(config);
-
-        GameRegistry.registerTileEntity(TileMarket.class, MOD_ID + ":market");
 
         proxy.preInit(event);
 
