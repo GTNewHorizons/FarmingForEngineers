@@ -3,14 +3,19 @@ package com.guigs44.farmingforengineers.block;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.IIcon;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 import com.guigs44.farmingforengineers.FarmingForEngineers;
+import com.guigs44.farmingforengineers.client.render.block.MarketBlockRenderer;
 import com.guigs44.farmingforengineers.entity.EntityMerchant;
 import com.guigs44.farmingforengineers.network.GuiHandler;
 import com.guigs44.farmingforengineers.tile.TileMarket;
@@ -37,6 +42,14 @@ public class BlockMarket extends BlockContainer {
     }
 
     @Override
+    public void registerBlockIcons(IIconRegister reg) {}
+
+    @Override
+    public IIcon getIcon(int side, int meta) {
+        return Blocks.log.getIcon(side, 1);
+    }
+
+    @Override
     public TileEntity createNewTileEntity(World world, int meta) {
         return new TileMarket();
     }
@@ -45,12 +58,6 @@ public class BlockMarket extends BlockContainer {
     public boolean isOpaqueCube() {
         return false;
     }
-
-    // @Override
-    // @SuppressWarnings("deprecation")
-    // public boolean isFullCube(IBlockState state) {
-    // return false;
-    // }
 
     @Override
     public boolean renderAsNormalBlock() {
@@ -65,7 +72,23 @@ public class BlockMarket extends BlockContainer {
 
     @Override
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase placer, ItemStack itemStack) {
-        EnumFacing facing = EnumFacing.NORTH;
+        int facing = MathHelper.floor_double(placer.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+        switch (facing) {
+            case 0:
+                world.setBlockMetadataWithNotify(x, y, z, 2, 2);
+                break;
+            case 1:
+                world.setBlockMetadataWithNotify(x, y, z, 5, 2);
+                break;
+            case 2:
+                world.setBlockMetadataWithNotify(x, y, z, 3, 2);
+                break;
+            case 3:
+                world.setBlockMetadataWithNotify(x, y, z, 4, 2);
+                break;
+        }
+
+        // EnumFacing facing = EnumFacing.NORTH;
         // BlockPos entityPos = pos.offset(facing.getOpposite());
         EntityMerchant.SpawnAnimationType spawnAnimationType = EntityMerchant.SpawnAnimationType.MAGIC;
         if (world.canBlockSeeTheSky(x, y, z)) {
@@ -75,7 +98,7 @@ public class BlockMarket extends BlockContainer {
         }
         if (!world.isRemote) {
             merchant = new EntityMerchant(world);
-            merchant.setMarket(x, y, z, facing);
+            merchant.setMarket(x, y, z, EnumFacing.NORTH);
             merchant.setToFacingAngle();
             merchant.setSpawnAnimation(spawnAnimationType);
 
@@ -119,19 +142,9 @@ public class BlockMarket extends BlockContainer {
         return true;
     }
 
-    // @Override
-    // public boolean rotateBlock(World world, BlockPos pos, EnumFacing axis) {
-    // return false;
-    // }
-
-    // @Override
-    // public int getRenderType() {
-    // return RenderingRegistry.getNextAvailableRenderId();
-    // }
-
     @Override
     public int getRenderType() {
-        return -1;
+        return MarketBlockRenderer.RENDER_ID;
     }
 
     // Helper Methods

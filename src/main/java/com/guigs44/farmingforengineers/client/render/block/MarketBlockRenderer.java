@@ -5,6 +5,8 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.world.IBlockAccess;
 
+import org.lwjgl.opengl.GL11;
+
 import com.guigs44.farmingforengineers.tile.TileMarket;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
@@ -17,7 +19,10 @@ public class MarketBlockRenderer implements ISimpleBlockRenderingHandler {
 
     @Override
     public void renderInventoryBlock(Block block, int metadata, int modelId, RenderBlocks renderer) {
-        TileEntityRendererDispatcher.instance.renderTileEntityAt(tileEntity, 0, 0, 0, 0);
+        GL11.glPushMatrix();
+        GL11.glScalef(0.7f, 0.7f, 0.7f);
+        TileEntityRendererDispatcher.instance.renderTileEntityAt(tileEntity, 0, -0.5, 0, 0);
+        GL11.glPopMatrix();
     }
 
     @Override
