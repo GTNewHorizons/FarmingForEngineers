@@ -1,8 +1,10 @@
 package com.guigs44.farmingforengineers.client;
 
 import com.guigs44.farmingforengineers.CommonProxy;
+import com.guigs44.farmingforengineers.client.render.RenderMerchant;
 import com.guigs44.farmingforengineers.client.render.block.MarketBlockRenderer;
 import com.guigs44.farmingforengineers.client.render.tile.TileEntityMarketRenderer;
+import com.guigs44.farmingforengineers.entity.EntityMerchant;
 import com.guigs44.farmingforengineers.tile.TileMarket;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
@@ -22,5 +24,8 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void init(FMLInitializationEvent event) {
         super.init(event);
+
+        RenderingRegistry.registerEntityRenderingHandler(EntityMerchant.class, new RenderMerchant());
     }
+
 }
