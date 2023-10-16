@@ -1,6 +1,7 @@
 package com.guigs44.farmingforengineers.entity;
 
 import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class EntityAIMerchant extends EntityAIBase {
 
@@ -22,13 +23,12 @@ public class EntityAIMerchant extends EntityAIBase {
             entity.setToFacingAngle();
             return false;
         }
-        if (true) { // TODO: Check if location is valid
-            this.movePosX = entity.marketX;
-            this.movePosY = entity.marketY;
-            this.movePosZ = entity.marketZ;
-            return true;
-        }
-        return false;
+
+        ForgeDirection opposite = entity.facing.getOpposite();
+        this.movePosX = entity.marketX + opposite.offsetX;
+        this.movePosY = entity.marketY;
+        this.movePosZ = entity.marketZ + opposite.offsetY;
+        return true;
     }
 
     @Override
