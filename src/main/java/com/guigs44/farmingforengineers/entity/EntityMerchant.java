@@ -22,6 +22,11 @@ import com.guigs44.farmingforengineers.network.GuiHandler;
 
 public class EntityMerchant extends EntityCreature implements INpc {
 
+    /**
+     * The minimum distance <em>squared</em> at which the merchant should be considered 'at' the market.
+     */
+    public static final float MARKET_ARRIVAL_DISTANCE = 1f;
+
     public enum SpawnAnimationType {
         MAGIC,
         FALLING,
@@ -33,9 +38,9 @@ public class EntityMerchant extends EntityCreature implements INpc {
             "Weathered Salesperson" };
 
     // private BlockPos marketPos;
-    private int marketX;
-    private int marketY;
-    private int marketZ;
+    int marketX;
+    int marketY;
+    int marketZ;
     private EnumFacing facing;
     private boolean spawnDone;
     private SpawnAnimationType spawnAnimation = SpawnAnimationType.MAGIC;
@@ -50,6 +55,11 @@ public class EntityMerchant extends EntityCreature implements INpc {
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntityZombie.class, 8f, 0.6, 0.6));
         this.tasks.addTask(5, new EntityAIMerchant(this, 0.6));
+    }
+
+    @Override
+    protected boolean isAIEnabled() {
+        return true;
     }
 
     @Override
@@ -217,9 +227,7 @@ public class EntityMerchant extends EntityCreature implements INpc {
     // }
 
     public boolean isAtMarket() {
-        // TODO: Implement
-        // return marketEntityPos != null && getDistanceSq(marketEntityPos.offset(facing.getOpposite())) <= 1;
-        return true;
+        return getDistanceSq(marketX, marketY, marketZ) <= MARKET_ARRIVAL_DISTANCE;
     }
 
     private boolean isMarketValid() {

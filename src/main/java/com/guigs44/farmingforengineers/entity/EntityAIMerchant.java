@@ -23,9 +23,9 @@ public class EntityAIMerchant extends EntityAIBase {
             return false;
         }
         if (true) { // TODO: Check if location is valid
-            this.movePosX = entity.posX + 0.5;
-            this.movePosY = entity.posY + 1;
-            this.movePosZ = entity.posZ + 0.5;
+            this.movePosX = entity.marketX;
+            this.movePosY = entity.marketY;
+            this.movePosZ = entity.marketZ;
             return true;
         }
         return false;

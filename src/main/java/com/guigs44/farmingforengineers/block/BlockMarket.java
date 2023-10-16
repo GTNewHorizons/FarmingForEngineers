@@ -174,6 +174,6 @@ public class BlockMarket extends BlockContainer {
     @Override
     public void onBlockDestroyedByPlayer(World p_149664_1_, int p_149664_2_, int p_149664_3_, int p_149664_4_,
             int p_149664_5_) {
-        merchant.disappear();
+        if (merchant != null) merchant.disappear();
     }
 }
