@@ -18,6 +18,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
 import com.guigs44.farmingforengineers.FarmingForEngineers;
+import com.guigs44.farmingforengineers.ModSounds;
 import com.guigs44.farmingforengineers.network.GuiHandler;
 
 public class EntityMerchant extends EntityCreature implements INpc {
@@ -113,18 +114,18 @@ public class EntityMerchant extends EntityCreature implements INpc {
 
     @Override
     protected String getLivingSound() {
-        return "mob.villager.ambient";
-    } // TODO: Figure out what is the correct string
+        return "mob.villager.idle";
+    }
 
     @Override
     protected String getHurtSound() {
         return "mob.villager.hit";
-    } // Works
+    }
 
     @Override
     protected String getDeathSound() {
         return "mob.villager.death";
-    }// works
+    }
 
     @Override
     public void onEntityUpdate() {
@@ -154,28 +155,38 @@ public class EntityMerchant extends EntityCreature implements INpc {
                 // Math.random() * 0.5f, (Math.random() - 0.5) * 0.5, stateId);
             }
             if (diggingAnimation % 2 == 0) {
-                worldObj.playSound(posX, posY, posZ, "block.gravel.hit", 1f, (float) (Math.random() + 0.5), false);
+                worldObj.playSound(
+                        posX,
+                        posY,
+                        posZ,
+                        ModSounds.LOC_DIG.toString(),
+                        1f,
+                        (float) (Math.random() + 0.5),
+                        false);
             }
         }
     }
 
-    // @Override
-    // public void handleStatusUpdate(byte id) {
-    // if(id == 12) {
-    // disappear();
-    // return;
-    // } else if(id == 13) {
-    // diggingBlockState = worldObj.getBlockState(getPosition().down());
-    // diggingAnimation = 60;
-    // return;
-    // }
-    // super.handleStatusUpdate(id);
-    // }
+    /**
+     * Handle metadata/state updates from the server
+     */
+    @Override
+    public void handleHealthUpdate(byte id) {
+        if (id == 12) {
+            disappear();
+            return;
+        } else if (id == 13) {
+            // diggingBlockState = worldObj.getBlockState(getPosition().down());
+            diggingAnimation = 60;
+            return;
+        }
+        super.handleHealthUpdate(id);
+    }
 
     @Override
     protected void damageEntity(DamageSource damageSrc, float damageAmount) {
         if (!spawnDone && damageSrc == DamageSource.fall) {
-            worldObj.playSound(posX, posY, posZ, getHurtSound(), 1f, 2f, false);
+            this.playSound(getHurtSound(), 1f, 2f);
             spawnDone = true;
             return;
         }
@@ -235,7 +246,7 @@ public class EntityMerchant extends EntityCreature implements INpc {
     }
 
     public void disappear() {
-        worldObj.playSound(posX, posY, posZ, "item.firecharge.use", 1f, 1f, false);
+        this.playSound(ModSounds.LOC_POOF.toString(), 1f, 1f);
         for (int i = 0; i < 50; i++) {
             worldObj.spawnParticle(
                     "firework",
