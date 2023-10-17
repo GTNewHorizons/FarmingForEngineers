@@ -122,7 +122,7 @@ public class BlockMarket extends BlockContainer {
             world.playSound(x + 0.5, y + 1, z + 0.5, ModSounds.LOC_POOF.toString(), 1f, 1f, false);
             for (int i = 0; i < 50; i++) {
                 world.spawnParticle(
-                        "firework",
+                        "fireworksSpark",
                         x + 0.5,
                         y + 1,
                         z + 0.5,
@@ -130,7 +130,7 @@ public class BlockMarket extends BlockContainer {
                         (Math.random() - 0.5) * 0.5f,
                         (Math.random() - 0.5) * 0.5f);
             }
-            world.spawnParticle("explosion", x + 0.5, y + 1, z + 0.5, 0, 0, 0);
+            world.spawnParticle("largeexplode", x + 0.5, y + 1, z + 0.5, 0, 0, 0);
         }
     }
 
@@ -170,11 +170,5 @@ public class BlockMarket extends BlockContainer {
             }
             world.setBlockMetadataWithNotify(x, y, z, side, 2);
         }
-    }
-
-    @Override
-    public void onBlockDestroyedByPlayer(World p_149664_1_, int p_149664_2_, int p_149664_3_, int p_149664_4_,
-            int p_149664_5_) {
-        merchant.disappear();
     }
 }

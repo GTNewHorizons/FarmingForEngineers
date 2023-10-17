@@ -249,7 +249,7 @@ public class EntityMerchant extends EntityCreature implements INpc {
         this.playSound(ModSounds.LOC_POOF.toString(), 1f, 1f);
         for (int i = 0; i < 50; i++) {
             worldObj.spawnParticle(
-                    "firework",
+                    "fireworksSpark",
                     posX,
                     posY + 1,
                     posZ,
@@ -257,7 +257,7 @@ public class EntityMerchant extends EntityCreature implements INpc {
                     (Math.random() - 0.5) * 0.5f,
                     (Math.random() - 0.5) * 0.5f);
         }
-        worldObj.spawnParticle("explosion", posX, posY + 1, posZ, 0, 0, 0);
+        worldObj.spawnParticle("largeexplode", posX, posY + 1, posZ, 0, 0, 0);
         setDead();
     }
 
