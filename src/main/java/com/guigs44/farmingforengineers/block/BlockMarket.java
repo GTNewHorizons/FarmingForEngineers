@@ -2,6 +2,7 @@ package com.guigs44.farmingforengineers.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
+import net.minecraft.block.BlockPistonBase;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -9,10 +10,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import com.guigs44.farmingforengineers.FarmingForEngineers;
 import com.guigs44.farmingforengineers.client.render.block.MarketBlockRenderer;
@@ -72,24 +72,17 @@ public class BlockMarket extends BlockContainer {
 
     @Override
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase placer, ItemStack itemStack) {
-        int facing = MathHelper.floor_double(placer.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
-        switch (facing) {
-            case 0:
-                world.setBlockMetadataWithNotify(x, y, z, 2, 2);
-                break;
-            case 1:
-                world.setBlockMetadataWithNotify(x, y, z, 5, 2);
-                break;
-            case 2:
-                world.setBlockMetadataWithNotify(x, y, z, 3, 2);
-                break;
-            case 3:
-                world.setBlockMetadataWithNotify(x, y, z, 4, 2);
-                break;
-        }
+        // See BlockDispenser#onBlockPlacedBy
+        int meta = BlockPistonBase.determineOrientation(world, x, y, z, placer);
+        world.setBlockMetadataWithNotify(x, y, z, meta, 2);
+        ForgeDirection facing = ForgeDirection.getOrientation(meta); // facing metadata value -> EnumFacing value
+        ForgeDirection merchantFacing = facing.getOpposite();
 
-        // EnumFacing facing = EnumFacing.NORTH;
-        // BlockPos entityPos = pos.offset(facing.getOpposite());
+        // The position of the merchant entity
+        int merchantX = x + merchantFacing.offsetX;
+        int merchantY = y;
+        int merchantZ = z + merchantFacing.offsetZ;
+
         EntityMerchant.SpawnAnimationType spawnAnimationType = EntityMerchant.SpawnAnimationType.MAGIC;
         if (world.canBlockSeeTheSky(x, y, z)) {
             spawnAnimationType = EntityMerchant.SpawnAnimationType.FALLING;
@@ -98,27 +91,27 @@ public class BlockMarket extends BlockContainer {
         }
         if (!world.isRemote) {
             merchant = new EntityMerchant(world);
-            merchant.setMarket(x, y, z, EnumFacing.NORTH);
+            merchant.setMarket(x, y, z, facing);
             merchant.setToFacingAngle();
             merchant.setSpawnAnimation(spawnAnimationType);
 
-            if (world.canBlockSeeTheSky(x, y, z)) {
-                merchant.setPosition(x + 0.5, y + 172, z + 0.5);
-            } else if (!world.isAirBlock(x, y, z - 1)) {
-                merchant.setPosition(x + 0.5, y + 0.5, z + 0.5);
+            if (world.canBlockSeeTheSky(merchantX, merchantY, merchantZ)) {
+                merchant.setPosition(merchantX + 0.5, merchantY + 172, merchantZ + 0.5);
+            } else if (!world.isAirBlock(merchantX, merchantY, merchantZ - 1)) {
+                merchant.setPosition(merchantX + 0.5, merchantY + 0.5, merchantZ + 0.5);
             } else {
-                merchant.setPosition(x + 0.5, y, z + 0.5);
+                merchant.setPosition(merchantX + 0.5, merchantY, merchantZ + 0.5);
             }
 
             world.spawnEntityInWorld(merchant);
             merchant.onInitialSpawn(null);
         }
         if (spawnAnimationType == EntityMerchant.SpawnAnimationType.FALLING) {
-            world.playSound(x + 0.5, y + 1, z + 0.5, "sounds.falling", 1f, 1f, false);
+            world.playSound(merchantX + 0.5, merchantY + 1, merchantZ + 0.5, "sounds.falling", 1f, 1f, false);
         } else if (spawnAnimationType == EntityMerchant.SpawnAnimationType.DIGGING) {
-            world.playSound(x + 0.5, y + 1, z, "sounds.falling", 1f, 1f, false);
+            world.playSound(merchantX + 0.5, merchantY + 1, merchantZ, "sounds.falling", 1f, 1f, false);
         } else {
-            world.playSound(x + 0.5, y + 1, z + 0.5, "item.firecharge.use", 1f, 1f, false);
+            world.playSound(merchantX + 0.5, merchantY + 1, merchantZ + 0.5, "item.firecharge.use", 1f, 1f, false);
             for (int i = 0; i < 50; i++) {
                 world.spawnParticle(
                         "firework",
@@ -129,7 +122,7 @@ public class BlockMarket extends BlockContainer {
                         (Math.random() - 0.5) * 0.5f,
                         (Math.random() - 0.5) * 0.5f);
             }
-            world.spawnParticle("explosion", x + 0.5, y + 1, z + 0.5, 0, 0, 0);
+            world.spawnParticle("explosion", merchantX + 0.5, merchantY + 1, merchantZ + 0.5, 0, 0, 0);
         }
     }
 
@@ -174,6 +167,6 @@ public class BlockMarket extends BlockContainer {
     @Override
     public void onBlockDestroyedByPlayer(World p_149664_1_, int p_149664_2_, int p_149664_3_, int p_149664_4_,
             int p_149664_5_) {
-        merchant.disappear();
+        if (merchant != null) merchant.disappear();
     }
 }

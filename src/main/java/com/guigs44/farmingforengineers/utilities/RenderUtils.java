@@ -5,13 +5,17 @@ import net.minecraftforge.common.util.ForgeDirection;
 public class RenderUtils {
 
     public static float getAngle(int metadata) {
-        switch (ForgeDirection.getOrientation(metadata)) {
+        return getAngle(ForgeDirection.getOrientation(metadata));
+    }
+
+    public static float getAngle(ForgeDirection direction) {
+        switch (direction) {
             case NORTH:
-                return 0;
+                return 180;
             case EAST:
                 return -90;
             case SOUTH:
-                return 180;
+                return 0;
             case WEST:
                 return 90;
             default:

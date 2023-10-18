@@ -1,6 +1,7 @@
 package com.guigs44.farmingforengineers;
 
 import com.guigs44.farmingforengineers.block.BlockMarket;
+import com.guigs44.farmingforengineers.block.ModBlocks;
 import com.guigs44.farmingforengineers.item.ItemBlockMarket;
 import com.guigs44.farmingforengineers.network.GuiHandler;
 import com.guigs44.farmingforengineers.tile.TileMarket;
@@ -17,8 +18,8 @@ public class CommonProxy {
     }
 
     public void init(FMLInitializationEvent event) {
-        FarmingForEngineers.blockMarket = new BlockMarket();
-        GameRegistry.registerBlock(FarmingForEngineers.blockMarket, ItemBlockMarket.class, "market");
+        ModBlocks.market = new BlockMarket();
+        GameRegistry.registerBlock(ModBlocks.market, ItemBlockMarket.class, "market");
         NetworkRegistry.INSTANCE.registerGuiHandler(FarmingForEngineers.instance, new GuiHandler());
         GameRegistry.registerTileEntity(TileMarket.class, FarmingForEngineers.MOD_ID + ":market");
     }
