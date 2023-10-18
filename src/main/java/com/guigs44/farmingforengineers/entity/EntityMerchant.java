@@ -4,6 +4,7 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.INpc;
@@ -12,6 +13,7 @@ import net.minecraft.entity.ai.EntityAIAvoidEntity;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
@@ -226,7 +228,11 @@ public class EntityMerchant extends EntityCreature implements INpc {
     }
 
     private boolean isMarketValid() {
-        return worldObj.getBlock(marketX, marketY, marketZ) == ModBlocks.market;
+        Block block = worldObj.getBlock(marketX, marketY, marketZ);
+        // While loading a world, getBlock() will return bedrock for a few ticks until everything
+        // gets fully initialized. Consider that to be valid so that the merchant doesn't disappear
+        // every load.
+        return block == ModBlocks.market || block == Blocks.bedrock;
     }
 
     public void setToFacingAngle() {
