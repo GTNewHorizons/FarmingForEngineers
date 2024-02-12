@@ -1,5 +1,7 @@
 package com.guigs44.farmingforengineers;
 
+import java.util.List;
+
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
@@ -44,36 +46,9 @@ public class CommandFarmingForEngineers extends CommandBase {
         }
     }
 
-    // Replaced by processCommand()
-    //
-    // @Override
-    // public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
-    // if(args.length == 0) {
-    // throw new WrongUsageException(getCommandUsage(sender));
-    // }
-    // if(args[0].equals("reload")) {
-    // AbstractRegistry.registryErrors.clear();
-    // MarketRegistry.INSTANCE.load(FarmingForEngineers.configDir);
-    // sender.addChatMessage(new TextComponentTranslation("commands.farmingforengineers:reload.success"));
-    // if(AbstractRegistry.registryErrors.size() > 0) {
-    // sender.addChatMessage(new TextComponentString(TextFormatting.RED + "There were errors loading the Farming for
-    // Engineers registries:"));
-    // TextFormatting lastFormatting = TextFormatting.WHITE;
-    // for(String error : AbstractRegistry.registryErrors) {
-    // sender.addChatMessage(new TextComponentString(lastFormatting + "* " + error));
-    // lastFormatting = lastFormatting == TextFormatting.GRAY ? TextFormatting.WHITE : TextFormatting.GRAY;
-    // }
-    // }
-    // } else {
-    // throw new WrongUsageException(getCommandUsage(sender));
-    // }
-    // }
-
-    // TODO: Implement/fix
-    // @Override
-    // public List<String> getTabCompletionOptions(MinecraftServer server, ICommandSender sender, String[] args,
-    // @Nullable BlockPos pos) {
-    // return getListOfStringsMatchingLastWord(args, "reload");
-    // }
-
+    @SuppressWarnings("rawtypes")
+    @Override
+    public List addTabCompletionOptions(ICommandSender sender, String[] args) {
+        return getListOfStringsMatchingLastWord(args, "reload");
+    }
 }

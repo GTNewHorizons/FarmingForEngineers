@@ -86,6 +86,13 @@ public class FarmingForEngineers {
         NetworkHandler.init();
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 
+        EntityRegistry.registerModEntity(EntityMerchant.class, "merchant", 0, this, 64, 3, true);
+
+        proxy.init(event);
+    }
+
+    @Mod.EventHandler
+    public void postInit(FMLPostInitializationEvent event) {
         new VanillaAddon();
         buildSoftDependProxy(Compat.HARVESTCRAFT, "com.guigs44.farmingforengineers.compat.HarvestcraftAddon");
         buildSoftDependProxy(Compat.FORESTRY, "com.guigs44.farmingforengineers.compat.ForestryAddon");
@@ -95,14 +102,7 @@ public class FarmingForEngineers {
 
         ModRecipes.init();
         MarketRegistry.INSTANCE.load(configDir);
-
-        EntityRegistry.registerModEntity(EntityMerchant.class, "merchant", 0, this, 64, 3, true);
-
-        proxy.init(event);
     }
-
-    @Mod.EventHandler
-    public void postInit(FMLPostInitializationEvent event) {}
 
     @Mod.EventHandler
     public void serverStarting(FMLServerStartingEvent event) {

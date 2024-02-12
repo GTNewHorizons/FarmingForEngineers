@@ -169,7 +169,7 @@ public class MarketRegistry extends AbstractRegistry {
                         String.format(
                                 "%d*%s:%d",
                                 defaultPayment.stackSize,
-                                defaultPayment.getItem().getUnlocalizedName(),
+                                getNamespacedId(defaultPayment),
                                 defaultPayment.getItemDamage()));
             }
             ItemStack itemStack = !value.isEmpty() ? parseItemStack(value) : null;
