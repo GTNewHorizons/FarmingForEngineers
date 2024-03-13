@@ -15,6 +15,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 import com.guigs44.farmingforengineers.FarmingForEngineers;
+import com.guigs44.farmingforengineers.ModSounds;
 import com.guigs44.farmingforengineers.client.render.block.MarketBlockRenderer;
 import com.guigs44.farmingforengineers.entity.EntityMerchant;
 import com.guigs44.farmingforengineers.network.GuiHandler;
@@ -114,14 +115,14 @@ public class BlockMarket extends BlockContainer {
             merchant.onInitialSpawn(null);
         }
         if (spawnAnimationType == EntityMerchant.SpawnAnimationType.FALLING) {
-            world.playSound(x + 0.5, y + 1, z + 0.5, "sounds.falling", 1f, 1f, false);
+            world.playSound(x + 0.5, y + 1, z + 0.5, ModSounds.LOC_FALLING.toString(), 1f, 1f, false);
         } else if (spawnAnimationType == EntityMerchant.SpawnAnimationType.DIGGING) {
-            world.playSound(x + 0.5, y + 1, z, "sounds.falling", 1f, 1f, false);
+            world.playSound(x + 0.5, y + 1, z, ModSounds.LOC_FALLING.toString(), 1f, 1f, false);
         } else {
-            world.playSound(x + 0.5, y + 1, z + 0.5, "item.firecharge.use", 1f, 1f, false);
+            world.playSound(x + 0.5, y + 1, z + 0.5, ModSounds.LOC_POOF.toString(), 1f, 1f, false);
             for (int i = 0; i < 50; i++) {
                 world.spawnParticle(
-                        "firework",
+                        "fireworksSpark",
                         x + 0.5,
                         y + 1,
                         z + 0.5,
@@ -129,7 +130,7 @@ public class BlockMarket extends BlockContainer {
                         (Math.random() - 0.5) * 0.5f,
                         (Math.random() - 0.5) * 0.5f);
             }
-            world.spawnParticle("explosion", x + 0.5, y + 1, z + 0.5, 0, 0, 0);
+            world.spawnParticle("largeexplode", x + 0.5, y + 1, z + 0.5, 0, 0, 0);
         }
     }
 
@@ -169,11 +170,5 @@ public class BlockMarket extends BlockContainer {
             }
             world.setBlockMetadataWithNotify(x, y, z, side, 2);
         }
-    }
-
-    @Override
-    public void onBlockDestroyedByPlayer(World p_149664_1_, int p_149664_2_, int p_149664_3_, int p_149664_4_,
-            int p_149664_5_) {
-        merchant.disappear();
     }
 }
