@@ -15,6 +15,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.guigs44.farmingforengineers.FarmingForEngineers;
+import com.guigs44.farmingforengineers.ModSounds;
 import com.guigs44.farmingforengineers.client.render.block.MarketBlockRenderer;
 import com.guigs44.farmingforengineers.entity.EntityMerchant;
 import com.guigs44.farmingforengineers.network.GuiHandler;
@@ -107,14 +108,14 @@ public class BlockMarket extends BlockContainer {
             merchant.onInitialSpawn(null);
         }
         if (spawnAnimationType == EntityMerchant.SpawnAnimationType.FALLING) {
-            world.playSound(merchantX + 0.5, merchantY + 1, merchantZ + 0.5, "sounds.falling", 1f, 1f, false);
+            world.playSound(merchantX + 0.5, merchantY + 1, merchantZ + 0.5, ModSounds.LOC_FALLING.toString(), 1f, 1f, false);
         } else if (spawnAnimationType == EntityMerchant.SpawnAnimationType.DIGGING) {
-            world.playSound(merchantX + 0.5, merchantY + 1, merchantZ, "sounds.falling", 1f, 1f, false);
+            world.playSound(merchantX + 0.5, merchantY + 1, merchantZ, ModSounds.LOC_FALLING.toString(), 1f, 1f, false);
         } else {
-            world.playSound(merchantX + 0.5, merchantY + 1, merchantZ + 0.5, "item.firecharge.use", 1f, 1f, false);
+            world.playSound(merchantX + 0.5, merchantY + 1, merchantZ + 0.5, ModSounds.LOC_POOF.toString(), 1f, 1f, false);
             for (int i = 0; i < 50; i++) {
                 world.spawnParticle(
-                        "firework",
+                        "fireworksSpark",
                         x + 0.5,
                         y + 1,
                         z + 0.5,
@@ -122,7 +123,7 @@ public class BlockMarket extends BlockContainer {
                         (Math.random() - 0.5) * 0.5f,
                         (Math.random() - 0.5) * 0.5f);
             }
-            world.spawnParticle("explosion", merchantX + 0.5, merchantY + 1, merchantZ + 0.5, 0, 0, 0);
+            world.spawnParticle("largeexplode", merchantX + 0.5, merchantY + 1, merchantZ + 0.5, 0, 0, 0);
         }
     }
 
@@ -162,10 +163,5 @@ public class BlockMarket extends BlockContainer {
             }
             world.setBlockMetadataWithNotify(x, y, z, side, 2);
         }
-    }
-
-    @Override
-    public void onBlockDestroyedByPlayer(World worldIn, int x, int y, int z, int meta) {
-        if (merchant != null) merchant.disappear();
     }
 }
