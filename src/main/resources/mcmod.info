@@ -1,16 +1,21 @@
-[
 {
-  "modid": "farmingforengineers",
-  "name": "Farming for Engineers",
-  "description": "Adds a seed market with a search bar and a scrolling grid.",
-  "version": "${modVersion}",
-  "mcversion": "${minecraftVersion}",
-  "url": "",
-  "updateUrl": "",
-  "authorList": ["BlayTheNinth", "guigs44", "mitchej123", "GTNH Team"],
-  "credits": "BlayTheNinth",
-  "logoFile": "",
-  "screenshots": [],
-  "dependencies": []
+	"modListVersion": 2,
+	"modList": [{
+		"modid": "${modId}",
+		"name": "${modName}",
+		"description": "Adds a seed market with a search bar and a scrolling grid.",
+		"version": "${modVersion}",
+		"mcversion": "${minecraftVersion}",
+		"url": "https://github.com/GTNewHorizons/FarmingForEngineers",
+		"updateUrl": "",
+		"authorList": ["BlayTheNinth", "guigs44", "mitchej123", "GTNH Team"],
+		"credits": "BlayTheNinth",
+		"logoFile": "",
+		"screenshots": [],
+		"parent": "",
+		"requiredMods": [],
+		"dependencies": [],
+		"dependants": [],
+		"useDependencyInformation": false
+	}]
 }
-]

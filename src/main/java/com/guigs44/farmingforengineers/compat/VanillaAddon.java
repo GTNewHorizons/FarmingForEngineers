@@ -10,8 +10,6 @@ import com.guigs44.farmingforengineers.registry.MarketEntry;
 import com.guigs44.farmingforengineers.registry.MarketRegistry;
 import com.guigs44.farmingforengineers.registry.MarketRegistryDefaultHandler;
 
-import buildcraft.api.core.EnumColor;
-
 public class VanillaAddon {
 
     private static final String[] ANIMALS = new String[] { "Pig", "Sheep", "Cow", "Chicken", "EntityHorse", "Ocelot",
@@ -66,10 +64,7 @@ public class VanillaAddon {
 
             @Override
             public void apply(MarketRegistry registry, ItemStack defaultPayment) {
-                registry.registerEntry(
-                        new ItemStack(Items.dye, 1, EnumColor.WHITE.ordinal()),
-                        defaultPayment,
-                        MarketEntry.EntryType.OTHER);
+                registry.registerEntry(new ItemStack(Items.dye, 1, 15), defaultPayment, MarketEntry.EntryType.OTHER);
             }
 
             @Override

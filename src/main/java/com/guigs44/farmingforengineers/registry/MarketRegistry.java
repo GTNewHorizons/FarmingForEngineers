@@ -10,6 +10,8 @@ import javax.annotation.Nullable;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.JsonToNBT;
+import net.minecraft.nbt.NBTException;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 
@@ -18,8 +20,8 @@ import com.google.common.collect.Maps;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.google.gson.JsonPrimitive;
+import com.guigs44.farmingforengineers.FarmingForEngineers;
 
 public class MarketRegistry extends AbstractRegistry {
 
@@ -224,7 +226,11 @@ public class MarketRegistry extends AbstractRegistry {
         String nbt = matcher.group(5);
         NBTTagCompound tagCompound = null;
         if (nbt != null) {
-            tagCompound = (NBTTagCompound) codechicken.nei.util.NBTJson.toNbt(JsonParser.parseString(nbt));
+            try {
+                tagCompound = (NBTTagCompound) JsonToNBT.func_150315_a(nbt);
+            } catch (NBTException e) {
+                FarmingForEngineers.logger.warn("Failed to parse NBT!", e);
+            }
         }
         ItemStack itemStack = new ItemStack(item, count, meta);
         if (tagCompound != null) {

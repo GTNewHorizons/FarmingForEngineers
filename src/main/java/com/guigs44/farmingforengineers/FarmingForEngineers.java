@@ -36,6 +36,7 @@ import cpw.mods.fml.common.registry.EntityRegistry;
         modid = FarmingForEngineers.MOD_ID,
         name = "Farming for Engineers",
         dependencies = "after:mousetweaks[2.8,);after:forestry;after:agricraft",
+        acceptedMinecraftVersions = "[1.7.10]",
         version = Tags.VERSION)
 // @Mod.EventBusSubscriber
 public class FarmingForEngineers {
