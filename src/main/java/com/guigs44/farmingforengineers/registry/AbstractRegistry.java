@@ -6,6 +6,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 import com.google.common.collect.Lists;
@@ -18,6 +20,8 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.guigs44.farmingforengineers.FarmingForEngineers;
 import com.guigs44.farmingforengineers.ModConfig;
+
+import cpw.mods.fml.common.registry.GameData;
 
 public abstract class AbstractRegistry {
 
@@ -232,5 +236,19 @@ public abstract class AbstractRegistry {
     protected final void logUnknownOre(ResourceLocation location) {
         FarmingForEngineers.logger
                 .warn("No ore dictionary entries found for {} in {}", location.getResourcePath(), registryName);
+    }
+
+    /**
+     * Get the modern {@link ResourceLocation}-style identifier for an ItemStack.
+     */
+    protected static String getNamespacedId(ItemStack stack) {
+        return getNamespacedId(stack.getItem());
+    }
+
+    /**
+     * Get the modern {@link ResourceLocation}-style identifier for an Item.
+     */
+    protected static String getNamespacedId(Item item) {
+        return GameData.getItemRegistry().getNameForObject(item);
     }
 }

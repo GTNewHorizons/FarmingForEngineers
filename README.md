@@ -8,8 +8,6 @@ Aims to backport [FarmingForBlockheads](https://www.curseforge.com/minecraft/mc-
 - Forestry integration.
 - Market appearance (Model/Textures).
 - Interacting with the NPC opens up the market UI.
-
-## Untested:
 - Custom trade entries.
 
 ## What doesn't work:
