@@ -4,6 +4,7 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.INpc;
@@ -12,15 +13,24 @@ import net.minecraft.entity.ai.EntityAIAvoidEntity;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import com.guigs44.farmingforengineers.FarmingForEngineers;
+import com.guigs44.farmingforengineers.ModSounds;
+import com.guigs44.farmingforengineers.block.ModBlocks;
 import com.guigs44.farmingforengineers.network.GuiHandler;
+import com.guigs44.farmingforengineers.utilities.RenderUtils;
 
 public class EntityMerchant extends EntityCreature implements INpc {
+
+    /**
+     * The minimum distance <em>squared</em> at which the merchant should be considered 'at' the market.
+     */
+    public static final float MARKET_ARRIVAL_DISTANCE = 1.75f * 1.75f;
 
     public enum SpawnAnimationType {
         MAGIC,
@@ -33,14 +43,13 @@ public class EntityMerchant extends EntityCreature implements INpc {
             "Weathered Salesperson" };
 
     // private BlockPos marketPos;
-    private int marketX;
-    private int marketY;
-    private int marketZ;
-    private EnumFacing facing;
+    int marketX;
+    int marketY;
+    int marketZ;
+    ForgeDirection facing;
     private boolean spawnDone;
     private SpawnAnimationType spawnAnimation = SpawnAnimationType.MAGIC;
 
-    // private BlockPos marketEntityPos;
     private int diggingAnimation;
     // private IBlockState diggingBlockState;
 
@@ -50,6 +59,11 @@ public class EntityMerchant extends EntityCreature implements INpc {
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntityZombie.class, 8f, 0.6, 0.6));
         this.tasks.addTask(5, new EntityAIMerchant(this, 0.6));
+    }
+
+    @Override
+    protected boolean isAIEnabled() {
+        return true;
     }
 
     @Override
@@ -100,7 +114,7 @@ public class EntityMerchant extends EntityCreature implements INpc {
             setCustomNameTag(NAMES[rand.nextInt(NAMES.length)]);
         }
         if (compound.hasKey("MarketPosX")) {
-            setMarket(marketX, marketY, marketZ, EnumFacing.getFront(compound.getByte("Facing")));
+            setMarket(marketX, marketY, marketZ, ForgeDirection.getOrientation(compound.getByte("Facing")));
         }
         spawnDone = compound.getBoolean("SpawnDone");
         spawnAnimation = SpawnAnimationType.values()[compound.getByte("SpawnAnimation")];
@@ -113,18 +127,18 @@ public class EntityMerchant extends EntityCreature implements INpc {
 
     @Override
     protected String getLivingSound() {
-        return "mob.villager.ambient";
-    } // TODO: Figure out what is the correct string
+        return "mob.villager.idle";
+    }
 
     @Override
     protected String getHurtSound() {
         return "mob.villager.hit";
-    } // Works
+    }
 
     @Override
     protected String getDeathSound() {
         return "mob.villager.death";
-    }// works
+    }
 
     @Override
     public void onEntityUpdate() {
@@ -154,28 +168,38 @@ public class EntityMerchant extends EntityCreature implements INpc {
                 // Math.random() * 0.5f, (Math.random() - 0.5) * 0.5, stateId);
             }
             if (diggingAnimation % 2 == 0) {
-                worldObj.playSound(posX, posY, posZ, "block.gravel.hit", 1f, (float) (Math.random() + 0.5), false);
+                worldObj.playSound(
+                        posX,
+                        posY,
+                        posZ,
+                        ModSounds.LOC_DIG.toString(),
+                        1f,
+                        (float) (Math.random() + 0.5),
+                        false);
             }
         }
     }
 
-    // @Override
-    // public void handleStatusUpdate(byte id) {
-    // if(id == 12) {
-    // disappear();
-    // return;
-    // } else if(id == 13) {
-    // diggingBlockState = worldObj.getBlockState(getPosition().down());
-    // diggingAnimation = 60;
-    // return;
-    // }
-    // super.handleStatusUpdate(id);
-    // }
+    /**
+     * Handle metadata/state updates from the server
+     */
+    @Override
+    public void handleHealthUpdate(byte id) {
+        if (id == 12) {
+            disappear();
+            return;
+        } else if (id == 13) {
+            // diggingBlockState = worldObj.getBlockState(getPosition().down());
+            diggingAnimation = 60;
+            return;
+        }
+        super.handleHealthUpdate(id);
+    }
 
     @Override
     protected void damageEntity(DamageSource damageSrc, float damageAmount) {
         if (!spawnDone && damageSrc == DamageSource.fall) {
-            worldObj.playSound(posX, posY, posZ, getHurtSound(), 1f, 2f, false);
+            this.playSound(getHurtSound(), 1f, 2f);
             spawnDone = true;
             return;
         }
@@ -203,42 +227,37 @@ public class EntityMerchant extends EntityCreature implements INpc {
     // return false;
     // }
 
-    public void setMarket(int marketX, int marketY, int marketZ, EnumFacing facing) {
+    public void setMarket(int marketX, int marketY, int marketZ, ForgeDirection facing) {
         this.marketX = marketX;
         this.marketY = marketY;
         this.marketZ = marketZ;
-        // this.marketEntityPos = marketPos.offset(facing.getOpposite());
         this.facing = facing;
     }
 
-    // @Nullable
-    // public BlockPos getMarketEntityPosition() {
-    // return marketEntityPos;
-    // }
-
     public boolean isAtMarket() {
-        // TODO: Implement
-        // return marketEntityPos != null && getDistanceSq(marketEntityPos.offset(facing.getOpposite())) <= 1;
-        return true;
+        return getDistanceSq(marketX, marketY, marketZ) <= MARKET_ARRIVAL_DISTANCE;
     }
 
     private boolean isMarketValid() {
-        // return marketPos != null && worldObj.getBlockState(marketPos).getBlock() == ModBlocks.market;
-        return true;
+        Block block = worldObj.getBlock(marketX, marketY, marketZ);
+        // While loading a world, getBlock() will return bedrock for a few ticks until everything
+        // gets fully initialized. Consider that to be valid so that the merchant doesn't disappear
+        // every load.
+        return block == ModBlocks.market || block == Blocks.bedrock;
     }
 
     public void setToFacingAngle() {
-        float facingAngle = 0f; // facing.getHorizontalAngle();
+        float facingAngle = RenderUtils.getAngle(facing);
         setRotation(facingAngle, 0f);
         setRotationYawHead(facingAngle);
         // setRenderYawOffset(facingAngle);
     }
 
     public void disappear() {
-        worldObj.playSound(posX, posY, posZ, "item.firecharge.use", 1f, 1f, false);
+        this.playSound(ModSounds.LOC_POOF.toString(), 1f, 1f);
         for (int i = 0; i < 50; i++) {
             worldObj.spawnParticle(
-                    "firework",
+                    "fireworksSpark",
                     posX,
                     posY + 1,
                     posZ,
@@ -246,7 +265,7 @@ public class EntityMerchant extends EntityCreature implements INpc {
                     (Math.random() - 0.5) * 0.5f,
                     (Math.random() - 0.5) * 0.5f);
         }
-        worldObj.spawnParticle("explosion", posX, posY + 1, posZ, 0, 0, 0);
+        worldObj.spawnParticle("largeexplode", posX, posY + 1, posZ, 0, 0, 0);
         setDead();
     }
 

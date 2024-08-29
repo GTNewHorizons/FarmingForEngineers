@@ -1,7 +1,6 @@
 // Add your dependencies here
 
 dependencies {
-    implementation('com.github.GTNewHorizons:NotEnoughItems:2.3.39-GTNH:dev')
-    implementation('com.github.GTNewHorizons:ForestryMC:4.5.8:dev')
-    implementation('com.google.code.gson:gson:2.10')
+    implementation('com.github.GTNewHorizons:NotEnoughItems:2.6.30-GTNH:dev')
+    implementation('com.github.GTNewHorizons:ForestryMC:4.9.7:dev')
 }
