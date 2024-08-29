@@ -35,7 +35,8 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 @Mod(
         modid = FarmingForEngineers.MOD_ID,
         name = "Farming for Engineers",
-        dependencies = "after:mousetweaks[2.8,);after:forestry;after:agricraft")
+        dependencies = "after:mousetweaks[2.8,);after:forestry;after:agricraft",
+        version = Tags.VERSION)
 // @Mod.EventBusSubscriber
 public class FarmingForEngineers {
 
