@@ -108,11 +108,25 @@ public class BlockMarket extends BlockContainer {
             merchant.onInitialSpawn(null);
         }
         if (spawnAnimationType == EntityMerchant.SpawnAnimationType.FALLING) {
-            world.playSound(merchantX + 0.5, merchantY + 1, merchantZ + 0.5, ModSounds.LOC_FALLING.toString(), 1f, 1f, false);
+            world.playSound(
+                    merchantX + 0.5,
+                    merchantY + 1,
+                    merchantZ + 0.5,
+                    ModSounds.LOC_FALLING.toString(),
+                    1f,
+                    1f,
+                    false);
         } else if (spawnAnimationType == EntityMerchant.SpawnAnimationType.DIGGING) {
             world.playSound(merchantX + 0.5, merchantY + 1, merchantZ, ModSounds.LOC_FALLING.toString(), 1f, 1f, false);
         } else {
-            world.playSound(merchantX + 0.5, merchantY + 1, merchantZ + 0.5, ModSounds.LOC_POOF.toString(), 1f, 1f, false);
+            world.playSound(
+                    merchantX + 0.5,
+                    merchantY + 1,
+                    merchantZ + 0.5,
+                    ModSounds.LOC_POOF.toString(),
+                    1f,
+                    1f,
+                    false);
             for (int i = 0; i < 50; i++) {
                 world.spawnParticle(
                         "fireworksSpark",
