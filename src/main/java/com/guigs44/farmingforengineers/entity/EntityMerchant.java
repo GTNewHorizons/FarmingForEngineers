@@ -4,6 +4,7 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.INpc;
@@ -12,16 +13,24 @@ import net.minecraft.entity.ai.EntityAIAvoidEntity;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import com.guigs44.farmingforengineers.FarmingForEngineers;
 import com.guigs44.farmingforengineers.ModSounds;
+import com.guigs44.farmingforengineers.block.ModBlocks;
 import com.guigs44.farmingforengineers.network.GuiHandler;
+import com.guigs44.farmingforengineers.utilities.RenderUtils;
 
 public class EntityMerchant extends EntityCreature implements INpc {
+
+    /**
+     * The minimum distance <em>squared</em> at which the merchant should be considered 'at' the market.
+     */
+    public static final float MARKET_ARRIVAL_DISTANCE = 1.75f * 1.75f;
 
     public enum SpawnAnimationType {
         MAGIC,
@@ -34,14 +43,13 @@ public class EntityMerchant extends EntityCreature implements INpc {
             "Weathered Salesperson" };
 
     // private BlockPos marketPos;
-    private int marketX;
-    private int marketY;
-    private int marketZ;
-    private EnumFacing facing;
+    int marketX;
+    int marketY;
+    int marketZ;
+    ForgeDirection facing;
     private boolean spawnDone;
     private SpawnAnimationType spawnAnimation = SpawnAnimationType.MAGIC;
 
-    // private BlockPos marketEntityPos;
     private int diggingAnimation;
     // private IBlockState diggingBlockState;
 
@@ -51,6 +59,11 @@ public class EntityMerchant extends EntityCreature implements INpc {
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntityZombie.class, 8f, 0.6, 0.6));
         this.tasks.addTask(5, new EntityAIMerchant(this, 0.6));
+    }
+
+    @Override
+    protected boolean isAIEnabled() {
+        return true;
     }
 
     @Override
@@ -101,7 +114,7 @@ public class EntityMerchant extends EntityCreature implements INpc {
             setCustomNameTag(NAMES[rand.nextInt(NAMES.length)]);
         }
         if (compound.hasKey("MarketPosX")) {
-            setMarket(marketX, marketY, marketZ, EnumFacing.getFront(compound.getByte("Facing")));
+            setMarket(marketX, marketY, marketZ, ForgeDirection.getOrientation(compound.getByte("Facing")));
         }
         spawnDone = compound.getBoolean("SpawnDone");
         spawnAnimation = SpawnAnimationType.values()[compound.getByte("SpawnAnimation")];
@@ -214,32 +227,27 @@ public class EntityMerchant extends EntityCreature implements INpc {
     // return false;
     // }
 
-    public void setMarket(int marketX, int marketY, int marketZ, EnumFacing facing) {
+    public void setMarket(int marketX, int marketY, int marketZ, ForgeDirection facing) {
         this.marketX = marketX;
         this.marketY = marketY;
         this.marketZ = marketZ;
-        // this.marketEntityPos = marketPos.offset(facing.getOpposite());
         this.facing = facing;
     }
 
-    // @Nullable
-    // public BlockPos getMarketEntityPosition() {
-    // return marketEntityPos;
-    // }
-
     public boolean isAtMarket() {
-        // TODO: Implement
-        // return marketEntityPos != null && getDistanceSq(marketEntityPos.offset(facing.getOpposite())) <= 1;
-        return true;
+        return getDistanceSq(marketX, marketY, marketZ) <= MARKET_ARRIVAL_DISTANCE;
     }
 
     private boolean isMarketValid() {
-        // return marketPos != null && worldObj.getBlockState(marketPos).getBlock() == ModBlocks.market;
-        return true;
+        Block block = worldObj.getBlock(marketX, marketY, marketZ);
+        // While loading a world, getBlock() will return bedrock for a few ticks until everything
+        // gets fully initialized. Consider that to be valid so that the merchant doesn't disappear
+        // every load.
+        return block == ModBlocks.market || block == Blocks.bedrock;
     }
 
     public void setToFacingAngle() {
-        float facingAngle = 0f; // facing.getHorizontalAngle();
+        float facingAngle = RenderUtils.getAngle(facing);
         setRotation(facingAngle, 0f);
         setRotationYawHead(facingAngle);
         // setRenderYawOffset(facingAngle);

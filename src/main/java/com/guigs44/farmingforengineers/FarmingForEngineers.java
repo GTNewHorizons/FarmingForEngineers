@@ -3,7 +3,6 @@ package com.guigs44.farmingforengineers;
 import java.io.File;
 import java.util.Optional;
 
-import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.config.Configuration;
@@ -11,6 +10,7 @@ import net.minecraftforge.common.config.Configuration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.guigs44.farmingforengineers.block.ModBlocks;
 import com.guigs44.farmingforengineers.compat.Compat;
 import com.guigs44.farmingforengineers.compat.VanillaAddon;
 import com.guigs44.farmingforengineers.entity.EntityMerchant;
@@ -55,13 +55,11 @@ public class FarmingForEngineers {
 
         @Override
         public Item getTabIconItem() {
-            return Item.getItemFromBlock(FarmingForEngineers.blockMarket);
+            return Item.getItemFromBlock(ModBlocks.market);
         }
     };
 
     public static File configDir;
-
-    public static Block blockMarket;
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
